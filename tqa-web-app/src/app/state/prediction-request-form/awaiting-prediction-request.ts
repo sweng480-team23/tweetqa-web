@@ -2,11 +2,12 @@ import { PredictionRequestFormState } from "./prediction-request-form.state";
 import { FormGroup } from "@angular/forms";
 import { FormAction } from "./form-action";
 import { AwaitingIsCorrectState } from "./awaiting-is-correct.state";
+import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
 
 export class AwaitingPredictionRequest extends PredictionRequestFormState {
 
-  constructor(predictionRequestForm: FormGroup) {
-    super(predictionRequestForm);
+  constructor(predictionRequestForm: FormGroup, prediction: PredictionResponseV1) {
+    super(predictionRequestForm, prediction);
   }
 
   enter(): void {
@@ -20,7 +21,9 @@ export class AwaitingPredictionRequest extends PredictionRequestFormState {
   protected nextStateDecision(action: FormAction): PredictionRequestFormState {
     switch (action) {
       case FormAction.SUBMIT:
-        const state: PredictionRequestFormState = new AwaitingIsCorrectState(this.predictionRequestForm);
+        const state: PredictionRequestFormState = new AwaitingIsCorrectState(
+          this.predictionRequestForm,
+          this.prediction);
         state.enter()
         return state;
       default:

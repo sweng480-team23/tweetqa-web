@@ -32,7 +32,7 @@ export class PredictionFormComponent implements OnInit {
       altAnswer: new FormControl(''),
     });
 
-    this.formState = new InitialFormState(this.predictionRequestForm);
+    this.formState = new InitialFormState(this.predictionRequestForm, PredictionRequestFormState.getEmptyPrediction());
   }
 
   ngOnInit(): void {

@@ -6,19 +6,18 @@ import { FormAction } from "./form-action";
 
 export abstract class PredictionRequestFormState {
 
-  protected predictionRequestForm: FormGroup;
-  prediction: PredictionResponseV1;
   isSubmitButtonDisabled: boolean = true;
   showAnswer: boolean = false;
   showIsCorrect: boolean = false;
   showAltAnswer: boolean = false;
 
-  protected constructor(predictionRequestForm: FormGroup) {
+  protected constructor(
+      protected predictionRequestForm: FormGroup,
+      public prediction: PredictionResponseV1) {
     this.predictionRequestForm = predictionRequestForm;
-    this.prediction = this.getEmptyPrediction();
   }
 
-  protected getEmptyPrediction(): PredictionResponseV1 {
+  public static getEmptyPrediction(): PredictionResponseV1 {
     return {
       alt_answer: '',
       datum: {
