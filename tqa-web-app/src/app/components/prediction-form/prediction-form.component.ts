@@ -8,6 +8,8 @@ import { PredictionCreateRequestV1, PredictionUpdateRequestV1 } from "../../dtos
 import { DataCreateRequestV1 } from "../../dtos/v1/data.dto.v1";
 import { AwaitingCorrectSubmissionState } from "../../state/prediction-request-form/awaiting-correct-submission.state";
 import { AwaitingIncorrectSubmissionState } from "../../state/prediction-request-form/awaiting-incorrect-submission.state";
+import {PredictionService} from "../../services/prediction.service";
+import {HttpClient} from "@angular/common/http";
 
 
 @Component({
@@ -19,9 +21,13 @@ export class PredictionFormComponent implements OnInit {
 
   predictionRequestForm: FormGroup;
   formState: PredictionRequestFormState;
+  predictionService: PredictionService;
 
-  constructor(fb: FormBuilder) {
-    console.log("Prediction Form constructed");
+  constructor(
+      protected http: HttpClient,
+      fb: FormBuilder) {
+    this.predictionService = new PredictionService(http);
+
     this.predictionRequestForm = fb.group({
       model: new FormControl(''),
       isCorrect: new FormControl(''),
@@ -42,20 +48,28 @@ export class PredictionFormComponent implements OnInit {
   onSubmit(): void {
     if (this.formState instanceof AwaitingPredictionRequest) {
       console.log("Submit PredictionRequest");
-      console.log({
-        model_uuid: this.formState.prediction.model.uuid,
-        datum: {
-          tweet: this.formState.prediction.datum.tweet,
-          question: this.formState.prediction.datum.question
-        } as DataCreateRequestV1
-      } as PredictionCreateRequestV1);
+      this.predictionService.create(
+        {
+          model_uuid: this.formState.prediction.model.uuid,
+          datum: {
+            tweet: this.formState.prediction.datum.tweet,
+            question: this.formState.prediction.datum.question
+          } as DataCreateRequestV1
+        } as PredictionCreateRequestV1
+      ).subscribe(prediction => {
+        this.formState.prediction = prediction;
+      });
     } else if (this.formState instanceof AwaitingCorrectSubmissionState ||
         this.formState instanceof AwaitingIncorrectSubmissionState) {
       console.log("Update PredictionRequest");
-      console.log({
-        ...this.formState.prediction
-      } as PredictionUpdateRequestV1);
+      this.predictionService.update(
+        this.formState.prediction.uuid,
+        { ...this.formState.prediction } as PredictionUpdateRequestV1
+      ).subscribe(prediction => {
+        this.formState.prediction = prediction;
+      });
     }
+
     this.formState = this.formState.nextState(FormAction.SUBMIT);
   }
 
