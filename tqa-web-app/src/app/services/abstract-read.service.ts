@@ -1,21 +1,18 @@
-import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { Observable } from "rxjs";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class AbstractReadService<RESPONSE> {
-  protected version: number;
-  protected endpoint: string;
+export abstract class AbstractReadService<RESPONSE> {
 
-  constructor(protected http: HttpClient, version: number, endpoint: string) {
+  protected constructor(
+      protected http: HttpClient,
+      protected version: number,
+      protected endpoint: string) {
     this.version = version;
     this.endpoint = endpoint;
   }
 
   public read(uuid: string, params?: {}): Observable<RESPONSE> {
-    return this.http.get<RESPONSE>(`${this.version}/${this.endpoint}/${uuid}`, { params });
+    return this.http.get<RESPONSE>(`v${this.version}/${this.endpoint}/${uuid}`, { params });
   }
 
 }

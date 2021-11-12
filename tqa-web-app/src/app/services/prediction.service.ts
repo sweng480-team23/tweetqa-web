@@ -4,9 +4,8 @@ import { PredictionCreateRequestV1, PredictionResponseV1, PredictionUpdateReques
 import { HttpClient } from "@angular/common/http";
 import { ApiMapping } from "../util/api-mapping";
 
-@Injectable({
-  providedIn: 'root'
-})
+
+@Injectable()
 export class PredictionService extends AbstractCreateReadUpdateService<
    PredictionCreateRequestV1, PredictionResponseV1, PredictionUpdateRequestV1> {
 

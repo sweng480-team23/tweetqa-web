@@ -8,8 +8,7 @@ import { PredictionCreateRequestV1, PredictionUpdateRequestV1 } from "../../dtos
 import { DataCreateRequestV1 } from "../../dtos/v1/data.dto.v1";
 import { AwaitingCorrectSubmissionState } from "../../state/prediction-request-form/awaiting-correct-submission.state";
 import { AwaitingIncorrectSubmissionState } from "../../state/prediction-request-form/awaiting-incorrect-submission.state";
-import {PredictionService} from "../../services/prediction.service";
-import {HttpClient} from "@angular/common/http";
+import { PredictionService } from "../../services/prediction.service";
 
 
 @Component({
@@ -21,13 +20,10 @@ export class PredictionFormComponent implements OnInit {
 
   predictionRequestForm: FormGroup;
   formState: PredictionRequestFormState;
-  predictionService: PredictionService;
 
   constructor(
-      protected http: HttpClient,
+      protected predictionService: PredictionService,
       fb: FormBuilder) {
-    this.predictionService = new PredictionService(http);
-
     this.predictionRequestForm = fb.group({
       model: new FormControl(''),
       isCorrect: new FormControl(''),
