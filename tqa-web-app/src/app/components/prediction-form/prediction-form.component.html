@@ -15,25 +15,25 @@
       <mat-label>Question</mat-label>
       <textarea matInput formControlName="question" id="question" class="text-input-field"></textarea>
     </mat-form-field>
-    <div *ngIf="showAnswer" class="form-field">
+    <div *ngIf="formState.showAnswer" class="form-field">
       <mat-label>Answer</mat-label>
-      <div>{{prediction.datum.answer}}</div>
+      <div>{{formState.prediction.datum.answer}}</div>
     </div>
-    <div *ngIf="showIsCorrect" class="radio-container">
+    <div *ngIf="formState.showIsCorrect" class="radio-container">
       <mat-label class="radio-label">Was the predicted answer correct?</mat-label>
       <mat-radio-group formControlName="isCorrect" id="isCorrect" class="radio-group">
         <mat-radio-button [value]="true" class="radio-button">Yes</mat-radio-button>
         <mat-radio-button [value]="false" class="radio-button">No</mat-radio-button>
       </mat-radio-group>
     </div>
-    <mat-form-field *ngIf="showAltAnswer" appearance="fill" class="form-field">
+    <mat-form-field *ngIf="formState.showAltAnswer" appearance="fill" class="form-field">
       <mat-label>Correct Answer</mat-label>
       <textarea matInput formControlName="altAnswer" id="altAnswer" class="text-input-field"></textarea>
     </mat-form-field>
     <button
       mat-flat-button
       color="accent"
-      [disabled]="isSubmitButtonDisabled"
+      [disabled]="formState.isSubmitButtonDisabled"
       (click)="onSubmit()">Submit</button>
   </form>
 </div>
