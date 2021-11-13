@@ -17,6 +17,9 @@ export class AwaitingIsCorrectState extends PredictionRequestFormState {
     this.showIsCorrect = true;
     this.showAltAnswer = false;
     this.isSubmitButtonDisabled = true;
+    this.predictionRequestForm.get('model')?.disable();
+    this.predictionRequestForm.get('tweet')?.disable();
+    this.predictionRequestForm.get('question')?.disable();
   }
 
   nextStateDecision(action: FormAction): PredictionRequestFormState {

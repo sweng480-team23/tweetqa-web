@@ -7,6 +7,7 @@ import { FormAction } from "./form-action";
 export abstract class PredictionRequestFormState {
 
   isSubmitButtonDisabled: boolean = true;
+  predictionRequestDisabled: boolean = false;
   showAnswer: boolean = false;
   showIsCorrect: boolean = false;
   showAltAnswer: boolean = false;
@@ -58,9 +59,7 @@ export abstract class PredictionRequestFormState {
 
   public nextState(action: FormAction): PredictionRequestFormState {
     this.prediction = this.getUpdatedPrediction();
-    const state = this.nextStateDecision(action);
-    console.log(state);
-    return state;
+    return this.nextStateDecision(action);
   };
 
   protected abstract nextStateDecision(action: FormAction): PredictionRequestFormState;
