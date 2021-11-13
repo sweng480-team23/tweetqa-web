@@ -4,7 +4,7 @@ import { FormAction } from "./form-action";
 import { AwaitingIsCorrectState } from "./awaiting-is-correct.state";
 import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
 
-export class AwaitingPredictionRequest extends PredictionRequestFormState {
+export class AwaitingPredictionRequestState extends PredictionRequestFormState {
 
   constructor(predictionRequestForm: FormGroup, prediction: PredictionResponseV1) {
     super(predictionRequestForm, prediction);

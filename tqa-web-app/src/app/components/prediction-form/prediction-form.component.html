@@ -15,9 +15,9 @@
       <mat-label>Question</mat-label>
       <textarea matInput formControlName="question" id="question" class="text-input-field"></textarea>
     </mat-form-field>
-    <div *ngIf="formState.showAnswer" class="form-field">
-      <mat-label>Answer</mat-label>
-      <div>{{formState.prediction.datum.answer}}</div>
+    <div *ngIf="formState.showAnswer" class="answer-container">
+      <mat-label class="answer-label">Answer</mat-label>
+      <div class="answer">{{formState.prediction.datum.answer}}</div>
     </div>
     <div *ngIf="formState.showIsCorrect" class="radio-container">
       <mat-label class="radio-label">Was the predicted answer correct?</mat-label>

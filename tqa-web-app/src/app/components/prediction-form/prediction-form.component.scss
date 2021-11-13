@@ -25,6 +25,26 @@
   width: 25vw;
 }
 
+.answer-container {
+  width: 25vw;
+  background-color: rgba(0, 0, 0, 0.15);
+  border-top-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #404040;
+}
+
+.answer-label {
+  padding: 10.5px;
+  color: #404040;
+  font-size: 11px;
+}
+
+.answer {
+  padding: 0px 10.5px 10.5px 10.5px;
+}
+
 .text-input-field {
   height: 50px;
 }

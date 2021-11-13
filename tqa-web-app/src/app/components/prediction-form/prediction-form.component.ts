@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup } from "@angular/forms";
 import { PredictionRequestFormState } from "../../state/prediction-request-form/prediction-request-form.state";
 import { InitialFormState } from "../../state/prediction-request-form/initial-form.state";
 import { FormAction } from "../../state/prediction-request-form/form-action";
-import { AwaitingPredictionRequest } from "../../state/prediction-request-form/awaiting-prediction-request";
+import { AwaitingPredictionRequestState } from "../../state/prediction-request-form/awaiting-prediction-request.state";
 import { PredictionCreateRequestV1, PredictionUpdateRequestV1 } from "../../dtos/v1/prediction.dto.v1";
 import { DataCreateRequestV1 } from "../../dtos/v1/data.dto.v1";
 import { AwaitingCorrectSubmissionState } from "../../state/prediction-request-form/awaiting-correct-submission.state";
@@ -42,7 +42,7 @@ export class PredictionFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    if (this.formState instanceof AwaitingPredictionRequest) {
+    if (this.formState instanceof AwaitingPredictionRequestState) {
       console.log("Submit PredictionRequest");
       this.predictionService.create(
         {

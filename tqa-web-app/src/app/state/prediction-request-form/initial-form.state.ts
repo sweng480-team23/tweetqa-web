@@ -1,7 +1,7 @@
 import { PredictionRequestFormState } from "./prediction-request-form.state";
 import { FormGroup } from "@angular/forms";
 import { FormAction } from "./form-action";
-import { AwaitingPredictionRequest } from "./awaiting-prediction-request";
+import { AwaitingPredictionRequestState } from "./awaiting-prediction-request.state";
 import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
 
 export class InitialFormState extends PredictionRequestFormState {
@@ -26,7 +26,7 @@ export class InitialFormState extends PredictionRequestFormState {
           && this.prediction.datum.tweet != ''
           && this.prediction.datum.question != '') {
           this.isSubmitButtonDisabled = false;
-          const state: PredictionRequestFormState = new AwaitingPredictionRequest(
+          const state: PredictionRequestFormState = new AwaitingPredictionRequestState(
             this.predictionRequestForm,
             this.prediction);
           state.enter();

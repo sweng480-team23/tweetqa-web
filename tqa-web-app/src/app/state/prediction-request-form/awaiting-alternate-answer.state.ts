@@ -3,6 +3,7 @@ import { FormGroup } from "@angular/forms";
 import { FormAction } from "./form-action";
 import { AwaitingIncorrectSubmissionState } from "./awaiting-incorrect-submission.state";
 import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
+import {AwaitingCorrectSubmissionState} from "./awaiting-correct-submission.state";
 
 export class AwaitingAlternateAnswerState extends PredictionRequestFormState {
 
@@ -25,6 +26,13 @@ export class AwaitingAlternateAnswerState extends PredictionRequestFormState {
           const state: PredictionRequestFormState = new AwaitingIncorrectSubmissionState(
             this.predictionRequestForm,
             this.prediction);
+          state.enter();
+          return state;
+        } else if (this.prediction.is_correct) {
+          const state: PredictionRequestFormState = new AwaitingCorrectSubmissionState(
+            this.predictionRequestForm,
+            this.prediction
+          );
           state.enter();
           return state;
         } else {

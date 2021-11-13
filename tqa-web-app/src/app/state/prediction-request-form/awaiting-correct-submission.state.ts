@@ -3,6 +3,8 @@ import { PredictionRequestFormState } from "./prediction-request-form.state";
 import { FormAction } from "./form-action";
 import { InitialFormState } from "./initial-form.state";
 import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
+import { AwaitingAlternateAnswerState } from "./awaiting-alternate-answer.state";
+import {AwaitingIncorrectSubmissionState} from "./awaiting-incorrect-submission.state";
 
 export class AwaitingCorrectSubmissionState extends PredictionRequestFormState {
 
@@ -26,6 +28,23 @@ export class AwaitingCorrectSubmissionState extends PredictionRequestFormState {
           PredictionRequestFormState.getEmptyPrediction());
         state.enter();
         return state;
+      case FormAction.VALUE_CHANGED:
+        if (!this.prediction.is_correct && this.prediction.alt_answer == '') {
+          const state: PredictionRequestFormState = new AwaitingAlternateAnswerState(
+            this.predictionRequestForm,
+            this.prediction
+          );
+          state.enter();
+          return state;
+        } else if (!this.prediction.is_correct) {
+          const state: PredictionRequestFormState = new AwaitingIncorrectSubmissionState(
+            this.predictionRequestForm,
+            this.prediction
+          );
+          state.enter();
+          return state;
+        }
+        return this;
       default:
         return this;
     }

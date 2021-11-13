@@ -23,7 +23,7 @@ export abstract class PredictionRequestFormState {
       datum: {
         tweet: '',
         question: '',
-        answer: ''
+        answer: 'This is a fake answer for demo purposes'
       } as DataResponseV1,
       model: {
         ml_type: ''
@@ -59,6 +59,7 @@ export abstract class PredictionRequestFormState {
   public nextState(action: FormAction): PredictionRequestFormState {
     this.prediction = this.getUpdatedPrediction();
     const state = this.nextStateDecision(action);
+    console.log(state);
     return state;
   };
 
