@@ -1,0 +1,40 @@
+<div class="form-container">
+  <form class="prediction-form" [formGroup]="predictionRequestForm">
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Model</mat-label>
+      <mat-select formControlName="model" id="model">
+        <mat-option value="bert">BERT</mat-option>
+        <mat-option value="xlnet">xlnet</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Tweet</mat-label>
+      <textarea matInput formControlName="tweet" id="tweet" class="text-input-field"></textarea>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Question</mat-label>
+      <textarea matInput formControlName="question" id="question" class="text-input-field"></textarea>
+    </mat-form-field>
+    <div *ngIf="formState.showAnswer" class="answer-container">
+      <mat-label class="answer-label">Answer</mat-label>
+      <div class="answer">{{formState.prediction.datum.answer}}</div>
+    </div>
+    <div *ngIf="formState.showIsCorrect" class="radio-container">
+      <mat-label class="radio-label">Was the predicted answer correct?</mat-label>
+      <mat-radio-group formControlName="isCorrect" id="isCorrect" class="radio-group">
+        <mat-radio-button [value]="true" class="radio-button">Yes</mat-radio-button>
+        <mat-radio-button [value]="false" class="radio-button">No</mat-radio-button>
+      </mat-radio-group>
+    </div>
+    <mat-form-field *ngIf="formState.showAltAnswer" appearance="fill" class="form-field">
+      <mat-label>Correct Answer</mat-label>
+      <textarea matInput formControlName="altAnswer" id="altAnswer" class="text-input-field"></textarea>
+    </mat-form-field>
+    <button
+      mat-flat-button
+      color="accent"
+      [disabled]="formState.isSubmitButtonDisabled"
+      (click)="onSubmit()">Submit</button>
+  </form>
+</div>
+
