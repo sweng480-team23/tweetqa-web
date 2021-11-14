@@ -46,7 +46,7 @@ export class PredictionFormComponent implements OnInit {
       console.log("Submit PredictionRequest");
       this.predictionService.create(
         {
-          model_uuid: this.formState.prediction.model.uuid,
+          model_id: this.formState.prediction.model.id,
           datum: {
             tweet: this.formState.prediction.datum.tweet,
             question: this.formState.prediction.datum.question
@@ -59,7 +59,7 @@ export class PredictionFormComponent implements OnInit {
         this.formState instanceof AwaitingIncorrectSubmissionState) {
       console.log("Update PredictionRequest");
       this.predictionService.update(
-        this.formState.prediction.uuid,
+        this.formState.prediction.id,
         { ...this.formState.prediction } as PredictionUpdateRequestV1
       ).subscribe(prediction => {
         this.formState.prediction = prediction;

@@ -11,8 +11,8 @@ export abstract class AbstractReadService<RESPONSE> {
     this.endpoint = endpoint;
   }
 
-  public read(uuid: string, params?: {}): Observable<RESPONSE> {
-    return this.http.get<RESPONSE>(`v${this.version}/${this.endpoint}/${uuid}`, { params });
+  public read(id: number, params?: {}): Observable<RESPONSE> {
+    return this.http.get<RESPONSE>(`v${this.version}/${this.endpoint}/${id}`, { params });
   }
 
 }

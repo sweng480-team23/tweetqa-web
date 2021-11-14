@@ -1,12 +1,12 @@
 
 export interface AccountCreateRequestV1 {
-  token_id: string;
+  token: string;
   email: string;
   password: string;
 }
 
 export interface AccountResponseV1 {
-  uuid: string;
+  id: number;
   email: string;
 }
 

@@ -6,7 +6,7 @@ export interface DataCreateRequestV1 {
 }
 
 export interface DataResponseV1 {
-  qid: string;
+  id: number;
   tweet: string;
   question: string;
   answer: string;

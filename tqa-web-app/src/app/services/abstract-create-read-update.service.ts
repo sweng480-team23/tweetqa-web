@@ -9,9 +9,9 @@ export abstract class AbstractCreateReadUpdateService <CREATE_REQUEST, RESPONSE,
     super(http, version, endpoint);
   }
 
-  public update(uuid: string, request: UPDATE_REQUEST, params?: {}): Observable<RESPONSE> {
+  public update(id: number, request: UPDATE_REQUEST, params?: {}): Observable<RESPONSE> {
     return this.http.put<RESPONSE>(
-      `v${this.version}/${this.endpoint}/${uuid}`,
+      `v${this.version}/${this.endpoint}/${id}`,
       request,
       { params }
     );
