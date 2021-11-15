@@ -10,7 +10,6 @@ export interface PredictionCreateRequestV1 {
 export interface PredictionResponseV1 {
   id: number;
   token: string;
-  prediction: string;
   is_correct: boolean;
   alt_answer: string;
   model: QAModelResponseV1;
