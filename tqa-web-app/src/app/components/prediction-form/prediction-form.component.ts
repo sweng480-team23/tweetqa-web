@@ -43,7 +43,6 @@ export class PredictionFormComponent implements OnInit {
 
   onSubmit(): void {
     if (this.formState instanceof AwaitingPredictionRequestState) {
-      console.log("Submit PredictionRequest");
       this.predictionService.create(
         {
           model_id: 1,
@@ -58,7 +57,6 @@ export class PredictionFormComponent implements OnInit {
       });
     } else if (this.formState instanceof AwaitingCorrectSubmissionState ||
         this.formState instanceof AwaitingIncorrectSubmissionState) {
-      console.log("Update PredictionRequest");
       this.predictionService.update(
         this.formState.prediction.id,
         { ...this.formState.prediction } as PredictionUpdateRequestV1
