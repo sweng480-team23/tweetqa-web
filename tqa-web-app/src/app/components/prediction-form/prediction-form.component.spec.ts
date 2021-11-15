@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
 import { PredictionFormComponent } from './prediction-form.component';
 import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
 import { mockPredictionResponseV1 } from "../../dtos/v1/mock/prediction.dto.v1.mock";
@@ -130,10 +129,6 @@ describe('PredictionFormComponent', () => {
     expect(component.formState instanceof InitialFormState);
   });
 
-  // it('should switch between incorrect and correct answer', () => {
-  //
-  // });
-
   afterEach(() => {
     fixture.destroy();
   });
@@ -144,5 +139,4 @@ describe('PredictionFormComponent', () => {
     component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
     fixture.detectChanges();
   }
-
 });
