@@ -46,7 +46,8 @@ export class PredictionFormComponent implements OnInit {
       console.log("Submit PredictionRequest");
       this.predictionService.create(
         {
-          model_id: this.formState.prediction.model.id,
+          model_id: 1,
+          token: "f5cc1306-457d-11ec-b8ee-3413e843a278",
           datum: {
             tweet: this.formState.prediction.datum.tweet,
             question: this.formState.prediction.datum.question

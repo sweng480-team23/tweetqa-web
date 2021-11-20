@@ -17,7 +17,7 @@
     </mat-form-field>
     <div *ngIf="formState.showAnswer" class="answer-container">
       <mat-label class="answer-label">Answer</mat-label>
-      <div class="answer">{{formState.prediction.datum.answer}}</div>
+      <div class="answer">{{formState.prediction.prediction}}</div>
     </div>
     <div *ngIf="formState.showIsCorrect" class="radio-container">
       <mat-label class="radio-label">Was the predicted answer correct?</mat-label>
