@@ -67,13 +67,13 @@ describe('PredictionFormComponent', () => {
   });
 
   it('should be ready to submit prediction', () => {
-    fillOutRequestForm();
+    fillOutInitialPredictionRequest();
     expect(component.formState instanceof AwaitingPredictionRequestState).toBeTrue();
     expect(button.disabled).toBeFalse();
   });
 
   it('should be ready to collect correct/incorrect response', waitForAsync(() => {
-    fillOutRequestForm();
+    fillOutInitialPredictionRequest();
     spyOn(component, 'onSubmit');
     button.click();
     expect(component.onSubmit).toHaveBeenCalled();
@@ -86,9 +86,7 @@ describe('PredictionFormComponent', () => {
   }));
 
   it('should be ready to submit correct response', () => {
-    fillOutRequestForm();
-    component.formState = component.formState.nextState(FormAction.SUBMIT);
-    fixture.detectChanges();
+    fillOutAndSubmitInitialPredictionRequest();
     component.predictionRequestForm.controls['isCorrect'].setValue(true);
     fixture.detectChanges();
     expect(button.disabled).toBeFalse();
@@ -96,9 +94,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('should be ready to collect alternate answer', () => {
-    fillOutRequestForm();
-    component.formState = component.formState.nextState(FormAction.SUBMIT);
-    fixture.detectChanges();
+    fillOutAndSubmitInitialPredictionRequest();
     component.predictionRequestForm.controls['isCorrect'].setValue(false);
     fixture.detectChanges();
     expect(button.disabled).toBeTrue();
@@ -106,9 +102,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('should be ready to submit incorrect answer', () => {
-    fillOutRequestForm();
-    component.formState = component.formState.nextState(FormAction.SUBMIT);
-    fixture.detectChanges();
+    fillOutAndSubmitInitialPredictionRequest();
     component.predictionRequestForm.controls['isCorrect'].setValue(false);
     component.predictionRequestForm.controls['altAnswer'].setValue(mockPredictionResponse.alt_answer);
     fixture.detectChanges();
@@ -117,9 +111,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('submission should return form to initial state', () => {
-    fillOutRequestForm();
-    component.formState = component.formState.nextState(FormAction.SUBMIT);
-    fixture.detectChanges();
+    fillOutAndSubmitInitialPredictionRequest();
     component.predictionRequestForm.controls['isCorrect'].setValue(true);
     fixture.detectChanges();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
@@ -128,15 +120,35 @@ describe('PredictionFormComponent', () => {
     expect(component.predictionRequestForm.controls['tweet'].value).toBe('');
     expect(component.formState instanceof InitialFormState);
   });
+  s
+  it('should switch between incorrect and correct answer', () => {
+    fillOutAndSubmitInitialPredictionRequest();
+    component.predictionRequestForm.controls['isCorrect'].setValue(true);
+    fixture.detectChanges();
+    expect(button.disabled).toBeFalse();
+    expect(component.formState instanceof AwaitingCorrectSubmissionState).toBeTrue();
+    component.predictionRequestForm.controls['isCorrect'].setValue(false);
+    fixture.detectChanges();
+    expect(button.disabled).toBeTrue();
+    expect(component.formState instanceof AwaitingAlternateAnswerState).toBeTrue();
+  });
 
   afterEach(() => {
     fixture.destroy();
   });
 
-  function fillOutRequestForm(): void {
+  //////////////////////////// Helper Functions ////////////////////////////
+
+  function fillOutInitialPredictionRequest(): void {
     component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
     component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
     component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
+    fixture.detectChanges();
+  }
+
+  function fillOutAndSubmitInitialPredictionRequest(): void {
+    fillOutInitialPredictionRequest();
+    component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
   }
 });
