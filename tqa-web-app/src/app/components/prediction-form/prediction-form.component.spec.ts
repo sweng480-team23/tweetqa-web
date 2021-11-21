@@ -1,34 +1,26 @@
-import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
-import {PredictionFormComponent} from './prediction-form.component';
-import {
-  PredictionCreateRequestV1,
-  PredictionResponseV1,
-  PredictionUpdateRequestV1
-} from "../../dtos/v1/prediction.dto.v1";
-import {
-  mockPredictionCreateRequestV1,
-  mockPredictionResponseV1,
-  mockPredictionUpdateRequestV1
-} from "../../dtos/v1/mock/prediction.dto.v1.mock";
-import {MatButtonModule} from "@angular/material/button";
-import {MatFormFieldModule} from "@angular/material/form-field";
-import {MatInputModule} from "@angular/material/input";
-import {MatOptionModule} from "@angular/material/core";
-import {MatRadioModule} from "@angular/material/radio";
-import {MatSelectModule} from "@angular/material/select";
-import {ReactiveFormsModule} from "@angular/forms";
-import {PredictionService} from "../../services/prediction.service";
-import {HttpClientModule} from "@angular/common/http";
-import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {AwaitingPredictionRequestState} from "../../state/prediction-request-form/awaiting-prediction-request.state";
-import {AwaitingIsCorrectState} from "../../state/prediction-request-form/awaiting-is-correct.state";
-import {By} from "@angular/platform-browser";
-import {FormAction} from "../../state/prediction-request-form/form-action";
-import {AwaitingCorrectSubmissionState} from "../../state/prediction-request-form/awaiting-correct-submission.state";
-import {InitialFormState} from "../../state/prediction-request-form/initial-form.state";
-import {AwaitingAlternateAnswerState} from "../../state/prediction-request-form/awaiting-alternate-answer.state";
-import {AwaitingIncorrectSubmissionState} from "../../state/prediction-request-form/awaiting-incorrect-submission.state";
+import { PredictionFormComponent } from './prediction-form.component';
+import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
+import { mockPredictionResponseV1 } from "../../dtos/v1/mock/prediction.dto.v1.mock";
+import { MatButtonModule } from "@angular/material/button";
+import { MatFormFieldModule } from "@angular/material/form-field";
+import { MatInputModule } from "@angular/material/input";
+import { MatOptionModule } from "@angular/material/core";
+import { MatRadioModule } from "@angular/material/radio";
+import { MatSelectModule } from "@angular/material/select";
+import { ReactiveFormsModule } from "@angular/forms";
+import { PredictionService } from "../../services/prediction.service";
+import { HttpClientModule } from "@angular/common/http";
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AwaitingPredictionRequestState } from "../../state/prediction-request-form/awaiting-prediction-request.state";
+import { AwaitingIsCorrectState } from "../../state/prediction-request-form/awaiting-is-correct.state";
+import { By } from "@angular/platform-browser";
+import { FormAction } from "../../state/prediction-request-form/form-action";
+import { AwaitingCorrectSubmissionState } from "../../state/prediction-request-form/awaiting-correct-submission.state";
+import { InitialFormState } from "../../state/prediction-request-form/initial-form.state";
+import { AwaitingAlternateAnswerState } from "../../state/prediction-request-form/awaiting-alternate-answer.state";
+import { AwaitingIncorrectSubmissionState } from "../../state/prediction-request-form/awaiting-incorrect-submission.state";
 
 describe('PredictionFormComponent', () => {
   let component: PredictionFormComponent;
@@ -76,19 +68,13 @@ describe('PredictionFormComponent', () => {
   });
 
   it('should be ready to submit prediction', () => {
-    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
-    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
-    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
-    fixture.detectChanges();
+    fillOutRequestForm();
     expect(component.formState instanceof AwaitingPredictionRequestState).toBeTrue();
     expect(button.disabled).toBeFalse();
   });
 
   it('should be ready to collect correct/incorrect response', waitForAsync(() => {
-    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
-    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
-    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
-    fixture.detectChanges();
+    fillOutRequestForm();
     spyOn(component, 'onSubmit');
     button.click();
     expect(component.onSubmit).toHaveBeenCalled();
@@ -101,10 +87,7 @@ describe('PredictionFormComponent', () => {
   }));
 
   it('should be ready to submit correct response', () => {
-    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
-    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
-    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
-    fixture.detectChanges();
+    fillOutRequestForm();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
     component.predictionRequestForm.controls['isCorrect'].setValue(true);
@@ -114,10 +97,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('should be ready to collect alternate answer', () => {
-    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
-    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
-    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
-    fixture.detectChanges();
+    fillOutRequestForm();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
     component.predictionRequestForm.controls['isCorrect'].setValue(false);
@@ -127,10 +107,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('should be ready to submit incorrect answer', () => {
-    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
-    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
-    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
-    fixture.detectChanges();
+    fillOutRequestForm();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
     component.predictionRequestForm.controls['isCorrect'].setValue(false);
@@ -141,10 +118,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('submission should return form to initial state', () => {
-    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
-    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
-    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
-    fixture.detectChanges();
+    fillOutRequestForm();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
     component.predictionRequestForm.controls['isCorrect'].setValue(true);
@@ -156,7 +130,19 @@ describe('PredictionFormComponent', () => {
     expect(component.formState instanceof InitialFormState);
   });
 
+  // it('should switch between incorrect and correct answer', () => {
+  //
+  // });
+
   afterEach(() => {
     fixture.destroy();
   });
+
+  function fillOutRequestForm(): void {
+    component.predictionRequestForm.controls['model'].setValue(mockPredictionResponse.model.ml_type);
+    component.predictionRequestForm.controls['tweet'].setValue(mockPredictionResponse.datum.tweet);
+    component.predictionRequestForm.controls['question'].setValue(mockPredictionResponse.datum.question);
+    fixture.detectChanges();
+  }
+
 });
