@@ -1,5 +1,5 @@
-import {DataCreateRequestV1, DataResponseV1} from "./data.dto.v1";
-import {QAModelResponseV1} from "./qa-model.dto.v1";
+import { DataCreateRequestV1, DataResponseV1 } from "./data.dto.v1";
+import { QAModelResponseV1 } from "./qa-model.dto.v1";
 
 export interface PredictionCreateRequestV1 {
   token: string;
