@@ -20,3 +20,12 @@ export const mockDataResponseV1 = cookyCutter.define<DataResponseV1>({
   start_position: faker.datatype.number(10),
   end_position: faker.datatype.number({min: 10, max: 258, precision: 1})
 });
+
+export const mockDataResponseFromCreateRequestV1 = (createRequest: DataCreateRequestV1) => {
+  return {
+    ...mockDataResponseV1(),
+    tweet: createRequest.tweet,
+    question: createRequest.question,
+    answer: createRequest.answer,
+  };
+}

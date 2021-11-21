@@ -13,6 +13,13 @@ export const mockQAModelResponseV1 = cookyCutter.define<QAModelResponseV1>({
   meteor_score: faker.datatype.float({min: 0, max: 1, precision: 0.01}),
 });
 
+export const mockQAModelResponseWithModelIdV1 = (model_id: number) => {
+  return {
+    ...mockQAModelResponseV1(),
+    id: model_id
+  };
+}
+
 export const mockQAModelCollectionResponseV1 = cookyCutter.define<QAModelCollectionResponseV1>({
   length: 3,
   collection: new Array(3).fill(mockQAModelResponseV1())
