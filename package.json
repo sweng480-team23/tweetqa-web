@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "cooky-cutter": "^1.5.4",
+    "faker": "^5.5.3"
+  },
+  "devDependencies": {
+    "@types/faker": "^5.5.9"
+  }
+}
