@@ -150,5 +150,5 @@ describe('PredictionFormComponent', () => {
     fillOutInitialPredictionRequest();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
-  }s
+  }
 });
