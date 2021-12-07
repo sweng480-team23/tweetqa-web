@@ -10,7 +10,7 @@ export abstract class AbstractCreateReadUpdateService <CREATE_REQUEST, RESPONSE,
   }
 
   public update(id: number, request: UPDATE_REQUEST, params?: {}): Observable<RESPONSE> {
-    return this.http.put<RESPONSE>(
+    return this.http.post<RESPONSE>(
       `v${this.version}/${this.endpoint}/${id}`,
       request,
       { params }
