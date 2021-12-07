@@ -120,7 +120,7 @@ describe('PredictionFormComponent', () => {
     expect(component.predictionRequestForm.controls['tweet'].value).toBe('');
     expect(component.formState instanceof InitialFormState);
   });
-  s
+
   it('should switch between incorrect and correct answer', () => {
     fillOutAndSubmitInitialPredictionRequest();
     component.predictionRequestForm.controls['isCorrect'].setValue(true);
@@ -150,5 +150,5 @@ describe('PredictionFormComponent', () => {
     fillOutInitialPredictionRequest();
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
-  }
+  }s
 });
