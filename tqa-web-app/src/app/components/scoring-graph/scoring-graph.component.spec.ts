@@ -3,7 +3,6 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ScoringGraphComponent } from './scoring-graph.component';
 import { QAModelCollectionResponseV1 } from "../../dtos/v1/qa-model.dto.v1";
 import { mockQAModelCollectionResponseV1 } from "../../dtos/v1/mock/qa-model.dto.v1.mock";
-import { HighchartsChartModule } from "highcharts-angular";
 import {ModelSeriesType} from "../../types/model-series.type";
 import {SeriesOptionsType} from "highcharts";
 import {By} from "@angular/platform-browser";
@@ -11,14 +10,11 @@ import {By} from "@angular/platform-browser";
 describe('ScoringGraphComponent', () => {
   let component: ScoringGraphComponent;
   let fixture: ComponentFixture<ScoringGraphComponent>;
-  let mockQAModelCollectionResponse: QAModelCollectionResponseV1
+  let mockQAModelCollectionResponse: QAModelCollectionResponseV1;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ScoringGraphComponent ],
-      imports: [
-        HighchartsChartModule
-      ]
     })
     .compileComponents();
   });

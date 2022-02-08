@@ -21,9 +21,14 @@ export const mockQAModelResponseWithModelIdV1 = (modelId: number) => {
 }
 
 export const mockQAModelCollectionResponseV1 = (numModels: number) => {
+  let models: QAModelResponseV1[] = [];
+  for (let i = 0; i < numModels; i++) {
+    let model: QAModelResponseV1 = mockQAModelResponseV1();
+    models.push(model);
+  }
   return cookyCutter.define<QAModelCollectionResponseV1>({
     length: numModels,
-    collection: new Array(numModels).fill(mockQAModelResponseV1())
+    collection: models
   });
 }
 
