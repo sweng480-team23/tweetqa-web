@@ -6,6 +6,7 @@ import { Score } from "../../constants/score.enum";
 import * as Highcharts from 'highcharts';
 import { mockQAModelCollectionResponseV1 } from "../../dtos/v1/mock/qa-model.dto.v1.mock";
 import { SeriesOptionsType } from "highcharts";
+import {QaModelService} from "../../services/qa-model.service";
 
 
 @Component({
@@ -35,14 +36,16 @@ export class ScoringGraphComponent implements OnInit {
     series: []
   }
 
-  constructor() { }
+  constructor(protected modelService: QaModelService) { }
 
   ngOnInit(): void {
-    // Mock call is for dev purposes only, should be replaced with an api call and response
-    const mockQAModelCollectionResponse = mockQAModelCollectionResponseV1(20)();
-    mockQAModelCollectionResponse.collection.forEach(model => console.log(model));
-    this.options.series = this.toSeries(mockQAModelCollectionResponse);
-    this.highcharts.chart('score-chart-container', this.options);
+    this.modelService.readAllModelsByType('BERT').subscribe(models => {
+      this.options.series = this.toSeries({
+        length: models.length,
+        collection: models
+      });
+      this.highcharts.chart('score-chart-container', this.options);
+    });
   }
 
   toSeries(qaModels: QAModelCollectionResponseV1): SeriesOptionsType[] {
