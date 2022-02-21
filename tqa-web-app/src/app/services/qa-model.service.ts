@@ -6,9 +6,7 @@ import {ApiMapping} from "../util/api-mapping";
 import {Observable} from "rxjs";
 import {WordCloudResponseV1} from "../dtos/v1/word-cloud.dto.v1";
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class QaModelService extends AbstractReadService<QAModelResponseV1>{
 
   constructor(protected http: HttpClient) {

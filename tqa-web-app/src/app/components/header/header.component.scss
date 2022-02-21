@@ -1,0 +1,27 @@
+@import "../../../style-variables";
+
+.header-container {
+  margin: 0px;
+  padding: 15px;
+  width: 100%;
+  background-color: #424242;
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.logo-image {
+  height: 50px;
+  margin-right: 5px;
+}
+
+.logo-name {
+  font-size: 50px;
+  color: $primary-color;
+  font-family: "Roboto Condensed";
+  font-weight: bold;
+  text-align: center;
+}

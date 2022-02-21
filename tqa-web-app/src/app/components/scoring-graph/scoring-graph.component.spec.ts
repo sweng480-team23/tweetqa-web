@@ -6,6 +6,9 @@ import { mockQAModelCollectionResponseV1 } from "../../dtos/v1/mock/qa-model.dto
 import {ModelSeriesType} from "../../types/model-series.type";
 import {SeriesOptionsType} from "highcharts";
 import {By} from "@angular/platform-browser";
+import {QaModelService} from "../../services/qa-model.service";
+import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('ScoringGraphComponent', () => {
   let component: ScoringGraphComponent;
@@ -15,6 +18,8 @@ describe('ScoringGraphComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ ScoringGraphComponent ],
+      imports: [ HttpClientTestingModule ],
+      providers: [ QaModelService, HttpClientModule ]
     })
     .compileComponents();
   });
@@ -43,7 +48,11 @@ describe('ScoringGraphComponent', () => {
   });
 
   it('should display chart for model scores', () => {
+    component.options.series = component.toSeries(mockQAModelCollectionResponse);
+    component.highcharts.chart('score-chart-container', component.options);
+    fixture.detectChanges();
     const chartDiv: any = fixture.debugElement.query(By.css('.highcharts-container'));
     expect(chartDiv).toBeTruthy();
   });
+
 });

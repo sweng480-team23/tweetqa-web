@@ -17,7 +17,7 @@ export class WordCloudComponent implements OnInit {
 
   public options: any = {
     title: {
-      text: 'Word Frequency of Dataset'
+      text: ''
     },
     series: [{
         type: 'wordcloud',

@@ -15,4 +15,7 @@ export abstract class AbstractReadService<RESPONSE> {
     return this.http.get<RESPONSE>(`v${this.version}/${this.endpoint}/${id}`, { params });
   }
 
+  public getVersion(): number {
+    return this.version;
+  }
 }

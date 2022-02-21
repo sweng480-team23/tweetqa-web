@@ -19,7 +19,7 @@ export class ScoringGraphComponent implements OnInit {
 
   public options: Highcharts.Options = {
     title: {
-      text: "Model Scores over Time"
+      text: ""
     },
     xAxis: {
       title: {
@@ -36,7 +36,7 @@ export class ScoringGraphComponent implements OnInit {
     series: []
   }
 
-  constructor(protected modelService: QaModelService) { }
+  constructor(public modelService: QaModelService) { }
 
   ngOnInit(): void {
     this.modelService.readAllModelsByType('BERT').subscribe(models => {

@@ -3,20 +3,25 @@ import { FormGroup } from "@angular/forms";
 import { FormAction } from "./form-action";
 import { AwaitingCorrectSubmissionState } from "./awaiting-correct-submission.state";
 import { AwaitingAlternateAnswerState } from "./awaiting-alternate-answer.state";
-import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
+import { PredictionStateAware } from "../aware/prediction-state.aware";
 
 export class AwaitingIsCorrectState extends PredictionRequestFormState {
 
-  constructor(predictionRequestForm: FormGroup, prediction: PredictionResponseV1) {
-    super(predictionRequestForm, prediction);
+  constructor(
+    predictionRequestForm: FormGroup,
+    predictionState: PredictionStateAware)
+  {
+    super(predictionRequestForm, predictionState);
   }
 
   enter(): void {
-    this.prediction = this.getUpdatedPrediction();
-    this.showAnswer = true;
-    this.showIsCorrect = true;
-    this.showAltAnswer = false;
-    this.isSubmitButtonDisabled = true;
+    this.dispatchChanges({
+      prediction: this.getUpdatedPrediction(),
+      showAnswer: true,
+      showIsCorrect: true,
+      showAltAnswer: false,
+      isSubmitButtonDisabled: true
+    });
     this.predictionRequestForm.get('model')?.disable();
     this.predictionRequestForm.get('tweet')?.disable();
     this.predictionRequestForm.get('question')?.disable();
@@ -25,16 +30,19 @@ export class AwaitingIsCorrectState extends PredictionRequestFormState {
   nextStateDecision(action: FormAction): PredictionRequestFormState {
     switch(action) {
       case FormAction.VALUE_CHANGED:
-        if (this.prediction.is_correct) {
+        if (this.predictionState.formState.prediction.is_correct) {
           const state: PredictionRequestFormState = new AwaitingCorrectSubmissionState(
             this.predictionRequestForm,
-            this.prediction);
+            this.predictionState
+          );
           state.enter();
           return state;
-        } else if (!this.prediction.is_correct && this.prediction.alt_answer == '') {
+        } else if (!this.predictionState.formState.prediction.is_correct
+          && this.predictionState.formState.prediction.alt_answer == '') {
           const state: PredictionRequestFormState = new AwaitingAlternateAnswerState(
             this.predictionRequestForm,
-            this.prediction);
+            this.predictionState
+          );
           state.enter();
           return state;
         } else {

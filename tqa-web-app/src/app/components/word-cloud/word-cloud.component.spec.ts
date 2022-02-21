@@ -1,8 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import { WordCloudComponent } from './word-cloud.component';
 import { WordCloudResponseV1 } from "../../dtos/v1/word-cloud.dto.v1";
 import { mockWordCloudResponseV1 } from "../../dtos/v1/mock/word-cloud.dto.v1.mock";
 import { By } from "@angular/platform-browser";
+import {QaModelService} from "../../services/qa-model.service";
+import {HttpClient} from "@angular/common/http";
+import {HttpClientTestingModule} from "@angular/common/http/testing";
 
 describe('WordCloudComponent', () => {
   let component: WordCloudComponent;
@@ -12,6 +15,8 @@ describe('WordCloudComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ WordCloudComponent ],
+      imports: [ HttpClientTestingModule ],
+      providers: [ QaModelService ]
     })
     .compileComponents();
   });
@@ -28,6 +33,9 @@ describe('WordCloudComponent', () => {
   });
 
   it('should display highchart for word cloud', () => {
+    component.options.series = mockWordCloudResponse.words;
+    component.highcharts.chart('word-cloud-container', component.options);
+    fixture.detectChanges();
     const chartDiv: any = fixture.debugElement.query(By.css('.highcharts-container'));
     expect(chartDiv).toBeTruthy();
   });
