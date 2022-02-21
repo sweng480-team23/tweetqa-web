@@ -2,7 +2,6 @@ import { TestBed } from '@angular/core/testing';
 
 import { PredictionService } from './prediction.service';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
-import { HttpClient } from "@angular/common/http";
 import {
   mockPredictionCreateRequestV1,
   mockPredictionResponseFromCreateRequestV1, mockPredictionUpdateRequestWithIdV1
@@ -13,7 +12,6 @@ import { ApiMapping } from "../util/api-mapping";
 describe('PredictionService', () => {
   let service: PredictionService;
   let httpMock: HttpTestingController;
-  let httpClient: HttpClient;
   let prediction: PredictionResponseV1;
   let createRequest: PredictionCreateRequestV1;
   let updateRequest: PredictionUpdateRequestV1;
@@ -24,7 +22,6 @@ describe('PredictionService', () => {
       providers: [ PredictionService ]
     });
     service = TestBed.inject(PredictionService);
-    httpClient = TestBed.inject(HttpClient);
     httpMock = TestBed.inject(HttpTestingController);
     createRequest = mockPredictionCreateRequestV1();
     prediction = mockPredictionResponseFromCreateRequestV1(createRequest);

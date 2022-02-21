@@ -14,6 +14,7 @@ export interface PredictionResponseV1 {
   alt_answer: string;
   model: QAModelResponseV1;
   datum: DataResponseV1;
+  prediction: string;
 }
 
 export interface PredictionUpdateRequestV1 {

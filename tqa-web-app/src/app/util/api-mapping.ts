@@ -1,6 +1,7 @@
 
 export class ApiMapping {
 
+  public static MODELS = new ApiMapping('models');
   public static PREDICTIONS = new ApiMapping('predictions');
 
   private readonly path: string;

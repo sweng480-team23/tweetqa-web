@@ -4,6 +4,7 @@ export interface WordCloudRequestV1 {
   model_id: number;
 }
 
-export interface WordCloudResponseV1 extends CollectionResponseV1<{ [name: string]: number }> {
-  words: { [name: string]: number }[];
+export interface WordCloudResponseV1 {
+  model_id: number;
+  words: {name: string, weight: number}[];
 }

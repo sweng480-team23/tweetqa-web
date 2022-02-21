@@ -13,6 +13,7 @@ export const mockPredictionCreateRequestV1 = cookyCutter.define<PredictionCreate
 
 export const mockPredictionResponseV1 = cookyCutter.define<PredictionResponseV1>({
   id: faker.datatype.number(),
+  prediction: faker.lorem.words(),
   token: faker.datatype.uuid(),
   is_correct: faker.datatype.boolean(),
   alt_answer: faker.lorem.words(),

@@ -14,17 +14,31 @@ import { MatRadioModule } from "@angular/material/radio";
 import { ReactiveFormsModule } from "@angular/forms";
 import { HTTP_INTERCEPTORS, HttpClientModule } from "@angular/common/http";
 import { RequestInterceptor } from "./util/request-interceptor";
-import {PredictionService} from "./services/prediction.service";
+import { PredictionService } from "./services/prediction.service";
+import { ScoringGraphComponent } from './components/scoring-graph/scoring-graph.component';
+import { WordCloudComponent } from './components/word-cloud/word-cloud.component';
+import { HeaderComponent } from './components/header/header.component';
+import { QaModelService } from "./services/qa-model.service";
+import { StoreModule } from "@ngrx/store";
+import { reducers } from "./state/store/app.state";
+import {EffectsModule} from "@ngrx/effects";
+import {PredictionEffect} from "./state/store/resources/prediction/prediction.effect";
 
 @NgModule({
   declarations: [
     AppComponent,
-    PredictionFormComponent
+    PredictionFormComponent,
+    ScoringGraphComponent,
+    WordCloudComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    EffectsModule.forRoot([
+      PredictionEffect
+    ]),
     HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
@@ -33,8 +47,10 @@ import {PredictionService} from "./services/prediction.service";
     MatRadioModule,
     MatSelectModule,
     ReactiveFormsModule,
+    StoreModule.forRoot(reducers),
   ],
   providers: [
+    QaModelService,
     PredictionService,
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
   ],
