@@ -11,7 +11,7 @@ export interface PredictionFormState {
   prediction: PredictionResponseV1;
 };
 
-export const initialState: PredictionFormState = {
+export const initialFormState: PredictionFormState = {
   isSubmitButtonDisabled: true,
   showAnswer: false,
   showIsCorrect: false,
@@ -20,7 +20,7 @@ export const initialState: PredictionFormState = {
 };
 
 const reducer = createReducer(
-  initialState,
+  initialFormState,
   on(predictionFormActions.setIsButtonDisabled, (state, props) => ({
     ...state,
     isSubmitButtonDisabled: props.value

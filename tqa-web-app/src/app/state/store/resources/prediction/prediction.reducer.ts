@@ -6,7 +6,7 @@ import { PredictionResponseV1 } from "../../../../dtos/v1/prediction.dto.v1";
 
 export interface PredictionState extends CRState<PredictionResponseV1> {};
 
-export const initialState: PredictionState = {
+export const initialPredictionState: PredictionState = {
   ...initialCRState
 };
 

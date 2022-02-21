@@ -67,7 +67,6 @@ export abstract class PredictionRequestFormState {
   public nextState(action: FormAction): PredictionRequestFormState {
     this.predictionState.store$.dispatch(formStateActions.setPrediction({value: this.getUpdatedPrediction()}));
     const nextState: PredictionRequestFormState = this.nextStateDecision(action);
-    console.log(nextState.constructor.name);
     return nextState;
   };
 
