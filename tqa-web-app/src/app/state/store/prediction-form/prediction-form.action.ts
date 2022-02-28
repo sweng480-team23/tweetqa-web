@@ -1,5 +1,5 @@
 import { createAction, props } from "@ngrx/store";
-import { PredictionResponseV1 } from "../../../dtos/v1/prediction.dto.v1";
+import { PredictionResponseV2 } from "../../../dtos/v2/prediction.dto.v2";
 
 export const typePrefix: string = '[Prediction Form]';
 
@@ -25,5 +25,5 @@ export const setShowAltAnswer = createAction(
 
 export const setPrediction = createAction(
   `${typePrefix} set prediction`,
-  props<{value: PredictionResponseV1}>()
+  props<{value: PredictionResponseV2}>()
 );

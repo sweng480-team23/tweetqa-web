@@ -21,8 +21,11 @@ import { HeaderComponent } from './components/header/header.component';
 import { QaModelService } from "./services/qa-model.service";
 import { StoreModule } from "@ngrx/store";
 import { reducers } from "./state/store/app.state";
-import {EffectsModule} from "@ngrx/effects";
-import {PredictionEffect} from "./state/store/resources/prediction/prediction.effect";
+import { EffectsModule } from "@ngrx/effects";
+import { PredictionEffect } from "./state/store/resources/prediction/prediction.effect";
+import { VisitorEffect } from "./state/store/resources/visitor/visitor.effect";
+import { LocalStorageService } from "./services/local-storage.service";
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
@@ -30,14 +33,16 @@ import {PredictionEffect} from "./state/store/resources/prediction/prediction.ef
     PredictionFormComponent,
     ScoringGraphComponent,
     WordCloudComponent,
-    HeaderComponent
+    HeaderComponent,
+    MainComponent
   ],
   imports: [
-    BrowserModule,
     AppRoutingModule,
+    BrowserModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([
-      PredictionEffect
+      PredictionEffect,
+      VisitorEffect
     ]),
     HttpClientModule,
     MatButtonModule,
@@ -50,6 +55,7 @@ import {PredictionEffect} from "./state/store/resources/prediction/prediction.ef
     StoreModule.forRoot(reducers),
   ],
   providers: [
+    LocalStorageService,
     QaModelService,
     PredictionService,
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }

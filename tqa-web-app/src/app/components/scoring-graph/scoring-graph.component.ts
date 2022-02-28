@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ModelSeriesType } from "../../types/model-series.type";
-import { QAModelCollectionResponseV1, QAModelResponseV1 } from "../../dtos/v1/qa-model.dto.v1";
+import { QAModelCollectionResponseV2, QAModelResponseV2 } from "../../dtos/v2/qa-model.dto.v2";
 import { ModelDataType } from "../../types/model-data.type";
 import { Score } from "../../constants/score.enum";
 import * as Highcharts from 'highcharts';
-import { mockQAModelCollectionResponseV1 } from "../../dtos/v1/mock/qa-model.dto.v1.mock";
+import { mockQAModelCollectionResponseV2 } from "../../dtos/v2/mock/qa-model.dto.v2.mock";
 import { SeriesOptionsType } from "highcharts";
 import {QaModelService} from "../../services/qa-model.service";
 
@@ -48,7 +48,7 @@ export class ScoringGraphComponent implements OnInit {
     });
   }
 
-  toSeries(qaModels: QAModelCollectionResponseV1): SeriesOptionsType[] {
+  toSeries(qaModels: QAModelCollectionResponseV2): SeriesOptionsType[] {
     let bleuData: ModelDataType[] = [];
     let rougeData: ModelDataType[] = [];
     let meteorData: ModelDataType[] = [];
@@ -74,7 +74,7 @@ export class ScoringGraphComponent implements OnInit {
     ];
   }
 
-  toData(qaModel: QAModelResponseV1): any[] {
+  toData(qaModel: QAModelResponseV2): any[] {
     return [
       {modelId: qaModel.id, x: new Date(qaModel.created_date).getTime(), y: qaModel.bleu_score, name: Score.BLEU.toString()} as ModelDataType,
       {modelId: qaModel.id, x: new Date(qaModel.created_date).getTime(), y: qaModel.meteor_score, name: Score.METEOR.toString()} as ModelDataType,

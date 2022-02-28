@@ -1,7 +1,7 @@
 import {ComponentFixture, fakeAsync, TestBed, tick, waitForAsync} from '@angular/core/testing';
 import { WordCloudComponent } from './word-cloud.component';
-import { WordCloudResponseV1 } from "../../dtos/v1/word-cloud.dto.v1";
-import { mockWordCloudResponseV1 } from "../../dtos/v1/mock/word-cloud.dto.v1.mock";
+import { WordCloudResponseV2 } from "../../dtos/v2/word-cloud.dto.v2";
+import { mockWordCloudResponseV2 } from "../../dtos/v2/mock/word-cloud.dto.v2.mock";
 import { By } from "@angular/platform-browser";
 import {QaModelService} from "../../services/qa-model.service";
 import {HttpClient} from "@angular/common/http";
@@ -10,7 +10,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 describe('WordCloudComponent', () => {
   let component: WordCloudComponent;
   let fixture: ComponentFixture<WordCloudComponent>;
-  let mockWordCloudResponse: WordCloudResponseV1;
+  let mockWordCloudResponse: WordCloudResponseV2;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -22,7 +22,7 @@ describe('WordCloudComponent', () => {
   });
 
   beforeEach(() => {
-    mockWordCloudResponse = mockWordCloudResponseV1(100)();
+    mockWordCloudResponse = mockWordCloudResponseV2(100)();
     fixture = TestBed.createComponent(WordCloudComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

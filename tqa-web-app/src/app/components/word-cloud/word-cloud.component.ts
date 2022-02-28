@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as Highcharts from "highcharts";
-import { mockWordCloudResponseV1 } from "../../dtos/v1/mock/word-cloud.dto.v1.mock";
 import {QaModelService} from "../../services/qa-model.service";
 
 declare var require: any

@@ -1,19 +1,24 @@
-import {AbstractCreateReadService} from "../../../services/abstract-create-read.service";
+import { AbstractCreateReadService } from "../../../services/abstract-create-read.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as resourceActions from './resource.action';
-import {map, switchMap} from "rxjs/operators";
+import { map, switchMap } from "rxjs/operators";
+import { ReadResourceEffect } from "./read-resource.effect";
 
 
 export abstract class CreateReadResourceEffect<
   CREATE_REQUEST,
   RESPONSE,
   SERVICE extends AbstractCreateReadService<CREATE_REQUEST, RESPONSE>>
+  extends ReadResourceEffect<RESPONSE, SERVICE>
 {
 
   constructor(
     protected actions$: Actions,
     protected service: SERVICE,
-    protected typePrefix: string) {}
+    protected typePrefix: string)
+  {
+    super(actions$, service, typePrefix);
+  }
 
   public create$ = createEffect(() => this.actions$.pipe(
     ofType(resourceActions.create(this.typePrefix)),

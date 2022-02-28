@@ -3,18 +3,18 @@ import { TestBed } from '@angular/core/testing';
 import { PredictionService } from './prediction.service';
 import { HttpClientTestingModule, HttpTestingController } from "@angular/common/http/testing";
 import {
-  mockPredictionCreateRequestV1,
-  mockPredictionResponseFromCreateRequestV1, mockPredictionUpdateRequestWithIdV1
-} from "../dtos/v1/mock/prediction.dto.v1.mock";
-import {PredictionCreateRequestV1, PredictionResponseV1, PredictionUpdateRequestV1} from "../dtos/v1/prediction.dto.v1";
+  mockPredictionCreateRequestV2,
+  mockPredictionResponseFromCreateRequestV2, mockPredictionUpdateRequestWithIdV2
+} from "../dtos/v2/mock/prediction.dto.v2.mock";
+import { PredictionCreateRequestV2, PredictionResponseV2, PredictionUpdateRequestV2 } from "../dtos/v2/prediction.dto.v2";
 import { ApiMapping } from "../util/api-mapping";
 
 describe('PredictionService', () => {
   let service: PredictionService;
   let httpMock: HttpTestingController;
-  let prediction: PredictionResponseV1;
-  let createRequest: PredictionCreateRequestV1;
-  let updateRequest: PredictionUpdateRequestV1;
+  let prediction: PredictionResponseV2;
+  let createRequest: PredictionCreateRequestV2;
+  let updateRequest: PredictionUpdateRequestV2;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -23,16 +23,16 @@ describe('PredictionService', () => {
     });
     service = TestBed.inject(PredictionService);
     httpMock = TestBed.inject(HttpTestingController);
-    createRequest = mockPredictionCreateRequestV1();
-    prediction = mockPredictionResponseFromCreateRequestV1(createRequest);
-    updateRequest = mockPredictionUpdateRequestWithIdV1(prediction.id);
+    createRequest = mockPredictionCreateRequestV2();
+    prediction = mockPredictionResponseFromCreateRequestV2(createRequest);
+    updateRequest = mockPredictionUpdateRequestWithIdV2(prediction.id);
   });
 
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
 
-  it('create() should POST PredictionCreateRequestV1 and receive PredictionResponseV1', () => {
+  it('create() should POST PredictionCreateRequestV2 and receive PredictionResponseV2', () => {
     service.create(createRequest).subscribe(response => {
       expect(response).toEqual(prediction);
     });
@@ -43,7 +43,7 @@ describe('PredictionService', () => {
     request.flush(prediction);
   });
 
-  it('read() should GET PredictionResponseV1', () => {
+  it('read() should GET PredictionResponseV2', () => {
     service.read(prediction.id).subscribe(response => {
       expect(response).toEqual(prediction);
     });
@@ -54,7 +54,7 @@ describe('PredictionService', () => {
     request.flush(prediction);
   });
 
-  it('update() should PUT PredictionUpdateRequestV1 and receive PredictionResponseV1', () => {
+  it('update() should PUT PredictionUpdateRequestV2 and receive PredictionResponseV2', () => {
     service.update(prediction.id, updateRequest).subscribe(response => {
       expect(response.id).toEqual(prediction.id);
     });
@@ -66,7 +66,7 @@ describe('PredictionService', () => {
       ...prediction,
       alt_answer: updateRequest.alt_answer,
       is_correct: updateRequest.is_correct
-    } as PredictionResponseV1)
+    } as PredictionResponseV2)
   });
 
   afterEach(() => {

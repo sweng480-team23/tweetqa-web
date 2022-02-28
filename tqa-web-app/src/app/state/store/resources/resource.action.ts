@@ -7,7 +7,7 @@ export const getById = (typePrefix: string) => createAction(
 
 export const getByIdSuccess = <DTO>(typePrefix: string) => createAction(
   `${typePrefix} GET by id success`,
-  props<{ resource: DTO }>()
+  props<{ response: DTO }>()
 );
 
 export const create = <DTO>(typePrefix: string) => createAction(

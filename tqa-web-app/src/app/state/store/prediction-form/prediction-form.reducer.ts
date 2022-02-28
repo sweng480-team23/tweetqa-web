@@ -1,14 +1,14 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import * as predictionFormActions from "./prediction-form.action";
 import { PredictionRequestFormState } from "../../prediction-request-form/prediction-request-form.state";
-import {PredictionResponseV1} from "../../../dtos/v1/prediction.dto.v1";
+import {PredictionResponseV2} from "../../../dtos/v2/prediction.dto.v2";
 
 export interface PredictionFormState {
   isSubmitButtonDisabled: boolean;
   showAnswer: boolean;
   showIsCorrect: boolean;
   showAltAnswer: boolean;
-  prediction: PredictionResponseV1;
+  prediction: PredictionResponseV2;
 };
 
 export const initialFormState: PredictionFormState = {

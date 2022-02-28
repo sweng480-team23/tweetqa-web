@@ -1,5 +1,5 @@
 import { ResourceAware, ResourceAwareBehavior } from "./resource.aware";
-import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
+import { PredictionResponseV2 } from "../../dtos/v2/prediction.dto.v2";
 import { PredictionRequestFormState } from "../prediction-request-form/prediction-request-form.state";
 import { Observable, Subscription } from "rxjs";
 import { PredictionFormState } from "../store/prediction-form/prediction-form.reducer";
@@ -7,7 +7,7 @@ import {Store} from "@ngrx/store";
 import {AppState} from "../store/app.state";
 import * as formStateActions from "../store/prediction-form/prediction-form.action";
 
-export interface PredictionStateAware extends ResourceAware<PredictionResponseV1> {
+export interface PredictionStateAware extends ResourceAware<PredictionResponseV2> {
   store$: Store<AppState>
   formState$: Observable<PredictionFormState>,
   formState: PredictionFormState
@@ -34,7 +34,7 @@ export const PredictionStateAwareBehavior = (props: PredictionStateAware): Predi
     ...ResourceAwareBehavior({
       resource$: props.resource$,
       subscription: props.subscription
-    } as ResourceAware<PredictionResponseV1>),
+    } as ResourceAware<PredictionResponseV2>),
     formState$: props.formState$,
     store$: props.store$
   } as PredictionStateAware
