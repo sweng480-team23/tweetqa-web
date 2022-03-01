@@ -1,16 +1,16 @@
-import { initialCRState, CRState } from "../resource.state";
+import { initialCRUState, CRUState } from "../resource.state";
 import { Action } from "@ngrx/store";
-import { crReducer } from "../resource.reducer";
+import { cruReducer } from "../resource.reducer";
 import { typePrefix } from "./prediction.action";
 import { PredictionResponseV2 } from "../../../../dtos/v2/prediction.dto.v2";
 
-export interface PredictionState extends CRState<PredictionResponseV2> {};
+export interface PredictionState extends CRUState<PredictionResponseV2> {};
 
 export const initialPredictionState: PredictionState = {
-  ...initialCRState
+  ...initialCRUState
 };
 
-const reducer = crReducer<PredictionResponseV2>(typePrefix, initialPredictionState);
+const reducer = cruReducer<PredictionResponseV2>(typePrefix, initialPredictionState);
 
 export function predictionReducer(state: PredictionState | undefined, action: Action) {
   return reducer(state, action)

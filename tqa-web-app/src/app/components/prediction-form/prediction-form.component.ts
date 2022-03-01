@@ -86,16 +86,13 @@ export class PredictionFormComponent implements OnInit {
       }));
     } else if (this.formState instanceof AwaitingCorrectSubmissionState ||
         this.formState instanceof AwaitingIncorrectSubmissionState) {
-      // TODO Switch call to ngrx framework
-      this.predictionService.update(
-        this.formState.predictionState.formState.prediction.id,
-        {
+      this.store$.dispatch(predictionActions.update({
+        id: this.formState.predictionState.formState.prediction.id,
+        request: {
           ...this.formState.predictionState.formState.prediction,
           visitor: this.visitorAware.resource
         } as PredictionUpdateRequestV2
-      ).subscribe(prediction => {
-        this.formState.predictionState.formState.prediction = prediction;
-      });
+      }));
     }
     this.formState = this.formState.nextState(FormAction.SUBMIT);
   }

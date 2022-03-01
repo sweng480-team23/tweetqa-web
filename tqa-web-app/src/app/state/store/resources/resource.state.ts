@@ -10,6 +10,11 @@ export interface CRState <T> extends ReadableState<T> {
   created: boolean;
 }
 
+export interface CRUState <T> extends CRState<T> {
+  updating: boolean;
+  updated: boolean;
+}
+
 export const initialReadableState: ReadableState<any> = {
   resource: null,
   loading: false,
@@ -20,4 +25,10 @@ export const initialCRState: CRState<any> = {
   ...initialReadableState,
   creating: false,
   created: false
+};
+
+export const initialCRUState: CRUState<any> = {
+  ...initialCRState,
+  updating: false,
+  updated: false
 };
