@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AbstractCreateReadService } from "./abstract-create-read.service";
+import { AbstractCreateReadService } from "./abstract/abstract-create-read.service";
 import { VisitorCreateRequestV2, VisitorResponseV2 } from "../dtos/v2/visitor.dto.v2";
 import { HttpClient } from "@angular/common/http";
 import {ApiMapping} from "../util/api-mapping";

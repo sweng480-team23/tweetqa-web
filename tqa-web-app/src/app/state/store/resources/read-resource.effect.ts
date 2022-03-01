@@ -1,4 +1,4 @@
-import { AbstractReadService } from "../../../services/abstract-read.service";
+import { AbstractReadService } from "../../../services/abstract/abstract-read.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as resourceActions from './resource.action';
 import { map, switchMap } from "rxjs/operators";

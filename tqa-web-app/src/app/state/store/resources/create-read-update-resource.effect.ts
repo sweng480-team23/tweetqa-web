@@ -2,7 +2,7 @@ import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as resourceActions from "./resource.action";
 import { map, switchMap } from "rxjs/operators";
 import { CreateReadResourceEffect } from "./create-read-resource.effect";
-import { AbstractCreateReadUpdateService } from "../../../services/abstract-create-read-update.service";
+import { AbstractCreateReadUpdateService } from "../../../services/abstract/abstract-create-read-update.service";
 
 export abstract class CreateReadUpdateResourceEffect<
   CREATE_REQUEST,
