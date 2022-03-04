@@ -1,7 +1,7 @@
 import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 import {PredictionFormComponent} from './prediction-form.component';
-import {PredictionResponseV1} from "../../dtos/v1/prediction.dto.v1";
-import {mockPredictionResponseV1} from "../../dtos/v1/mock/prediction.dto.v1.mock";
+import {PredictionResponseV2} from "../../dtos/v2/prediction.dto.v2";
+import {mockPredictionResponseV2} from "../../dtos/v2/mock/prediction.dto.v2.mock";
 import {MatButtonModule} from "@angular/material/button";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatInputModule} from "@angular/material/input";
@@ -30,10 +30,10 @@ describe('PredictionFormComponent', () => {
   let component: PredictionFormComponent;
   let store: MockStore;
   let fixture: ComponentFixture<PredictionFormComponent>;
-  let mockPredictionResponse: PredictionResponseV1;
+  let mockPredictionResponse: PredictionResponseV2;
   let button: HTMLButtonElement;
   const initialState = {
-    predictions: {...initialPredictionState, resource: mockPredictionResponseV1()},
+    predictions: {...initialPredictionState, resource: mockPredictionResponseV2()},
     predictionForm: initialFormState
   }
 
@@ -60,7 +60,7 @@ describe('PredictionFormComponent', () => {
   });
 
   beforeEach(() => {
-    mockPredictionResponse = mockPredictionResponseV1()
+    mockPredictionResponse = mockPredictionResponseV2()
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(PredictionFormComponent);
     component = fixture.componentInstance;

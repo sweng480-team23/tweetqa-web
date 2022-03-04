@@ -1,8 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ScoringGraphComponent } from './scoring-graph.component';
-import { QAModelCollectionResponseV1 } from "../../dtos/v1/qa-model.dto.v1";
-import { mockQAModelCollectionResponseV1 } from "../../dtos/v1/mock/qa-model.dto.v1.mock";
+import { QAModelCollectionResponseV2 } from "../../dtos/v2/qa-model.dto.v2";
+import { mockQAModelCollectionResponseV2 } from "../../dtos/v2/mock/qa-model.dto.v2.mock";
 import {ModelSeriesType} from "../../types/model-series.type";
 import {SeriesOptionsType} from "highcharts";
 import {By} from "@angular/platform-browser";
@@ -13,7 +13,7 @@ import {HttpClientTestingModule} from "@angular/common/http/testing";
 describe('ScoringGraphComponent', () => {
   let component: ScoringGraphComponent;
   let fixture: ComponentFixture<ScoringGraphComponent>;
-  let mockQAModelCollectionResponse: QAModelCollectionResponseV1;
+  let mockQAModelCollectionResponse: QAModelCollectionResponseV2;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -25,7 +25,7 @@ describe('ScoringGraphComponent', () => {
   });
 
   beforeEach(() => {
-    mockQAModelCollectionResponse = mockQAModelCollectionResponseV1(20)();
+    mockQAModelCollectionResponse = mockQAModelCollectionResponseV2(20)();
     fixture = TestBed.createComponent(ScoringGraphComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();

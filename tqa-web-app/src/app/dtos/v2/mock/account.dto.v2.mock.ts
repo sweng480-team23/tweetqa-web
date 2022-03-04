@@ -1,20 +1,20 @@
 import * as cookyCutter from 'cooky-cutter';
 import * as faker from 'faker';
-import { AccountCreateRequestV1, AccountResponseV1, LoginRequestV1 } from "../account.dto.v1";
+import { AccountCreateRequestV2, AccountResponseV2, LoginRequestV2 } from "../account.dto.v2";
 
 
-export const mockAccountCreateRequestV1 = cookyCutter.define<AccountCreateRequestV1>({
+export const mockAccountCreateRequestV2 = cookyCutter.define<AccountCreateRequestV2>({
   token: faker.datatype.uuid(),
   email: faker.internet.email(),
   password: faker.internet.password()
 });
 
-export const mockAccountResponseV1 = cookyCutter.define<AccountResponseV1>({
+export const mockAccountResponseV2 = cookyCutter.define<AccountResponseV2>({
   id: faker.datatype.number(),
   email: faker.internet.email()
 });
 
-export const mockLoginRequestV1 = cookyCutter.define<LoginRequestV1>({
+export const mockLoginRequestV2 = cookyCutter.define<LoginRequestV2>({
   email: faker.internet.email(),
   password: faker.internet.password()
 });

@@ -1,15 +1,15 @@
 import * as cookyCutter from 'cooky-cutter';
 import * as faker from 'faker';
-import { DataCreateRequestV1, DataResponseV1 } from "../data.dto.v1";
+import { DataCreateRequestV2, DataResponseV2 } from "../data.dto.v2";
 
 
-export const mockDataCreateRequestV1 = cookyCutter.define<DataCreateRequestV1>({
+export const mockDataCreateRequestV2 = cookyCutter.define<DataCreateRequestV2>({
   tweet: faker.lorem.sentences(),
   question: faker.lorem.sentence(),
   answer: faker.lorem.words()
 });
 
-export const mockDataResponseV1 = cookyCutter.define<DataResponseV1>({
+export const mockDataResponseV2 = cookyCutter.define<DataResponseV2>({
   id: faker.datatype.number(),
   tweet: faker.lorem.sentences(),
   question: faker.lorem.sentence(),
@@ -21,9 +21,9 @@ export const mockDataResponseV1 = cookyCutter.define<DataResponseV1>({
   end_position: faker.datatype.number({min: 10, max: 258, precision: 1})
 });
 
-export const mockDataResponseFromCreateRequestV1 = (createRequest: DataCreateRequestV1) => {
+export const mockDataResponseFromCreateRequestV2 = (createRequest: DataCreateRequestV2) => {
   return {
-    ...mockDataResponseV1(),
+    ...mockDataResponseV2(),
     tweet: createRequest.tweet,
     question: createRequest.question,
     answer: createRequest.answer,

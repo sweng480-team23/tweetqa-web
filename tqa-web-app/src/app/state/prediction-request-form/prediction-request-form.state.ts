@@ -1,7 +1,7 @@
 import { FormGroup } from "@angular/forms";
-import { PredictionResponseV1 } from "../../dtos/v1/prediction.dto.v1";
-import { DataResponseV1 } from "../../dtos/v1/data.dto.v1";
-import { QAModelResponseV1 } from "../../dtos/v1/qa-model.dto.v1";
+import { PredictionResponseV2 } from "../../dtos/v2/prediction.dto.v2";
+import { PartialDataResponseV2 } from "../../dtos/v2/data.dto.v2";
+import { QAModelResponseV2 } from "../../dtos/v2/qa-model.dto.v2";
 import { FormAction } from "./form-action";
 import { PredictionFormState } from "../store/prediction-form/prediction-form.reducer";
 import { PredictionStateAware } from "../aware/prediction-state.aware";
@@ -17,22 +17,22 @@ export abstract class PredictionRequestFormState {
     this.predictionState = predictionState;
   }
 
-  public static getEmptyPrediction(): PredictionResponseV1 {
+  public static getEmptyPrediction(): PredictionResponseV2 {
     return {
       prediction: '',
       alt_answer: '',
       datum: {
         tweet: '',
         question: '',
-      } as DataResponseV1,
+      } as PartialDataResponseV2,
       model: {
         ml_type: ''
-      } as QAModelResponseV1
-    } as PredictionResponseV1;
+      } as QAModelResponseV2
+    } as PredictionResponseV2;
   }
 
-  protected getUpdatedPrediction(): PredictionResponseV1 {
-    return <PredictionResponseV1>{
+  protected getUpdatedPrediction(): PredictionResponseV2 {
+    return <PredictionResponseV2>{
       ...this.predictionState.formState.prediction,
       alt_answer: this.predictionRequestForm.get('altAnswer')?.value,
       datum: {
