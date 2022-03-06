@@ -1,4 +1,4 @@
-import * as cookyCutter from 'cooky-cutter';
+/* import * as cookyCutter from 'cooky-cutter';
 import * as faker from 'faker';
 import { QAModelCollectionResponseV2, QAModelResponseV2 } from "../qa-model.dto.v2";
 
@@ -30,6 +30,6 @@ export const mockQAModelCollectionResponseV2 = (numModels: number) => {
     length: numModels,
     collection: models
   });
-}
+} */
 
 

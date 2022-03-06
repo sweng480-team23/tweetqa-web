@@ -4,7 +4,7 @@ import { QAModelCollectionResponseV2, QAModelResponseV2 } from "../../dtos/v2/qa
 import { ModelDataType } from "../../types/model-data.type";
 import { Score } from "../../constants/score.enum";
 import * as Highcharts from 'highcharts';
-import { mockQAModelCollectionResponseV2 } from "../../dtos/v2/mock/qa-model.dto.v2.mock";
+//import { mockQAModelCollectionResponseV2 } from "../../dtos/v2/mock/qa-model.dto.v2.mock";
 import { SeriesOptionsType } from "highcharts";
 import {QaModelService} from "../../services/qa-model.service";
 

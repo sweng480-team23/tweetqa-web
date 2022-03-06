@@ -1,4 +1,4 @@
-import * as cookyCutter from 'cooky-cutter';
+/* import * as cookyCutter from 'cooky-cutter';
 import * as faker from 'faker';
 import { WordCloudRequestV2, WordCloudResponseV2 } from "../word-cloud.dto.v2";
 
@@ -19,3 +19,4 @@ export const mockWordCloudResponseV2 = (numWords: number) => {
     words
   });
 }
+ */
