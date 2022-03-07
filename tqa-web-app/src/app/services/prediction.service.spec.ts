@@ -38,7 +38,7 @@ describe('PredictionService', () => {
     });
     const request = httpMock.expectOne({
       method: 'POST',
-      url: `v1/${ApiMapping.PREDICTIONS.getPath}`
+      url: `v2/${ApiMapping.PREDICTIONS.getPath}`
     });
     request.flush(prediction);
   });
@@ -49,7 +49,7 @@ describe('PredictionService', () => {
     });
     const request = httpMock.expectOne({
       method: 'GET',
-      url: `v1/${ApiMapping.PREDICTIONS.getPath}/${prediction.id}`
+      url: `v2/${ApiMapping.PREDICTIONS.getPath}/${prediction.id}`
     });
     request.flush(prediction);
   });
@@ -60,7 +60,7 @@ describe('PredictionService', () => {
     });
     const request = httpMock.expectOne({
       method: 'PUT',
-      url: `v1/${ApiMapping.PREDICTIONS.getPath}/${prediction.id}`
+      url: `v2/${ApiMapping.PREDICTIONS.getPath}/${prediction.id}`
     });
     request.flush({
       ...prediction,

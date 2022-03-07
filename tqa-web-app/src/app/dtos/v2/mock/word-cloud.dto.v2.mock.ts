@@ -1,5 +1,5 @@
 import * as cookyCutter from 'cooky-cutter';
-import * as faker from 'faker';
+import faker from "@faker-js/faker";
 import { WordCloudRequestV2, WordCloudResponseV2 } from "../word-cloud.dto.v2";
 
 export const mockWordCloudRequestV2 = cookyCutter.define<WordCloudRequestV2>({

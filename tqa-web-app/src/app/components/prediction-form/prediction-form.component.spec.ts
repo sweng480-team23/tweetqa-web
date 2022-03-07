@@ -24,6 +24,8 @@ import {initialFormState, PredictionFormState} from "../../state/store/predictio
 import {initialPredictionState} from "../../state/store/resources/prediction/prediction.reducer";
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {PredictionRequestFormState} from "../../state/prediction-request-form/prediction-request-form.state";
+import {mockVisitorResponseV2} from "../../dtos/v2/mock/visitor.dto.v2.mock";
+import {initialVisitorState} from "../../state/store/resources/visitor/visitor.reducer";
 
 
 describe('PredictionFormComponent', () => {
@@ -34,7 +36,8 @@ describe('PredictionFormComponent', () => {
   let button: HTMLButtonElement;
   const initialState = {
     predictions: {...initialPredictionState, resource: mockPredictionResponseV2()},
-    predictionForm: initialFormState
+    predictionForm: initialFormState,
+    visitors: {...initialVisitorState, resource: mockVisitorResponseV2()}
   }
 
   beforeEach(async () => {

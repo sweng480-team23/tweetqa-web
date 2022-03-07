@@ -1,5 +1,5 @@
 import * as cookyCutter from 'cooky-cutter';
-import * as faker from 'faker';
+import faker from "@faker-js/faker";
 import { QAModelCollectionResponseV2, QAModelResponseV2 } from "../qa-model.dto.v2";
 
 

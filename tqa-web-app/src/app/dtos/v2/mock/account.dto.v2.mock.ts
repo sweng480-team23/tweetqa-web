@@ -1,5 +1,5 @@
 import * as cookyCutter from 'cooky-cutter';
-import * as faker from 'faker';
+import faker from "@faker-js/faker";
 import { AccountCreateRequestV2, AccountResponseV2, LoginRequestV2 } from "../account.dto.v2";
 
 
