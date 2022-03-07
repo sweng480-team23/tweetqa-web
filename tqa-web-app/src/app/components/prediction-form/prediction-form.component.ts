@@ -76,7 +76,7 @@ export class PredictionFormComponent implements OnInit {
     if (this.formState instanceof AwaitingPredictionRequestState) {
       this.store$.dispatch(predictionActions.create({
         request: {
-          model_id: "1",
+          model_id: 1,
           visitor: this.visitorAware.resource,
           datum: {
             tweet: this.formState.predictionState.formState.prediction.datum.tweet,

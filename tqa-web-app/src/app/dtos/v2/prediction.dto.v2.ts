@@ -3,7 +3,7 @@ import { QAModelResponseV2 } from "./qa-model.dto.v2";
 import { VisitorEnforcedRequest, VisitorResponseV2 } from "./visitor.dto.v2";
 
 export interface PredictionCreateRequestV2 extends VisitorEnforcedRequest {
-  model_id: string;
+  model_id: number;
   datum: DataCreateRequestV2;
 }
 

@@ -11,5 +11,4 @@ export interface VisitorResponseV2 {
 
 export interface VisitorEnforcedRequest {
   visitor?: VisitorResponseV2;
-
 }
