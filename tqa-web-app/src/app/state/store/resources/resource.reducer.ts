@@ -60,6 +60,17 @@ const onUpdateSuccess = <T, S extends CRUState<T>>(typePrefix: string) => on(
   })
 );
 
+export const readableReducer = <T>(
+  typePrefix: string,
+  initialState: ReadableState<T>,
+  ...ons: ReducerTypes<ReadableState<T>, ActionCreator[]>[]
+) => createReducer<ReadableState<T>>(
+  initialState,
+  onGet<T, ReadableState<T>>(typePrefix),
+  onGetSuccess<T, ReadableState<T>>(typePrefix),
+  ...ons
+);
+
 export const crReducer = <T>(
     typePrefix: string,
     initialState: CRState<T>,
