@@ -4,7 +4,7 @@ import { VisitorCreateRequestV2, VisitorEnforcedRequest, VisitorResponseV2 } fro
 
 export const mockVisitorCreateRequestV2 = cookyCutter.define<VisitorCreateRequestV2>({
   invitor_account: faker.datatype.number(),
-  email: faker.internet.email()
+  emails: [...Array(5)].map(x => faker.internet.email())
 });
 
 export const mockVisitorResponseV2 = cookyCutter.define<VisitorResponseV2>({

@@ -26,6 +26,7 @@ import { PredictionEffect } from "./state/store/resources/prediction/prediction.
 import { VisitorEffect } from "./state/store/resources/visitor/visitor.effect";
 import { LocalStorageService } from "./services/local-storage.service";
 import { MainComponent } from './components/main/main.component';
+import { VisitorInvitationFormComponent } from './components/visitor-invitation-form/visitor-invitation-form.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MainComponent } from './components/main/main.component';
     ScoringGraphComponent,
     WordCloudComponent,
     HeaderComponent,
-    MainComponent
+    MainComponent,
+    VisitorInvitationFormComponent
   ],
   imports: [
     AppRoutingModule,

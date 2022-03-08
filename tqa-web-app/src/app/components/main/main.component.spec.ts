@@ -6,7 +6,6 @@ import { ActivatedRoute } from "@angular/router";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { initialVisitorState } from "../../state/store/resources/visitor/visitor.reducer";
 import { mockVisitorResponseV2 } from "../../dtos/v2/mock/visitor.dto.v2.mock";
-import { RouterTestingModule } from '@angular/router/testing';
 import faker from "@faker-js/faker";
 import {of} from "rxjs";
 

@@ -1,0 +1,14 @@
+<form class="visitor-invitation-form" [formGroup]="visitorInviteForm">
+  <mat-form-field appearance="fill" class="email-field">
+    <mat-label>Visitor Emails</mat-label>
+    <input matInput formControlName="emails" id="emails">
+  </mat-form-field>
+  <button
+    mat-flat-button
+    class="invite-button"
+    color="accent"
+    (click)="onInvite()">
+    Invite
+  </button>
+</form>
+
