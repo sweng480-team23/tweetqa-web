@@ -7,6 +7,7 @@ import { PredictionFormComponent } from './components/prediction-form/prediction
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
+import {MatMenuModule} from '@angular/material/menu';
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
@@ -52,6 +53,7 @@ import { AdminComponent } from './components/admin/admin.component';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
+    MatMenuModule,
     MatOptionModule,
     MatRadioModule,
     MatSelectModule,

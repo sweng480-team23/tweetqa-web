@@ -6,7 +6,7 @@ import { MainComponent } from "./components/main/main.component";
 
 const routes: Routes = [
   { path: '', component: MainComponent },
-  { path: 'admin-auth', component: AdminAuthComponent },
+  { path: 'admin/auth', component: AdminAuthComponent },
   { path: 'admin', component: AdminComponent },
 ];
 
