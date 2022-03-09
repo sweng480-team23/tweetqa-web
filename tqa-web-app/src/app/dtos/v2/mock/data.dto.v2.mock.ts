@@ -1,4 +1,4 @@
-/* import * as cookyCutter from 'cooky-cutter';
+import * as cookyCutter from 'cooky-cutter';
 import * as faker from 'faker';
 import { DataCreateRequestV2, DataResponseV2 } from "../data.dto.v2";
 
@@ -28,4 +28,4 @@ export const mockDataResponseFromCreateRequestV2 = (createRequest: DataCreateReq
     question: createRequest.question,
     answer: createRequest.answer,
   };
-} */
+}

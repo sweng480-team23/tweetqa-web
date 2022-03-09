@@ -1,4 +1,4 @@
-/* import * as cookyCutter from 'cooky-cutter';
+import * as cookyCutter from 'cooky-cutter';
 import * as faker from 'faker';
 import {mockDataCreateRequestV2, mockDataResponseFromCreateRequestV2, mockDataResponseV2} from "./data.dto.v2.mock";
 import { PredictionCreateRequestV2, PredictionResponseV2, PredictionUpdateRequestV2 } from "../prediction.dto.v2";
@@ -42,4 +42,3 @@ export const mockPredictionUpdateRequestWithIdV2 = (id: number) => {
     id
   };
 }
- */
