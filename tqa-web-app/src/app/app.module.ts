@@ -27,8 +27,6 @@ import { PredictionEffect } from "./state/store/resources/prediction/prediction.
 import { VisitorEffect } from "./state/store/resources/visitor/visitor.effect";
 import { LocalStorageService } from "./services/local-storage.service";
 import { MainComponent } from './components/main/main.component';
-import { AdminAuthComponent } from './components/admin-auth/admin-auth.component';
-import { AdminComponent } from './components/admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -37,9 +35,7 @@ import { AdminComponent } from './components/admin/admin.component';
     ScoringGraphComponent,
     WordCloudComponent,
     HeaderComponent,
-    MainComponent,
-    AdminAuthComponent,
-    AdminComponent
+    MainComponent
   ],
   imports: [
     AppRoutingModule,
