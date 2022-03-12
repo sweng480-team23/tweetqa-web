@@ -6,6 +6,7 @@ import { PredictionFormComponent } from './components/prediction-form/prediction
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
+import { MatIconModule } from "@angular/material/icon";
 import { MatMenuModule } from "@angular/material/menu";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
@@ -53,6 +54,7 @@ import { VisitorInvitationFormComponent } from './components/visitor-invitation-
     HttpClientModule,
     MatButtonModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatMenuModule,
     MatOptionModule,

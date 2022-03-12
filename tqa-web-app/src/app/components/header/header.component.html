@@ -2,10 +2,14 @@
   <div class="logo-container">
     <img class="logo-image" src="assets/images/twitter-logo.png">
     <div class="logo-name">Tweet QA</div>
-    <button class = "menu-name" mat-button [routerLink]="['/']">Home</button>
-    <button class = "menu-name" mat-button [routerLink]="['/admin/auth']">Admin Login</button>
-    <button class = "menu-name" mat-button [routerLink]="['/admin']">Admin </button>
-    
-    
   </div>
+  <button mat-button [matMenuTriggerFor]="menu" class="main-menu">
+    <mat-icon class="menu-icon">menu</mat-icon>
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item [routerLink]="[rootRoute]">Home</button>
+    <button mat-menu-item [routerLink]="[adminAuthRoute]">Admin Login</button>
+    <button mat-menu-item [routerLink]="[adminRoute]">Admin</button>
+    <button mat-menu-item [routerLink]="[adminVisitorRoute]">Invite Visitors</button>
+  </mat-menu>
 </div>

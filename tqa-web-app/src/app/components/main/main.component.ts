@@ -3,7 +3,7 @@ import { LocalStorageService } from "../../services/local-storage.service";
 import { ActivatedRoute } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../state/store/app.state";
-import { Constant } from "../../util/constant";
+import { Constant } from "../../constants/constant";
 import * as visitorActions from "../../state/store/resources/visitor/visitor.action";
 
 @Component({

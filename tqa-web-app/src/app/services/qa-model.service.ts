@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { QAModelResponseV2 } from "../dtos/v2/qa-model.dto.v2";
 import { AbstractReadService } from "./abstract/abstract-read.service";
 import { HttpClient } from "@angular/common/http";
-import { ApiMapping } from "../util/api-mapping";
+import { ApiMapping } from "../constants/api-mapping";
 import { Observable } from "rxjs";
 import { WordCloudResponseV2 } from "../dtos/v2/word-cloud.dto.v2";
 

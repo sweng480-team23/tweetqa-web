@@ -7,7 +7,7 @@ import {
   mockPredictionResponseFromCreateRequestV2, mockPredictionUpdateRequestWithIdV2
 } from "../dtos/v2/mock/prediction.dto.v2.mock";
 import { PredictionCreateRequestV2, PredictionResponseV2, PredictionUpdateRequestV2 } from "../dtos/v2/prediction.dto.v2";
-import { ApiMapping } from "../util/api-mapping";
+import { ApiMapping } from "../constants/api-mapping";
 
 describe('PredictionService', () => {
   let service: PredictionService;
