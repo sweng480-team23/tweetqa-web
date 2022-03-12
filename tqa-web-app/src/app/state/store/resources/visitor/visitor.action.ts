@@ -10,6 +10,7 @@ export const typePrefix: string = '[Visitor]';
 
 export const create = resourceActions.create<VisitorCreateRequestV2>(typePrefix);
 export const createSuccess = resourceActions.createSuccess<VisitorCollectionResponseV2>(typePrefix);
+export const resetCreated = resourceActions.resetCreated(typePrefix);
 
 export const getByToken = createAction(
   `${typePrefix} GET by token`,

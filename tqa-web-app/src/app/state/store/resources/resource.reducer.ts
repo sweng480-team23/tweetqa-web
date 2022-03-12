@@ -2,7 +2,7 @@ import {ActionCreator, createReducer, on, ReducerTypes} from "@ngrx/store";
 import {CRState, CRUState, initialCRState, ReadableState} from "./resource.state";
 import * as resourceActions from "./resource.action";
 
-const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
+export const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
   resourceActions.getById(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
@@ -11,7 +11,7 @@ const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
   })
 );
 
-const onGetSuccess = <T, S extends ReadableState<T>>(typePrefix: string) => on(
+export const onGetSuccess = <T, S extends ReadableState<T>>(typePrefix: string) => on(
   resourceActions.getByIdSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
@@ -22,7 +22,7 @@ const onGetSuccess = <T, S extends ReadableState<T>>(typePrefix: string) => on(
 );
 
 
-const onCreate = <T, S extends CRState<T>>(typePrefix: string) => on(
+export const onCreate = <T, S extends CRState<T>>(typePrefix: string) => on(
   resourceActions.create(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
@@ -31,7 +31,7 @@ const onCreate = <T, S extends CRState<T>>(typePrefix: string) => on(
   })
 );
 
-const onCreateSuccess = <T, S extends CRState<T>>(typePrefix: string) => on(
+export const onCreateSuccess = <T, S extends CRState<T>>(typePrefix: string) => on(
   resourceActions.createSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
@@ -41,7 +41,16 @@ const onCreateSuccess = <T, S extends CRState<T>>(typePrefix: string) => on(
   })
 );
 
-const onUpdate = <T, S extends CRUState<T>>(typePrefix: string) => on(
+export const onCreateReset = <T, S extends CRState<T>>(typePrefix: string) => on(
+  resourceActions.resetCreated(typePrefix),
+  (state: S extends infer S ? S : never, props) => ({
+    ...state,
+    creating: false,
+    created: false
+  })
+);
+
+export const onUpdate = <T, S extends CRUState<T>>(typePrefix: string) => on(
   resourceActions.update(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
@@ -50,7 +59,7 @@ const onUpdate = <T, S extends CRUState<T>>(typePrefix: string) => on(
   })
 );
 
-const onUpdateSuccess = <T, S extends CRUState<T>>(typePrefix: string) => on(
+export const onUpdateSuccess = <T, S extends CRUState<T>>(typePrefix: string) => on(
   resourceActions.updateSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
@@ -81,6 +90,7 @@ export const crReducer = <T>(
   onGetSuccess<T, CRState<T>>(typePrefix),
   onCreate<T, CRState<T>>(typePrefix),
   onCreateSuccess<T, CRState<T>>(typePrefix),
+  onCreateReset<T, CRState<T>>(typePrefix),
   ...ons
 );
 
@@ -94,6 +104,7 @@ export const cruReducer = <T>(
   onGetSuccess<T, CRUState<T>>(typePrefix),
   onCreate<T, CRUState<T>>(typePrefix),
   onCreateSuccess<T, CRUState<T>>(typePrefix),
+  onCreateReset<T, CRUState<T>>(typePrefix),
   onUpdate<T, CRUState<T>>(typePrefix),
   onUpdateSuccess<T, CRUState<T>>(typePrefix),
   ...ons

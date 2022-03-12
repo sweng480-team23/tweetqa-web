@@ -39,6 +39,7 @@ export class VisitorInvitationFormComponent implements OnInit {
           }
         })
         this.visitorInviteForm.reset();
+        this.store$.dispatch(visitorActions.resetCreated());
       }
     } as CreateAware);
   }

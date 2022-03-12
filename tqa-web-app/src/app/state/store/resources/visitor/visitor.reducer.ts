@@ -2,6 +2,7 @@ import { initialCRState, CRState } from "../resource.state";
 import { Action, on, ActionCreator, Creator, createReducer } from "@ngrx/store";
 import { VisitorResponseV2 } from "../../../../dtos/v2/visitor.dto.v2";
 import * as visitorActions from "./visitor.action";
+import { onCreate, onCreateSuccess, onCreateReset } from "../resource.reducer";
 
 export interface VisitorState extends CRState<VisitorResponseV2> {};
 
@@ -25,30 +26,14 @@ const onGetTokenSuccess = on<VisitorState, ActionCreator<string, Creator<any[], 
     loaded: true
   }));
 
-const onCreate = on<VisitorState, ActionCreator<string, Creator<any[], object>>[]>(
-  visitorActions.create,
-  (state: VisitorState, props: any): VisitorState => ({
-    ...state,
-    creating: true,
-    created: false
-  })
-);
-
-const onCreateSuccess = on<VisitorState, ActionCreator<string, Creator<any[], object>>[]>(
-  visitorActions.createSuccess,
-  (state: VisitorState, props: any): VisitorState => ({
-    ...state,
-    creating: false,
-    created: true
-  })
-);
-
 const reducer = createReducer<VisitorState>(
   initialVisitorState,
   onGetToken,
   onGetTokenSuccess,
-  onCreate,
-  onCreateSuccess);
+  onCreate(visitorActions.typePrefix),
+  onCreateSuccess(visitorActions.typePrefix),
+  onCreateReset(visitorActions.typePrefix)
+);
 
 export function visitorReducer(state: VisitorState | undefined, action: Action) {
   return reducer(state, action)
