@@ -30,6 +30,8 @@ import { MainComponent } from './components/main/main.component';
 import { AdminAuthComponent } from './components/admin-auth/admin-auth.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { VisitorInvitationFormComponent } from './components/visitor-invitation-form/visitor-invitation-form.component';
+import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -41,7 +43,8 @@ import { VisitorInvitationFormComponent } from './components/visitor-invitation-
     MainComponent,
     AdminAuthComponent,
     AdminComponent,
-    VisitorInvitationFormComponent
+    VisitorInvitationFormComponent,
+    SuccessDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -53,6 +56,7 @@ import { VisitorInvitationFormComponent } from './components/visitor-invitation-
     ]),
     HttpClientModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
     MatIconModule,
     MatInputModule,
