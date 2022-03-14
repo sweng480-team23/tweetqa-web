@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AbstractCreateReadUpdateService } from "./abstract/abstract-create-read-update.service";
 import { PredictionCreateRequestV2, PredictionResponseV2, PredictionUpdateRequestV2 } from "../dtos/v2/prediction.dto.v2";
 import { HttpClient } from "@angular/common/http";
-import { ApiMapping } from "../util/api-mapping";
+import { ApiMapping } from "../constants/api-mapping";
 
 
 @Injectable()

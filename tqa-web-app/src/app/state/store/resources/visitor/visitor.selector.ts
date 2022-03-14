@@ -6,3 +6,4 @@ import { VisitorState } from "./visitor.reducer";
 export const selectVisitors = (state: AppState) => state.visitors;
 
 export const selectResource = resourceSelectors.selectResource<VisitorResponseV2, VisitorState>(selectVisitors);
+export const selectCreated = resourceSelectors.selectCreated<VisitorResponseV2, VisitorState>(selectVisitors);

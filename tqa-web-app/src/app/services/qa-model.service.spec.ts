@@ -5,7 +5,7 @@ import { WordCloudResponseV2 } from "../dtos/v2/word-cloud.dto.v2";
 import { QAModelCollectionResponseV2 } from "../dtos/v2/qa-model.dto.v2";
 import { mockQAModelCollectionResponseV2 } from "../dtos/v2/mock/qa-model.dto.v2.mock";
 import { mockWordCloudResponseV2 } from "../dtos/v2/mock/word-cloud.dto.v2.mock";
-import { ApiMapping } from "../util/api-mapping";
+import { ApiMapping } from "../constants/api-mapping";
 
 describe('QaModelService', () => {
   let service: QaModelService;

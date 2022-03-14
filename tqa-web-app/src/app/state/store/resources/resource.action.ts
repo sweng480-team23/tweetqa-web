@@ -20,6 +20,10 @@ export const createSuccess = <DTO>(typePrefix: string) => createAction(
   props<{ response: DTO }>()
 );
 
+export const resetCreated = (typePrefix: string) => createAction(
+  `${typePrefix} Reset create success to false`
+)
+
 export const update = <DTO>(typePrefix: string) => createAction(
   `${typePrefix} PUT to update resource`,
   props<{ id: number, request: DTO }>()

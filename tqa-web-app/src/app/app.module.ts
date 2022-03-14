@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PredictionFormComponent } from './components/prediction-form/prediction-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatButtonModule } from "@angular/material/button";
-import {MatMenuModule} from '@angular/material/menu';
+import { MatIconModule } from "@angular/material/icon";
+import { MatMenuModule } from "@angular/material/menu";
 import { MatOptionModule } from "@angular/material/core";
 import { MatSelectModule } from "@angular/material/select";
 import { MatInputModule } from "@angular/material/input";
@@ -29,6 +29,9 @@ import { LocalStorageService } from "./services/local-storage.service";
 import { MainComponent } from './components/main/main.component';
 import { AdminAuthComponent } from './components/admin-auth/admin-auth.component';
 import { AdminComponent } from './components/admin/admin.component';
+import { VisitorInvitationFormComponent } from './components/visitor-invitation-form/visitor-invitation-form.component';
+import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
+import { MatDialogModule } from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -39,7 +42,9 @@ import { AdminComponent } from './components/admin/admin.component';
     HeaderComponent,
     MainComponent,
     AdminAuthComponent,
-    AdminComponent
+    AdminComponent,
+    VisitorInvitationFormComponent,
+    SuccessDialogComponent
   ],
   imports: [
     AppRoutingModule,
@@ -51,7 +56,9 @@ import { AdminComponent } from './components/admin/admin.component';
     ]),
     HttpClientModule,
     MatButtonModule,
+    MatDialogModule,
     MatFormFieldModule,
+    MatIconModule,
     MatInputModule,
     MatMenuModule,
     MatOptionModule,
