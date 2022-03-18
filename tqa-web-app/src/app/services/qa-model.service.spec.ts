@@ -40,6 +40,17 @@ describe('QaModelService', () => {
     request.flush(mockQAModelCollectResponse.collection);
   });
 
+  it('readBestModelsForEachType() should GET list of QAModelResponseV2', () => {
+    service.readBestModelsForEachType().subscribe(response => {
+      expect(response).toEqual(mockQAModelCollectResponse.collection);
+    });
+    const request = httpMock.expectOne({
+      method: 'GET',
+      url: `v${service.getVersion()}/${ApiMapping.MODELS.getPath}/best`
+    });
+    request.flush(mockQAModelCollectResponse.collection);
+  });
+
   it('getWordCloud() should GET WordCloudResponseV2', () => {
     let modelId: number = 1;
     service.getWordCloud(modelId).subscribe(response => {

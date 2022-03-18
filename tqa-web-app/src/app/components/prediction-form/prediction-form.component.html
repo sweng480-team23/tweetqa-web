@@ -3,8 +3,7 @@
     <mat-form-field appearance="fill" class="form-field">
       <mat-label>Model</mat-label>
       <mat-select formControlName="model" id="model">
-        <mat-option value="bert">BERT</mat-option>
-        <mat-option value="xlnet">xlnet</mat-option>
+        <mat-option *ngFor="let qaModel of modelAware.resource" [value]="qaModel">{{qaModel.ml_type}}</mat-option>
       </mat-select>
     </mat-form-field>
     <mat-form-field appearance="fill" class="form-field">

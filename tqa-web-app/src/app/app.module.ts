@@ -32,6 +32,7 @@ import { AdminComponent } from './components/admin/admin.component';
 import { VisitorInvitationFormComponent } from './components/visitor-invitation-form/visitor-invitation-form.component';
 import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { QAModelEffect } from "./state/store/resources/qa-model/qa-model.effect";
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     BrowserAnimationsModule,
     EffectsModule.forRoot([
       PredictionEffect,
+      QAModelEffect,
       VisitorEffect
     ]),
     HttpClientModule,
