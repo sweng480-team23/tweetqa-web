@@ -1,6 +1,7 @@
 
 export class ApiMapping {
 
+  public static ACCOUNTS = new ApiMapping('accounts');
   public static MODELS = new ApiMapping('models');
   public static PREDICTIONS = new ApiMapping('predictions');
   public static VISITORS = new ApiMapping('visitors');

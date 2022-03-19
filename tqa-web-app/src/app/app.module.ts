@@ -32,6 +32,9 @@ import { AdminComponent } from './components/admin/admin.component';
 import { VisitorInvitationFormComponent } from './components/visitor-invitation-form/visitor-invitation-form.component';
 import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { AdminAuthEffects } from './state/store/resources/adminauth/adminauth.effects';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,8 @@ import { MatDialogModule } from "@angular/material/dialog";
     BrowserAnimationsModule,
     EffectsModule.forRoot([
       PredictionEffect,
-      VisitorEffect
+      VisitorEffect, 
+      AdminAuthEffects
     ]),
     HttpClientModule,
     MatButtonModule,
@@ -66,6 +70,7 @@ import { MatDialogModule } from "@angular/material/dialog";
     MatSelectModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     LocalStorageService,

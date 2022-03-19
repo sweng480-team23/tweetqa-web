@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { AppState } from 'src/app/state/store/app.state';
+import { isAuthenticated } from 'src/app/state/store/resources/adminauth/adminauth.selector';
 import {AppRoute} from "../../constants/app-route.constant";
 
 @Component({
@@ -12,9 +16,11 @@ export class HeaderComponent implements OnInit {
   public adminVisitorRoute = AppRoute.ADMIN_VISITOR.getRouterLink;
   public rootRoute = AppRoute.ROOT.getRouterLink;
 
-  constructor() { }
+  isAuthenticated!: Observable<boolean>;
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
+    this.isAuthenticated = this.store.select(isAuthenticated);
   }
 
 }

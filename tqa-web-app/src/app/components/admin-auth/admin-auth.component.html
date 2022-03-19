@@ -1,1 +1,30 @@
-<p>admin-auth works!</p>
+
+<div>
+<h3>Admin Login</h3>
+<form class="admin-auth-form" [formGroup]="adminAuthForm" (ngSubmit)="onAuthSubmit()">
+    <mat-form-field appearance="fill" class="input-field">
+      <mat-label>Email</mat-label>
+      <input matInput formControlName="email" id="email">
+    </mat-form-field>
+    <div *ngIf="adminAuthForm.get('email')?.touched && !adminAuthForm.get('email')?.valid">
+        <div *ngIf = "adminAuthForm.get('email')?.errors?.required">Email is required</div>
+        <div *ngIf = "adminAuthForm.get('email')?.errors?.email">Invalid Email</div>
+    </div>
+    <mat-form-field appearance="fill" class="input-field">
+        <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
+        <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        <!--TODOmat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint-->
+    </mat-form-field>
+    <div *ngIf="adminAuthForm.get('password')?.touched && !adminAuthForm.get('password')?.valid">
+        <div>Password is required</div>
+    </div>
+    <button
+      mat-flat-button
+      class="click-button"
+      color="accent"
+      [disabled]="!adminAuthForm.valid"
+      >
+      Login
+    </button>
+  </form>
+</div>
