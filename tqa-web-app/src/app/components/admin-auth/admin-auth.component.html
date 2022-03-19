@@ -13,7 +13,6 @@
     <mat-form-field appearance="fill" class="input-field">
         <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'" formControlName="password" required>
         <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        <!--TODOmat-hint *ngIf="!passwordInput.value">Enter your password</mat-hint-->
     </mat-form-field>
     <div *ngIf="adminAuthForm.get('password')?.touched && !adminAuthForm.get('password')?.valid">
         <div>Password is required</div>

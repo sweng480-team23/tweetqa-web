@@ -6,7 +6,6 @@ export const environment = {
   production: false,
   api_url: 'http://localhost:8080/',
   storagePrefix: 'tqa_',
-  FIRBASE_API_KEY: 'AIzaSyDpOZ9z1QO_nIU9tACmByOCgwkncZAY0H0', //For adminauth testing
 };
 
 /*

@@ -10,7 +10,7 @@ export interface AdminAuthState extends ReadableState<AdminV2>{};
 export const initialAdminState: AdminAuthState = {
     ...initialCRState
 };
-//Reducer constant, create from initial admin state
+
 
 const onAdminLoginSuccess =     on<AdminAuthState, ActionCreator<string, Creator<any[], object>>[]>(
     adminAuthActions.adminLoginSuccess,
@@ -25,16 +25,6 @@ const adminauthReducer = createReducer<AdminAuthState>(
     onAdminLoginSuccess,
 );
 
-/* const adminauthReducer = createReducer(
-    initialAdminState,
-    on(adminLoginSuccess, (state, action)=>{
-        return{
-            ...state, 
-            admin: action.admin,
-        } 
-    })
-);
- */
 //export the reducer function
 export function adminAuthReducer(state: AdminAuthState | undefined, action: Action){
     return adminauthReducer(state, action)

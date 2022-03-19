@@ -11,12 +11,6 @@ import { AdminAuthResponseV2, AdminV2 } from "../dtos/v2/admin-auth.dto.v2";
 export class AdminAuthService{
     constructor(private http: HttpClient) {}
 
-/*     login(email: string, password: string): Observable<AdminAuthResponseV2> {
-      return this.http.post<AdminAuthResponseV2>(
-        `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${environment.FIRBASE_API_KEY}`,
-        { email, password, returnSecureToken: true }
-      );
-    } */
     login(email: string, password: string): Observable<AdminAuthResponseV2> {
         return this.http.post<AdminAuthResponseV2>(
           `v2/accounts`,
