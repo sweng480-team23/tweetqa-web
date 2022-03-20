@@ -8,6 +8,7 @@ import {initialVisitorState} from "../../state/store/resources/visitor/visitor.r
 import {mockVisitorResponseV2} from "../../dtos/v2/mock/visitor.dto.v2.mock";
 import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatDialogModule} from "@angular/material/dialog";
 
 describe('VisitorInvitationFormComponent', () => {
   let component: VisitorInvitationFormComponent;
@@ -24,6 +25,7 @@ describe('VisitorInvitationFormComponent', () => {
       declarations: [ VisitorInvitationFormComponent ],
       imports: [
         ReactiveFormsModule,
+        MatDialogModule,
         FormsModule
       ],
       providers: [

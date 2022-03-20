@@ -12,7 +12,7 @@ export const selectResources = <DTO, T extends CRUCollectionState<DTO>>
   (selectedState: (state: AppState) => T) => createSelector(
     selectedState,
   (state: T) => state.resources
-);
+  );
 
 export const selectCreated = <DTO, T extends CRState<DTO>>
   (selectedState: (state: AppState) => T) => createSelector(
