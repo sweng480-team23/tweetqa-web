@@ -12,3 +12,12 @@ export const adminLoginSuccess = createAction(
     '${typePrefix} admin login success',
     props<{admin: AdminV2}>()
 );
+
+export const adminAutoLogin = createAction(
+  '${typePrefix} admin auto login',
+);
+
+//create and export adminAutoLogout action
+export const adminAutoLogout = createAction(
+  '${typePrefix} admin auto logout',
+)

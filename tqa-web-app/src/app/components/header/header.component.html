@@ -11,6 +11,6 @@
     <button mat-menu-item *ngIf="!(isAuthenticated|async)" [routerLink]="[adminAuthRoute]">Admin Login</button>
     <button mat-menu-item *ngIf="(isAuthenticated|async)" [routerLink]="[adminRoute]">Admin</button>
     <button mat-menu-item *ngIf="(isAuthenticated|async)" [routerLink]="[adminVisitorRoute]">Invite Visitors</button>
-    <button mat-menu-item *ngIf="(isAuthenticated|async)">Sign Out</button>
+    <button mat-menu-item *ngIf="(isAuthenticated|async)" (click)="onLogout($event)">Sign Out</button>
   </mat-menu>
 </div>

@@ -20,10 +20,22 @@ const onAdminLoginSuccess =     on<AdminAuthState, ActionCreator<string, Creator
         loading:true
     }));
 
+//add the reducer for adminAutoLogout to remove the admin in the state
+const onAdminAutoLogout = on <AdminAuthState, ActionCreator<string, Creator<any[], object>>[]>(
+    adminAuthActions.adminAutoLogout,
+    (state: AdminAuthState, props: any):AdminAuthState =>({
+        ...state,
+        resource: null as any,
+
+    })
+);
+
 const adminauthReducer = createReducer<AdminAuthState>(
     initialAdminState,
     onAdminLoginSuccess,
+    onAdminAutoLogout
 );
+
 
 //export the reducer function
 export function adminAuthReducer(state: AdminAuthState | undefined, action: Action){
