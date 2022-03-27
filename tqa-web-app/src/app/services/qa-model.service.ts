@@ -19,6 +19,12 @@ export class QaModelService extends AbstractReadService<QAModelResponseV2>{
       { params });
   }
 
+  public readBestModelsForEachType(params?: {}): Observable<QAModelResponseV2[]> {
+    return this.http.get<QAModelResponseV2[]>(
+      `v${this.version}/${this.endpoint}/best`,
+      {params});
+  }
+
   public getWordCloud(id: number, params?: {}): Observable<WordCloudResponseV2> {
     return this.http.get<WordCloudResponseV2>(
       `v${this.version}/${this.endpoint}/${id}/wordcloud`,

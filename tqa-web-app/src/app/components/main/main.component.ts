@@ -5,6 +5,7 @@ import { Store } from "@ngrx/store";
 import { AppState } from "../../state/store/app.state";
 import { Constant } from "../../constants/constant";
 import * as visitorActions from "../../state/store/resources/visitor/visitor.action";
+import * as modelActions from "../../state/store/resources/qa-model/qa-model.action";
 
 @Component({
   selector: 'app-main',
@@ -23,9 +24,11 @@ export class MainComponent implements OnInit {
       let token: string | null = params.get(Constant.TOKEN.getValue);
       if (!!token) {
         this.localStorageService.setItem(`${Constant.TOKEN.getValue}`, token);
-        this.store.dispatch(visitorActions.getByToken({ token }))
+        this.store.dispatch(visitorActions.getByToken({ token }));
       }
     });
+
+    this.store.dispatch(modelActions.getBestModels());
   }
 
 }
