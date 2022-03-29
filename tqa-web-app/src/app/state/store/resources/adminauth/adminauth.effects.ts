@@ -35,8 +35,7 @@ export class AdminAuthEffects{
         );
     })
 
-    loginRedirect$ = createEffect(
-        () => {
+    loginRedirect$ = createEffect(() => {
           return this.actions$.pipe(
             ofType(adminLoginSuccess),
             tap((action) => {
@@ -47,8 +46,7 @@ export class AdminAuthEffects{
         { dispatch: false }
       );
 
-    adminAutoLogin$ = createEffect(
-      ()=>{
+    adminAutoLogin$ = createEffect(()=>{
       return this.actions$.pipe(
         ofType(adminAutoLogin), 
         mergeMap((action)=>{
@@ -59,8 +57,7 @@ export class AdminAuthEffects{
     });
 
     //Implement the adminAutoLogout action
-    adminLogout$ = createEffect(
-      ()=>{
+    adminLogout$ = createEffect(()=>{
         //filter the action using pipe, if the action if ofType (adminAutoLogout)
         return this.actions$.pipe(ofType(adminAutoLogout), 
         map((action)=>{
