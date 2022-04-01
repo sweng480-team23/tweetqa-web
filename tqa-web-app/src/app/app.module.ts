@@ -33,6 +33,7 @@ import { VisitorInvitationFormComponent } from './components/visitor-invitation-
 import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
 import { QAModelEffect } from "./state/store/resources/qa-model/qa-model.effect";
+import { TrainingFormComponent } from './components/training-form/training-form.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import { QAModelEffect } from "./state/store/resources/qa-model/qa-model.effect"
     AdminAuthComponent,
     AdminComponent,
     VisitorInvitationFormComponent,
-    SuccessDialogComponent
+    SuccessDialogComponent,
+    TrainingFormComponent
   ],
   imports: [
     AppRoutingModule,
