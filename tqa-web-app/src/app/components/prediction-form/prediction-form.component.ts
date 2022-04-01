@@ -8,7 +8,7 @@ import {
   PredictionCreateRequestV2,
   PredictionUpdateRequestV2
 } from "../../dtos/v2/prediction.dto.v2";
-import { DataCreateRequestV2 } from "../../dtos/v2/data.dto.v2";
+import { DataCreateRequestV2} from "../../dtos/v2/data.dto.v2";
 import { AwaitingCorrectSubmissionState } from "../../state/prediction-request-form/awaiting-correct-submission.state";
 import { AwaitingIncorrectSubmissionState } from "../../state/prediction-request-form/awaiting-incorrect-submission.state";
 import { Store } from "@ngrx/store";
@@ -24,6 +24,8 @@ import { ResourceAware, ResourceAwareBehavior } from "../../state/aware/resource
 import { VisitorResponseV2 } from "../../dtos/v2/visitor.dto.v2";
 
 
+
+
 @Component({
   selector: 'app-prediction-form',
   templateUrl: './prediction-form.component.html',
@@ -34,6 +36,7 @@ export class PredictionFormComponent implements OnInit {
   predictionRequestForm: FormGroup;
   formState: PredictionRequestFormState;
   visitorAware: ResourceAware<VisitorResponseV2>;
+  randomTweet = "";
 
   constructor(
       public store$: Store<AppState>,
@@ -41,7 +44,6 @@ export class PredictionFormComponent implements OnInit {
       fb: FormBuilder)
   {
     let subscription: Subscription = new Subscription();
-
     this.predictionRequestForm = fb.group({
       model: new FormControl(''),
       isCorrect: new FormControl(''),
@@ -70,8 +72,11 @@ export class PredictionFormComponent implements OnInit {
     this.predictionRequestForm.valueChanges.subscribe(values => {
       this.formState = this.formState.nextState(FormAction.VALUE_CHANGED);
     });
+    //Get a new random tweet during initialization, to speed up the tweet retrieval process from user perspective
+    this.getTweet();
   }
 
+  //Function to submit the tweet
   onSubmit(): void {
     if (this.formState instanceof AwaitingPredictionRequestState) {
       this.store$.dispatch(predictionActions.create({
@@ -97,4 +102,21 @@ export class PredictionFormComponent implements OnInit {
     this.formState = this.formState.nextState(FormAction.SUBMIT);
   }
 
+  //Function to get a new random tweet from API
+  getTweet():void{
+    if (this.formState instanceof InitialFormState) {
+      this.predictionService.getRandomTweet().subscribe((response)=>{
+        this.randomTweet= response['tweet'];
+      });
+    }   
+  }
+
+  //Function to request the new random tweet to be displayed
+  onTweetRequest():void{
+    if (this.formState instanceof InitialFormState) {
+      //get a new random tweet for the backend, while display random tweet stored in the front
+      this.predictionRequestForm.get('tweet')?.setValue(this.randomTweet);
+      this.getTweet();
+    }
+  }
 }

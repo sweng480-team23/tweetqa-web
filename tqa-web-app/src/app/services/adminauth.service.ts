@@ -2,7 +2,6 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Store } from "@ngrx/store";
 import { Observable } from "rxjs";
-
 import { AdminAuthResponseV2, AdminV2 } from "../dtos/v2/admin-auth.dto.v2";
 import { AppState } from "../state/store/app.state";
 import { adminAutoLogout } from "../state/store/resources/adminauth/adminauth.actions";

@@ -15,6 +15,9 @@
       <mat-label>Question</mat-label>
       <textarea matInput formControlName="question" id="question" class="text-input-field"></textarea>
     </mat-form-field>
+    <div>
+      <button mat-flat-button color="accent"  (click)="onTweetRequest()">Get Random Tweet</button>
+    </div>
     <div *ngIf="formState.predictionState.formState.showAnswer" class="answer-container">
       <mat-label class="answer-label">Answer</mat-label>
       <div class="answer">{{formState.predictionState.formState.prediction.prediction}}</div>

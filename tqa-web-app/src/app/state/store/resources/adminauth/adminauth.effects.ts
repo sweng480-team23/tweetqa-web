@@ -1,10 +1,9 @@
 import { Injectable } from "@angular/core";
 import { Router } from "@angular/router";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { Action, Store } from "@ngrx/store";
+import { Store } from "@ngrx/store";
 import { of } from "rxjs";
 import { exhaustMap, map, mergeMap, tap } from "rxjs/operators";
-import { AdminV2 } from "src/app/dtos/v2/admin-auth.dto.v2";
 import { AdminAuthService } from "src/app/services/adminauth.service";
 import { AppState } from "../../app.state";
 import { adminAutoLogin, adminAutoLogout, adminLoginStart, adminLoginSuccess } from "./adminauth.actions";

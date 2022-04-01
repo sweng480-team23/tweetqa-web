@@ -30,7 +30,6 @@ export class AdminAuthComponent implements OnInit {
   }
 
   onAuthSubmit(){
-    console.log(this.adminAuthForm.value);
     const email = this.adminAuthForm.value.email;
     const password = this.adminAuthForm.value.password;
     this.store.dispatch(adminLoginStart({email,password}));

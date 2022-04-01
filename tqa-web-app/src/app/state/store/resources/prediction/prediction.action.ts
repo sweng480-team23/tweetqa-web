@@ -1,3 +1,4 @@
+import { createAction } from '@ngrx/store';
 import * as resourceActions from '../resource.action';
 
 export const typePrefix: string = '[Prediction]';
