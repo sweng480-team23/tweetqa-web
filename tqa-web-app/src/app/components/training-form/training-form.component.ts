@@ -36,7 +36,7 @@ export class TrainingFormComponent implements OnInit {
       learningRate: new FormControl(this.possibleLearningRates[1]),
       batchSize: new FormControl(this.possibleBatchSizes[1]),
       baseModel: new FormControl(this.possibleBaseModels[0]),
-      lastXLabels: new FormControl(''),
+      lastXLabels: new FormControl(5000),
       includeUserLabels: new FormControl(false)
     });
   }

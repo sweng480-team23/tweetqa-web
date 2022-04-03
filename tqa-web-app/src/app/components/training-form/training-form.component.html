@@ -24,6 +24,10 @@
         <mat-option *ngFor="let baseModel of possibleBaseModels" [value]="baseModel">{{baseModel}}</mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field appearance="fill" class="form-field">
+      <mat-label>Include Last X Labels</mat-label>
+      <input type="number" matInput formControlName="lastXLabels" id="lastXLabels">
+    </mat-form-field>
     <div class="radio-container">
       <mat-label class="radio-label">Include User Generated Labels?</mat-label>
       <mat-radio-group formControlName="includeUserLabels" id="includeUserLabels" class="radio-group">
