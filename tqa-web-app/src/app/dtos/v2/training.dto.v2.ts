@@ -8,7 +8,6 @@ export interface TrainingCreateRequestV2 {
   baseModel: string;
   lastXLabels: number;
   includeUserLabels: boolean;
-  pipelineHost: string;
 }
 
 export interface TrainingResponseV2 {
