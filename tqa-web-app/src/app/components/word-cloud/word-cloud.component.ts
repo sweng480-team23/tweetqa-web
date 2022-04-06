@@ -16,6 +16,7 @@ Wordcloud(Highcharts);
 })
 export class WordCloudComponent implements OnInit {
   public highcharts = Highcharts;
+  private mlType: string = '';
 
   public options: any = {
     title: {
@@ -33,7 +34,8 @@ export class WordCloudComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != '') {
+      if (formState.prediction.model.ml_type != '' && formState.prediction.model.ml_type != this.mlType) {
+        this.mlType = formState.prediction.model.ml_type;
         this.modelService.getWordCloud(formState.prediction.model.id).subscribe(wordCloud => {
           this.options.series[0].data = wordCloud.words;
           this.highcharts.chart('word-cloud-container', this.options);
