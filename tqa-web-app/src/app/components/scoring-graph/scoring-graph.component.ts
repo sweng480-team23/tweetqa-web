@@ -19,6 +19,7 @@ import {AppState} from "../../state/store/app.state";
 })
 export class ScoringGraphComponent implements OnInit {
   public highcharts = Highcharts;
+  private mlType: string = '';
 
   public options: Highcharts.Options = {
     title: {
@@ -45,7 +46,8 @@ export class ScoringGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != '') {
+      if (formState.prediction.model.ml_type != '' && formState.prediction.model.ml_type != this.mlType) {
+        this.mlType = formState.prediction.model.ml_type;
         this.modelService.readAllModelsByType(formState.prediction.model.ml_type).subscribe(models => {
           this.options.series = this.toSeries({
             length: models.length,
