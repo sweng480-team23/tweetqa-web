@@ -6,7 +6,10 @@ import { Score } from "../../constants/score.enum";
 import * as Highcharts from 'highcharts';
 import { mockQAModelCollectionResponseV2 } from "../../dtos/v2/mock/qa-model.dto.v2.mock";
 import { SeriesOptionsType } from "highcharts";
-import {QaModelService} from "../../services/qa-model.service";
+import { QaModelService } from "../../services/qa-model.service";
+import * as formStateSelectors from "../../state/store/prediction-form/prediction-form.selector";
+import {Store} from "@ngrx/store";
+import {AppState} from "../../state/store/app.state";
 
 
 @Component({
@@ -16,6 +19,7 @@ import {QaModelService} from "../../services/qa-model.service";
 })
 export class ScoringGraphComponent implements OnInit {
   public highcharts = Highcharts;
+  private mlType: string = '';
 
   public options: Highcharts.Options = {
     title: {
@@ -36,15 +40,22 @@ export class ScoringGraphComponent implements OnInit {
     series: []
   }
 
-  constructor(public modelService: QaModelService) { }
+  constructor(
+    public store$: Store<AppState>,
+    public modelService: QaModelService) { }
 
   ngOnInit(): void {
-    this.modelService.readAllModelsByType('BERT').subscribe(models => {
-      this.options.series = this.toSeries({
-        length: models.length,
-        collection: models
-      });
-      this.highcharts.chart('score-chart-container', this.options);
+    this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
+      if (formState.prediction.model.ml_type != '' && formState.prediction.model.ml_type != this.mlType) {
+        this.mlType = formState.prediction.model.ml_type;
+        this.modelService.readAllModelsByType(formState.prediction.model.ml_type).subscribe(models => {
+          this.options.series = this.toSeries({
+            length: models.length,
+            collection: models
+          });
+          this.highcharts.chart('score-chart-container', this.options);
+        });
+      }
     });
   }
 

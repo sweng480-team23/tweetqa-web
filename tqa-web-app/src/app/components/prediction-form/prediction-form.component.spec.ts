@@ -26,6 +26,8 @@ import {MockStore, provideMockStore} from "@ngrx/store/testing";
 import {PredictionRequestFormState} from "../../state/prediction-request-form/prediction-request-form.state";
 import {mockVisitorResponseV2} from "../../dtos/v2/mock/visitor.dto.v2.mock";
 import {initialVisitorState} from "../../state/store/resources/visitor/visitor.reducer";
+import {initialQAModelState} from "../../state/store/resources/qa-model/qa-model.reducer";
+import {mockQAModelResponseV2} from "../../dtos/v2/mock/qa-model.dto.v2.mock";
 
 
 describe('PredictionFormComponent', () => {
@@ -37,6 +39,7 @@ describe('PredictionFormComponent', () => {
   const initialState = {
     predictions: {...initialPredictionState, resource: mockPredictionResponseV2()},
     predictionForm: initialFormState,
+    qaModels: {...initialQAModelState, resources: [mockQAModelResponseV2(), mockQAModelResponseV2()]},
     visitors: {...initialVisitorState, resource: mockVisitorResponseV2()}
   }
 
