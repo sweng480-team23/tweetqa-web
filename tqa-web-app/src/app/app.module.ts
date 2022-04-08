@@ -32,8 +32,12 @@ import { AdminComponent } from './components/admin/admin.component';
 import { VisitorInvitationFormComponent } from './components/visitor-invitation-form/visitor-invitation-form.component';
 import { SuccessDialogComponent } from './components/success-dialog/success-dialog.component';
 import { MatDialogModule } from "@angular/material/dialog";
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { AdminAuthEffects } from './state/store/resources/adminauth/adminauth.effects';
 import { QAModelEffect } from "./state/store/resources/qa-model/qa-model.effect";
 import { TrainingFormComponent } from './components/training-form/training-form.component';
+
 
 @NgModule({
   declarations: [
@@ -55,6 +59,8 @@ import { TrainingFormComponent } from './components/training-form/training-form.
     BrowserAnimationsModule,
     EffectsModule.forRoot([
       PredictionEffect,
+      VisitorEffect, 
+      AdminAuthEffects
       QAModelEffect,
       VisitorEffect
     ]),
@@ -70,6 +76,7 @@ import { TrainingFormComponent } from './components/training-form/training-form.
     MatSelectModule,
     ReactiveFormsModule,
     StoreModule.forRoot(reducers),
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
   ],
   providers: [
     LocalStorageService,

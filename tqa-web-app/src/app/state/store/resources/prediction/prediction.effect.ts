@@ -7,7 +7,7 @@ import {
 } from "../../../../dtos/v2/prediction.dto.v2";
 import { PredictionService } from "../../../../services/prediction.service";
 import { typePrefix } from "./prediction.action";
-import { Actions } from "@ngrx/effects";
+import { Actions, createEffect, ofType } from "@ngrx/effects";
 
 @Injectable()
 export class PredictionEffect extends CreateReadUpdateResourceEffect<
@@ -16,9 +16,7 @@ export class PredictionEffect extends CreateReadUpdateResourceEffect<
   PredictionUpdateRequestV2,
   PredictionService>
 {
-
   constructor(protected action$: Actions, protected service: PredictionService) {
     super(action$, service, typePrefix);
   }
-
 }

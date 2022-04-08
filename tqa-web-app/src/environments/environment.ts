@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   api_url: 'http://localhost:8080/',
-  storagePrefix: 'tqa_'
+  storagePrefix: 'tqa_',
 };
 
 /*
