@@ -59,8 +59,8 @@ import { TrainingFormComponent } from './components/training-form/training-form.
     BrowserAnimationsModule,
     EffectsModule.forRoot([
       PredictionEffect,
-      VisitorEffect, 
-      AdminAuthEffects
+      VisitorEffect,
+      AdminAuthEffects,
       QAModelEffect,
       VisitorEffect
     ]),

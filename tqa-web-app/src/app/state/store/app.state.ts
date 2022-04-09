@@ -13,8 +13,7 @@ export const reducers: ActionReducerMap<AppState> = {
   visitors: visitorReducer,
   adminauth: adminAuthReducer,
   qaModels: qaModelReducer,
-  training: trainingReducer,
-  visitors: visitorReducer
+  training: trainingReducer
 };
 
 //Include all state created here
@@ -24,6 +23,5 @@ export interface AppState {
   visitors: VisitorState,
   adminauth: AdminAuthState
   qaModels: QAModelState,
-  training: TrainingState,
-  visitors: VisitorState
+  training: TrainingState
 }
