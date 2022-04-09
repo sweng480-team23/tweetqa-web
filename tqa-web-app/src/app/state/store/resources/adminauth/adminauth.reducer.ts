@@ -3,7 +3,7 @@ import { AdminV2 } from "src/app/dtos/v2/admin-auth.dto.v2";
 import { CRState, initialCRState, ReadableState } from "../resource.state";
 import * as adminAuthActions from "./adminauth.actions";
 import { adminLoginSuccess } from "./adminauth.actions";
-//import { AdminAuthState, initialAdminState } from "./adminauth.state";
+//import { AdminAuthState, initialAdminState } from "./adminAuth.state";
 
 
 export interface AdminAuthState extends ReadableState<AdminV2>{};
@@ -17,8 +17,8 @@ const onAdminLoginSuccess =     on<AdminAuthState, ActionCreator<string, Creator
     (state: AdminAuthState, props:any): AdminAuthState =>({
         ...state,
         resource:props.admin,
-        loading:false, 
-        loaded:true 
+        loading:false,
+        loaded:true
     }));
 
 //add the reducer for adminAutoLogout to remove the admin in the state
