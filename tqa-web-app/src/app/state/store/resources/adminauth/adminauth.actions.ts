@@ -10,7 +10,7 @@ export const adminLoginStart = createAction(
 );
 export const adminLoginSuccess = createAction(
     '${typePrefix} admin login success',
-    props<{admin: AdminV2}>()
+    props<{admin: AdminV2; redirect:boolean}>()
 );
 
 export const adminAutoLogin = createAction(
