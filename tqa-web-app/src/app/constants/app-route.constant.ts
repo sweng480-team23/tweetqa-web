@@ -5,7 +5,6 @@ export class AppRoute {
   public static ADMIN_TRAINING = new AppRoute('admin/training');
   public static ADMIN_VISITOR = new AppRoute('admin/visitor');
   public static ROOT = new AppRoute('');
-  public static VISITOR = new AppRoute('visitor/:token')
 
   private readonly route: string;
 
