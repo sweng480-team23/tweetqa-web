@@ -10,6 +10,11 @@ export const getByIdSuccess = <DTO>(typePrefix: string) => createAction(
   props<{ response: DTO }>()
 );
 
+export const getResourcesSuccess = <DTO>(typePrefix: string) => createAction(
+  `${typePrefix} successfully retreived resources`,
+  props<{ resources: DTO }>()
+);
+
 export const create = <DTO>(typePrefix: string) => createAction(
   `${typePrefix} POST to create resource`,
   props<{ request: DTO }>()

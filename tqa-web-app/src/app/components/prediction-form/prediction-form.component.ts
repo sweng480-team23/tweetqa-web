@@ -13,6 +13,7 @@ import { AwaitingCorrectSubmissionState } from "../../state/prediction-request-f
 import { AwaitingIncorrectSubmissionState } from "../../state/prediction-request-form/awaiting-incorrect-submission.state";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../state/store/app.state";
+import * as modelSelectors from "../../state/store/resources/qa-model/qa-model.selector";
 import * as predictionActions from "../../state/store/resources/prediction/prediction.action";
 import * as predictionSelectors from "../../state/store/resources/prediction/prediction.selector";
 import * as visitorSelectors from "../../state/store/resources/visitor/visitor.selector";
@@ -22,6 +23,7 @@ import { Subscription } from "rxjs";
 import { PredictionStateAware, PredictionStateAwareBehavior } from "../../state/aware/prediction-state.aware";
 import { ResourceAware, ResourceAwareBehavior } from "../../state/aware/resource.aware";
 import { VisitorResponseV2 } from "../../dtos/v2/visitor.dto.v2";
+import { QAModelResponseV2 } from "../../dtos/v2/qa-model.dto.v2";
 
 
 
@@ -37,6 +39,7 @@ export class PredictionFormComponent implements OnInit {
   formState: PredictionRequestFormState;
   visitorAware: ResourceAware<VisitorResponseV2>;
   randomTweet = "";
+  modelAware: ResourceAware<QAModelResponseV2[]>;
 
   constructor(
       public store$: Store<AppState>,
@@ -66,6 +69,11 @@ export class PredictionFormComponent implements OnInit {
       resource$: this.store$.select(visitorSelectors.selectResource),
       subscription
     } as ResourceAware<VisitorResponseV2>);
+
+    this.modelAware = ResourceAwareBehavior({
+      resource$: this.store$.select(modelSelectors.selectResources),
+      subscription
+    } as ResourceAware<QAModelResponseV2[]>);
   }
 
   ngOnInit(): void {
@@ -81,7 +89,7 @@ export class PredictionFormComponent implements OnInit {
     if (this.formState instanceof AwaitingPredictionRequestState) {
       this.store$.dispatch(predictionActions.create({
         request: {
-          model_id: 1,
+          model_id: this.formState.predictionState.formState.prediction.model.id,
           visitor: this.visitorAware.resource,
           datum: {
             tweet: this.formState.predictionState.formState.prediction.datum.tweet,

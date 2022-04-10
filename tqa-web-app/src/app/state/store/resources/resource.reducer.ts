@@ -1,5 +1,5 @@
 import {ActionCreator, createReducer, on, ReducerTypes} from "@ngrx/store";
-import {CRState, CRUState, initialCRState, ReadableState} from "./resource.state";
+import {CRState, CRUCollectionState, CRUState, initialCRState, ReadableState} from "./resource.state";
 import * as resourceActions from "./resource.action";
 
 export const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
@@ -69,6 +69,16 @@ export const onUpdateSuccess = <T, S extends CRUState<T>>(typePrefix: string) =>
   })
 );
 
+export const onGetResourcesSuccess = <T, S extends CRUState<T>>(typePrefix: string) => on(
+  resourceActions.getResourcesSuccess(typePrefix),
+  (state: S extends infer S ? S : never, props) => ({
+    ...state,
+    loading: false,
+    loaded: true,
+    resources: props.resources
+  })
+);
+
 export const readableReducer = <T>(
   typePrefix: string,
   initialState: ReadableState<T>,
@@ -107,6 +117,23 @@ export const cruReducer = <T>(
   onCreateReset<T, CRUState<T>>(typePrefix),
   onUpdate<T, CRUState<T>>(typePrefix),
   onUpdateSuccess<T, CRUState<T>>(typePrefix),
+  ...ons
+);
+
+export const cruCollectionReducer = <T>(
+  typePrefix: string,
+  initialState: CRUCollectionState<T>,
+  ...ons: ReducerTypes<CRUCollectionState<T>, ActionCreator[]>[]
+) => createReducer<CRUCollectionState<T>>(
+  initialState,
+  onGet<T, CRUCollectionState<T>>(typePrefix),
+  onGetSuccess<T, CRUCollectionState<T>>(typePrefix),
+  onCreate<T, CRUCollectionState<T>>(typePrefix),
+  onCreateSuccess<T, CRUCollectionState<T>>(typePrefix),
+  onCreateReset<T, CRUCollectionState<T>>(typePrefix),
+  onUpdate<T, CRUCollectionState<T>>(typePrefix),
+  onUpdateSuccess<T, CRUCollectionState<T>>(typePrefix),
+  onGetResourcesSuccess<T, CRUCollectionState<T>>(typePrefix),
   ...ons
 );
 

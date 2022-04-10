@@ -2,6 +2,7 @@ export class AppRoute {
 
   public static ADMIN = new AppRoute('admin');
   public static ADMIN_AUTH = new AppRoute('admin/auth');
+  public static ADMIN_TRAINING = new AppRoute('admin/training');
   public static ADMIN_VISITOR = new AppRoute('admin/visitor');
   public static ROOT = new AppRoute('');
 

@@ -42,8 +42,7 @@ export abstract class PredictionRequestFormState {
       },
       is_correct: this.predictionRequestForm.get('isCorrect')?.value,
       model: {
-        ...this.predictionState.formState.prediction.model,
-        ml_type: this.predictionRequestForm.get('model')?.value
+        ...this.predictionRequestForm.get('model')?.value
       },
     };
   }
