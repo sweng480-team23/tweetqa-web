@@ -27,7 +27,7 @@ export class AdminAuthEffects{
                         const admin = this.adminauthService.formatAdmin(data);
                         //Set the user in local storage
                         this.adminauthService.setAdminInLocalStorage(admin);
-                        return adminLoginSuccess({admin});
+                        return adminLoginSuccess({admin, redirect:true});
                     })
                 )
             })
@@ -38,7 +38,9 @@ export class AdminAuthEffects{
           return this.actions$.pipe(
             ofType(adminLoginSuccess),
             tap((action) => {
-              this.router.navigate(['/']);
+              if(action.redirect){
+                this.router.navigate(['/']);
+              }
             })
           );
         },
@@ -50,7 +52,12 @@ export class AdminAuthEffects{
         ofType(adminAutoLogin), 
         mergeMap((action)=>{
           const admin = this.adminauthService.getAdminFromLocalStorage();
-          return of(adminLoginSuccess({admin}));
+          if(admin!= null){
+            return of(adminLoginSuccess({admin, redirect:false}));
+          } else {
+            return of(adminAutoLogout())
+          }
+
         })
       );
     });
