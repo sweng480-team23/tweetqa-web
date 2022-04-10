@@ -34,17 +34,6 @@ export class AdminAuthEffects{
         );
     })
 
-    loginRedirect$ = createEffect(() => {
-          return this.actions$.pipe(
-            ofType(adminLoginSuccess),
-            tap((action) => {
-              // this.router.navigate(['/'], { queryParamsHandling: "merge"});
-            })
-          );
-        },
-        { dispatch: false }
-      );
-
     adminAutoLogin$ = createEffect(()=>{
       return this.actions$.pipe(
         ofType(adminAutoLogin),
@@ -62,7 +51,7 @@ export class AdminAuthEffects{
         map((action)=>{
           //call the adminLogout service & navigate the router back to homepage
           this.adminauthService.adminLogout();
-          this.router.navigate(['/']);
+          this.router.navigate(['/'], { queryParamsHandling: "preserve" });
         }));
       },{dispatch:false}
     );

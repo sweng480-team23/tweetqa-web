@@ -12,7 +12,7 @@ export const initialAdminState: AdminAuthState = {
 };
 
 
-const onAdminLoginSuccess =     on<AdminAuthState, ActionCreator<string, Creator<any[], object>>[]>(
+const onAdminLoginSuccess = on<AdminAuthState, ActionCreator<string, Creator<any[], object>>[]>(
     adminAuthActions.adminLoginSuccess,
     (state: AdminAuthState, props:any): AdminAuthState =>({
         ...state,

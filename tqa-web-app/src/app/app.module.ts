@@ -37,6 +37,7 @@ import { environment } from '../environments/environment';
 import { AdminAuthEffects } from './state/store/resources/adminauth/adminauth.effects';
 import { QAModelEffect } from "./state/store/resources/qa-model/qa-model.effect";
 import { TrainingFormComponent } from './components/training-form/training-form.component';
+import {LoggedInAdminGuard} from "./util/logged-in-admin-guard";
 
 
 @NgModule({
@@ -80,6 +81,7 @@ import { TrainingFormComponent } from './components/training-form/training-form.
   ],
   providers: [
     LocalStorageService,
+    LoggedInAdminGuard,
     QaModelService,
     PredictionService,
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
