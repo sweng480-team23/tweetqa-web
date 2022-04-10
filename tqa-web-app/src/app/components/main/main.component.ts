@@ -6,7 +6,6 @@ import { AppState } from "../../state/store/app.state";
 import { Constant } from "../../constants/constant";
 import * as visitorActions from "../../state/store/resources/visitor/visitor.action";
 import * as modelActions from "../../state/store/resources/qa-model/qa-model.action";
-import { adminAutoLogin } from "../../state/store/resources/adminauth/adminauth.actions";
 
 @Component({
   selector: 'app-main',
@@ -30,7 +29,6 @@ export class MainComponent implements OnInit {
     });
 
     this.store.dispatch(modelActions.getBestModels());
-    // this.store.dispatch(adminAutoLogin());
   }
 
 }
