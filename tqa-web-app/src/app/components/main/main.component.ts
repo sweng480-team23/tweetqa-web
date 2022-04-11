@@ -25,6 +25,11 @@ export class MainComponent implements OnInit {
       if (!!token) {
         this.localStorageService.setItem(`${Constant.TOKEN.getValue}`, token);
         this.store.dispatch(visitorActions.getByToken({ token }));
+      } else {
+        token = this.localStorageService.getItem('token');
+        if(token != null){
+          this.store.dispatch(visitorActions.getByToken({ token }));
+        }
       }
     });
 
