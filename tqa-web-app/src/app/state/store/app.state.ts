@@ -14,7 +14,6 @@ export const reducers: ActionReducerMap<AppState> = {
   adminauth: adminAuthReducer,
   qaModels: qaModelReducer,
   training: trainingReducer,
-  visitors: visitorReducer
 };
 
 //Include all state created here
@@ -25,5 +24,4 @@ export interface AppState {
   adminauth: AdminAuthState
   qaModels: QAModelState,
   training: TrainingState,
-  visitors: VisitorState
 }

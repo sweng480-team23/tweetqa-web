@@ -60,7 +60,7 @@ import { TrainingFormComponent } from './components/training-form/training-form.
     EffectsModule.forRoot([
       PredictionEffect,
       VisitorEffect, 
-      AdminAuthEffects
+      AdminAuthEffects,
       QAModelEffect,
       VisitorEffect
     ]),
