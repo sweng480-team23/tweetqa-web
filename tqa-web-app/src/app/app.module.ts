@@ -38,6 +38,8 @@ import { AdminAuthEffects } from './state/store/resources/adminauth/adminauth.ef
 import { QAModelEffect } from "./state/store/resources/qa-model/qa-model.effect";
 import { TrainingFormComponent } from './components/training-form/training-form.component';
 import {LoggedInAdminGuard} from "./util/logged-in-admin-guard";
+import {TrainingEffect} from "./state/store/resources/training/training.effect";
+import {TrainingService} from "./services/training.service";
 
 
 @NgModule({
@@ -59,10 +61,10 @@ import {LoggedInAdminGuard} from "./util/logged-in-admin-guard";
     BrowserModule,
     BrowserAnimationsModule,
     EffectsModule.forRoot([
-      PredictionEffect,
-      VisitorEffect,
       AdminAuthEffects,
+      PredictionEffect,
       QAModelEffect,
+      TrainingEffect,
       VisitorEffect
     ]),
     HttpClientModule,
@@ -84,6 +86,7 @@ import {LoggedInAdminGuard} from "./util/logged-in-admin-guard";
     LoggedInAdminGuard,
     QaModelService,
     PredictionService,
+    TrainingService,
     { provide: HTTP_INTERCEPTORS, useClass: RequestInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
