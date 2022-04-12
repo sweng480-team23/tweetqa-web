@@ -5,6 +5,8 @@ import { Store } from '@ngrx/store';
 import { mockLoginRequestV2 } from 'src/app/dtos/v2/mock/account.dto.v2.mock';
 import { AppState } from 'src/app/state/store/app.state';
 import { adminLoginStart } from 'src/app/state/store/resources/adminauth/adminauth.actions';
+import {isAuthenticated} from "../../state/store/resources/adminauth/adminauth.selector";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-admin-auth',
@@ -15,10 +17,11 @@ export class AdminAuthComponent implements OnInit {
 
   adminAuthForm!: FormGroup;
   hide = true;
-  constructor(    
+  constructor(
     public store: Store<AppState>,
     fb: FormBuilder,
-    public dialog: MatDialog) { 
+    public dialog: MatDialog,
+    public router: Router) {
 
     }
 
@@ -26,6 +29,12 @@ export class AdminAuthComponent implements OnInit {
     this.adminAuthForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required]),
+    });
+
+    this.store.select(isAuthenticated).subscribe(auth => {
+      if (auth == true) {
+        this.router.navigate(['/'], { queryParamsHandling: "preserve" })
+      }
     });
   }
 

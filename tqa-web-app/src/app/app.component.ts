@@ -15,7 +15,7 @@ export class AppComponent implements OnInit{
     private store: Store<AppState>
   ){}
 
-  //implement OnInit so that this will call the autologin action 
+  //implement OnInit so that this will call the autologin action
   ngOnInit(): void {
     this.store.dispatch(adminAutoLogin());
   }

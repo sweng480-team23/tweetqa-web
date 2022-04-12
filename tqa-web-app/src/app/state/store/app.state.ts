@@ -8,10 +8,9 @@ import { trainingReducer, TrainingState } from "./resources/training/training.re
 
 //Include all reducer created here
 export const reducers: ActionReducerMap<AppState> = {
+  adminAuth: adminAuthReducer,
   predictions: predictionReducer,
   predictionForm: predictionFormReducer,
-  visitors: visitorReducer,
-  adminauth: adminAuthReducer,
   qaModels: qaModelReducer,
   training: trainingReducer,
   visitors: visitorReducer
@@ -19,10 +18,9 @@ export const reducers: ActionReducerMap<AppState> = {
 
 //Include all state created here
 export interface AppState {
+  adminAuth: AdminAuthState
   predictions: PredictionState,
   predictionForm: PredictionFormState,
-  visitors: VisitorState,
-  adminauth: AdminAuthState
   qaModels: QAModelState,
   training: TrainingState,
   visitors: VisitorState

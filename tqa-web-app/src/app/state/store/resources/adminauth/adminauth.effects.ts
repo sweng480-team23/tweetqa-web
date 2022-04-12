@@ -11,15 +11,15 @@ import { adminAutoLogin, adminAutoLogout, adminLoginStart, adminLoginSuccess } f
 @Injectable()
 export class AdminAuthEffects{
     constructor(
-        private actions$:Actions, 
-        private adminauthService: AdminAuthService, 
+        private actions$:Actions,
+        private adminauthService: AdminAuthService,
         private store: Store<AppState>,
         private router: Router,
         ){}
 
     adminLogin$ = createEffect(()=>{
         return this.actions$.pipe(
-            ofType(adminLoginStart), 
+            ofType(adminLoginStart),
             exhaustMap((action)=>{
                 return this.adminauthService.login(action.email, action.password).pipe(
                     map((data)=>{
@@ -34,20 +34,9 @@ export class AdminAuthEffects{
         );
     })
 
-    loginRedirect$ = createEffect(() => {
-          return this.actions$.pipe(
-            ofType(adminLoginSuccess),
-            tap((action) => {
-              this.router.navigate(['/']);
-            })
-          );
-        },
-        { dispatch: false }
-      );
-
     adminAutoLogin$ = createEffect(()=>{
       return this.actions$.pipe(
-        ofType(adminAutoLogin), 
+        ofType(adminAutoLogin),
         mergeMap((action)=>{
           const admin = this.adminauthService.getAdminFromLocalStorage();
           return of(adminLoginSuccess({admin}));
@@ -58,11 +47,11 @@ export class AdminAuthEffects{
     //Implement the adminAutoLogout action
     adminLogout$ = createEffect(()=>{
         //filter the action using pipe, if the action if ofType (adminAutoLogout)
-        return this.actions$.pipe(ofType(adminAutoLogout), 
+        return this.actions$.pipe(ofType(adminAutoLogout),
         map((action)=>{
           //call the adminLogout service & navigate the router back to homepage
           this.adminauthService.adminLogout();
-          this.router.navigate(['/']);
+          this.router.navigate(['/'], { queryParamsHandling: "preserve" });
         }));
       },{dispatch:false}
     );
