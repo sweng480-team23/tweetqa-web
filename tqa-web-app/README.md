@@ -14,6 +14,19 @@ Run `ng generate component component-name` to generate a new component. You can 
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
+## Deploy to GCP
+
+1. Run `ng build` to create new distribution artifact in `dist/` directory
+2. Copy `app.yaml` file to route of `dist/` directory
+3. Upload the folder containing the contents of `dist/` to a GCP Cloud Storage bucket.  It should have the following structure:
+   
+    ---app.yaml
+   
+    ---tqa-web-app/
+4. Create a new directory in GCP using the cloud console, `mkdir tqa-web-app`
+5. Sync data from the bucket to the new directory, `gsutil rsync -r gs://tqa-web-app ./tqa-web-app`
+6. From within the new directory, deploy to gcp, `cd tqa-web-app`, `gcloud app deploy`
+
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).

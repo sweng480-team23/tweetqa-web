@@ -1,0 +1,9 @@
+runtime: python27
+api_version: 1
+threadsafe: true
+handlers:
+  - url: /
+    static_files: tqa-web-app/index.html
+    upload: tqa-web-app/index.html
+  - url: /
+    static_dir: tqa-web-app
