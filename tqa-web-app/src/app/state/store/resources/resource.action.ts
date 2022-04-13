@@ -48,3 +48,7 @@ export const updateSuccess = <DTO>(typePrefix: string) => createAction(
   `${typePrefix} PUT to update resource successful`,
   props<{ response: DTO }>()
 );
+
+export const resetResource = <DTO>(typePrefix: string) => createAction(
+  `${typePrefix} Reset resource value`,
+);

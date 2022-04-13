@@ -1,5 +1,12 @@
 import {ActionCreator, createReducer, on, ReducerTypes} from "@ngrx/store";
-import {CRState, CRUCollectionState, CRUState, initialCRState, ReadableState} from "./resource.state";
+import {
+  CRState,
+  CRUCollectionState,
+  CRUState,
+  initialCRState,
+  initialReadableState,
+  ReadableState
+} from "./resource.state";
 import * as resourceActions from "./resource.action";
 
 export const onError = <T, S extends ReadableState<T>>(typePrefix: string) => on(
@@ -15,6 +22,14 @@ export const onErrorReset = <T, S extends ReadableState<T>>(typePrefix: string) 
   (state: S extends infer S ? S : never, props) => ({
     ...state,
     error: undefined
+  })
+);
+
+export const onResourceReset = <T, S extends ReadableState<T>>(typePrefix: string) => on(
+  resourceActions.resetResource(typePrefix),
+  (state: S extends infer S ? S : never, props) => ({
+    ...state,
+    ...initialReadableState
   })
 );
 
@@ -111,6 +126,7 @@ export const readableReducer = <T>(
   initialState,
   onError<T, ReadableState<T>>(typePrefix),
   onErrorReset<T, ReadableState<T>>(typePrefix),
+  onResourceReset<T, ReadableState<T>>(typePrefix),
   onGet<T, ReadableState<T>>(typePrefix),
   onGetSuccess<T, ReadableState<T>>(typePrefix),
   ...ons
@@ -124,6 +140,7 @@ export const crReducer = <T>(
   initialState,
   onError<T, CRState<T>>(typePrefix),
   onErrorReset<T, CRState<T>>(typePrefix),
+  onResourceReset<T, CRState<T>>(typePrefix),
   onGet<T, CRState<T>>(typePrefix),
   onGetSuccess<T, CRState<T>>(typePrefix),
   onCreate<T, CRState<T>>(typePrefix),
@@ -140,6 +157,7 @@ export const cruReducer = <T>(
   initialState,
   onError<T, CRUState<T>>(typePrefix),
   onErrorReset<T, CRUState<T>>(typePrefix),
+  onResourceReset<T, CRUState<T>>(typePrefix),
   onGet<T, CRUState<T>>(typePrefix),
   onGetSuccess<T, CRUState<T>>(typePrefix),
   onCreate<T, CRUState<T>>(typePrefix),
@@ -158,6 +176,7 @@ export const cruCollectionReducer = <T>(
   initialState,
   onError<T, CRUCollectionState<T>>(typePrefix),
   onErrorReset<T, CRUCollectionState<T>>(typePrefix),
+  onResourceReset<T, CRUCollectionState<T>>(typePrefix),
   onGet<T, CRUCollectionState<T>>(typePrefix),
   onGetSuccess<T, CRUCollectionState<T>>(typePrefix),
   onCreate<T, CRUCollectionState<T>>(typePrefix),
