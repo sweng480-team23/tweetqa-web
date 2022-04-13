@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ModelSeriesType } from "../../types/model-series.type";
 import { QAModelCollectionResponseV2, QAModelResponseV2 } from "../../dtos/v2/qa-model.dto.v2";
 import { ModelDataType } from "../../types/model-data.type";
@@ -10,6 +10,7 @@ import { QaModelService } from "../../services/qa-model.service";
 import * as formStateSelectors from "../../state/store/prediction-form/prediction-form.selector";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/store/app.state";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -17,9 +18,10 @@ import {AppState} from "../../state/store/app.state";
   templateUrl: './scoring-graph.component.html',
   styleUrls: ['./scoring-graph.component.scss']
 })
-export class ScoringGraphComponent implements OnInit {
+export class ScoringGraphComponent implements OnInit, OnDestroy {
   public highcharts = Highcharts;
   private mlType: string = '';
+  private subscription: Subscription = new Subscription();
 
   public options: Highcharts.Options = {
     title: {
@@ -45,10 +47,18 @@ export class ScoringGraphComponent implements OnInit {
     public modelService: QaModelService) { }
 
   ngOnInit(): void {
-    this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
+    this.subscription.add(this.onFormChange());
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
+  }
+
+  onFormChange(): Subscription {
+    return this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
       if (formState.prediction.model.ml_type != undefined
-          && formState.prediction.model.ml_type != ''
-          && formState.prediction.model.ml_type != this.mlType)
+        && formState.prediction.model.ml_type != ''
+        && formState.prediction.model.ml_type != this.mlType)
       {
         this.mlType = formState.prediction.model.ml_type;
         this.modelService.readAllModelsByType(formState.prediction.model.ml_type).subscribe(models => {

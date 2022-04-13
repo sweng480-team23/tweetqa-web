@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup} from "@angular/forms";
 import {PredictionRequestFormState} from "../../state/prediction-request-form/prediction-request-form.state";
 import {InitialFormState} from "../../state/prediction-request-form/initial-form.state";
@@ -30,7 +30,7 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './prediction-form.component.html',
   styleUrls: ['./prediction-form.component.scss']
 })
-export class PredictionFormComponent implements OnInit {
+export class PredictionFormComponent implements OnInit, OnDestroy {
 
   predictionRequestForm: FormGroup;
   formState: PredictionRequestFormState;
@@ -38,6 +38,7 @@ export class PredictionFormComponent implements OnInit {
   randomTweet = "";
   modelAware: ResourceAware<QAModelResponseV2[]>;
   predictionErrorAware: ErrorAware;
+  subscription: Subscription = new Subscription();
 
   constructor(
       public store$: Store<AppState>,
@@ -45,10 +46,8 @@ export class PredictionFormComponent implements OnInit {
       public dialog: MatDialog,
       fb: FormBuilder)
   {
-    let subscription: Subscription = new Subscription();
-
     this.predictionErrorAware = ErrorAwareBehavior({
-      subscription,
+      subscription: this.subscription,
       error$: this.store$.select(predictionSelectors.selectError),
       dialog: this.dialog,
       store$: this.store$,
@@ -67,7 +66,7 @@ export class PredictionFormComponent implements OnInit {
       this.predictionRequestForm,
       PredictionStateAwareBehavior({
         resource$: this.store$.select(predictionSelectors.selectResource),
-        subscription,
+        subscription: this.subscription,
         formState$: this.store$.select(formStateSelectors.getFormState),
         store$: store$
       } as PredictionStateAware)
@@ -75,12 +74,12 @@ export class PredictionFormComponent implements OnInit {
 
     this.visitorAware = ResourceAwareBehavior({
       resource$: this.store$.select(visitorSelectors.selectResource),
-      subscription
+      subscription: this.subscription
     } as ResourceAware<VisitorResponseV2>);
 
     this.modelAware = ResourceAwareBehavior({
       resource$: this.store$.select(modelSelectors.selectResources),
-      subscription
+      subscription: this.subscription
     } as ResourceAware<QAModelResponseV2[]>);
   }
 
@@ -97,6 +96,10 @@ export class PredictionFormComponent implements OnInit {
 
     //Get a new random tweet during initialization, to speed up the tweet retrieval process from user perspective
     this.getTweet();
+  }
+
+  ngOnDestroy() {
+    this.subscription.unsubscribe();
   }
 
   //Function to submit the tweet
