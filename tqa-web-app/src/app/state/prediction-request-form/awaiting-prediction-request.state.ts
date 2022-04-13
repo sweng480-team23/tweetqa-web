@@ -21,7 +21,8 @@ export class AwaitingPredictionRequestState extends PredictionRequestFormState {
       showAnswer: false,
       showIsCorrect: false,
       showAltAnswer: false,
-      isSubmitButtonDisabled: false
+      isSubmitButtonDisabled: false,
+      isRandomButtonDisabled: false,
     });
   }
 

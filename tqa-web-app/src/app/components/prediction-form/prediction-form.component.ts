@@ -139,14 +139,14 @@ export class PredictionFormComponent extends SubscribedComponent implements OnIn
 
   //Function to get a new random tweet from API
   getTweet():void{
-    if (this.formState instanceof InitialFormState) {
+    if (this.formState instanceof InitialFormState || this.formState instanceof AwaitingPredictionRequestState) {
       this.subscription.add(this.onGetRandomTweet());
     }
   }
 
   //Function to request the new random tweet to be displayed
   onTweetRequest():void{
-    if (this.formState instanceof InitialFormState) {
+    if (this.formState instanceof InitialFormState || this.formState instanceof AwaitingPredictionRequestState) {
       //get a new random tweet for the backend, while display random tweet stored in the front
       this.predictionRequestForm.get('tweet')?.setValue(this.randomTweet);
       this.getTweet();

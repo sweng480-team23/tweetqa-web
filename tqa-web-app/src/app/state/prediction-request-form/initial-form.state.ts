@@ -21,7 +21,8 @@ export class InitialFormState extends PredictionRequestFormState {
       showAnswer: false,
       showIsCorrect: false,
       showAltAnswer: false,
-      isSubmitButtonDisabled: true
+      isSubmitButtonDisabled: true,
+      isRandomButtonDisabled: false,
     });
     this.predictionRequestForm.get('model')?.enable();
     this.predictionRequestForm.get('tweet')?.enable();

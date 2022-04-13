@@ -53,6 +53,7 @@ export abstract class PredictionRequestFormState {
     this.predictionState.store$.dispatch(formStateActions.setShowIsCorrect({value: newFormState.showIsCorrect}));
     this.predictionState.store$.dispatch(formStateActions.setShowAltAnswer({value: newFormState.showAltAnswer}));
     this.predictionState.store$.dispatch(formStateActions.setIsButtonDisabled({value: newFormState.isSubmitButtonDisabled}));
+    this.predictionState.store$.dispatch(formStateActions.setIsRandomButtonDisabled({value: newFormState.isRandomButtonDisabled}));
   }
 
   protected resetFormValues(): void {
