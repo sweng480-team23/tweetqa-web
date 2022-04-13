@@ -46,7 +46,10 @@ export class ScoringGraphComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != '' && formState.prediction.model.ml_type != this.mlType) {
+      if (formState.prediction.model.ml_type != undefined
+          && formState.prediction.model.ml_type != ''
+          && formState.prediction.model.ml_type != this.mlType)
+      {
         this.mlType = formState.prediction.model.ml_type;
         this.modelService.readAllModelsByType(formState.prediction.model.ml_type).subscribe(models => {
           this.options.series = this.toSeries({

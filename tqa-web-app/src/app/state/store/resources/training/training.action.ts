@@ -6,6 +6,7 @@ export const typePrefix: string = '[Training]';
 
 export const create = resourceActions.create<TrainingCreateRequestV2>(typePrefix);
 export const createSuccess = resourceActions.createSuccess<TrainingResponseV2>(typePrefix);
+export const resetCreated = resourceActions.resetCreated(typePrefix);
 
 export const updateResource = createAction(
   `${typePrefix} update state of resource`,

@@ -37,6 +37,8 @@ export class VisitorInvitationFormComponent implements OnInit {
       subscription,
       error$: this.store$.select(visitorSelectors.selectError),
       dialog: this.errorDialog,
+      store$: store$,
+      typePrefix: visitorActions.typePrefix
     } as ErrorAware);
 
     this.createAware = CreateAwareBehavior({

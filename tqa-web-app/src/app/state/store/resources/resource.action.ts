@@ -6,6 +6,10 @@ export const error = (typePrefix: string) => createAction(
   props<{ error: HttpErrorResponse }>()
 );
 
+export const resetError = (typePrefix: string) => createAction(
+  `${typePrefix} clear error`
+)
+
 export const getById = (typePrefix: string) => createAction(
   `${typePrefix} GET resource by id`,
   props<{ id: number; }>()

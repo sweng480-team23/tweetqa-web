@@ -40,7 +40,9 @@ export class TrainingFormComponent implements OnInit {
     this.trainingErrorAware = ErrorAwareBehavior({
       subscription,
       error$: this.store$.select(trainingSelectors.selectError),
-      dialog: this.dialog
+      dialog: this.dialog,
+      store$: store$,
+      typePrefix: trainingActions.typePrefix
     } as ErrorAware);
 
     this.trainingAware = ResourceAwareBehavior({
@@ -57,7 +59,8 @@ export class TrainingFormComponent implements OnInit {
             data: {
               message: response?.message
             }
-          })
+          });
+          this.store$.dispatch(trainingActions.resetCreated());
         });
       }
     } as CreateAware);

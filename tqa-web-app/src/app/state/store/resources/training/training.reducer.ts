@@ -1,6 +1,6 @@
 import { CRState, initialCRState } from "../resource.state";
-import {Action, ActionCreator, createReducer, Creator, on } from "@ngrx/store";
-import { onCreate, onCreateReset } from "../resource.reducer";
+import { Action, ActionCreator, createReducer, Creator, on } from "@ngrx/store";
+import { onCreate, onCreateReset, onError, onErrorReset } from "../resource.reducer";
 import { typePrefix } from "./training.action";
 import { TrainingCreateRequestV2, TrainingResponseV2 } from "../../../../dtos/v2/training.dto.v2";
 import * as trainingActions from "./training.action";
@@ -34,6 +34,8 @@ const onCreateSuccess = on<TrainingState, ActionCreator<string, Creator<any[], o
 
 const reducer = createReducer<TrainingState>(
   initialTrainingState,
+  onError<TrainingCreateRequestV2, CRState<TrainingCreateRequestV2>>(typePrefix),
+  onErrorReset<TrainingCreateRequestV2, CRState<TrainingCreateRequestV2>>(typePrefix),
   onUpdateResource,
   onCreate<TrainingCreateRequestV2, CRState<TrainingCreateRequestV2>>(typePrefix),
   onCreateSuccess,

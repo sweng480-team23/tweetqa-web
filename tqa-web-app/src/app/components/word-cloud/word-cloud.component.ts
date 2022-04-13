@@ -34,7 +34,10 @@ export class WordCloudComponent implements OnInit {
 
   ngOnInit(): void {
     this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != '' && formState.prediction.model.ml_type != this.mlType) {
+      if (formState.prediction.model.ml_type != undefined
+          && formState.prediction.model.ml_type != ''
+          && formState.prediction.model.ml_type != this.mlType)
+      {
         this.mlType = formState.prediction.model.ml_type;
         this.modelService.getWordCloud(formState.prediction.model.id).subscribe(wordCloud => {
           this.options.series[0].data = wordCloud.words;

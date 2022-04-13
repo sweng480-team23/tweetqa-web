@@ -10,6 +10,14 @@ export const onError = <T, S extends ReadableState<T>>(typePrefix: string) => on
   })
 );
 
+export const onErrorReset = <T, S extends ReadableState<T>>(typePrefix: string) => on(
+  resourceActions.resetError(typePrefix),
+  (state: S extends infer S ? S : never, props) => ({
+    ...state,
+    error: undefined
+  })
+);
+
 export const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
   resourceActions.getById(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
@@ -102,6 +110,7 @@ export const readableReducer = <T>(
 ) => createReducer<ReadableState<T>>(
   initialState,
   onError<T, ReadableState<T>>(typePrefix),
+  onErrorReset<T, ReadableState<T>>(typePrefix),
   onGet<T, ReadableState<T>>(typePrefix),
   onGetSuccess<T, ReadableState<T>>(typePrefix),
   ...ons
@@ -114,6 +123,7 @@ export const crReducer = <T>(
 ) => createReducer<CRState<T>>(
   initialState,
   onError<T, CRState<T>>(typePrefix),
+  onErrorReset<T, CRState<T>>(typePrefix),
   onGet<T, CRState<T>>(typePrefix),
   onGetSuccess<T, CRState<T>>(typePrefix),
   onCreate<T, CRState<T>>(typePrefix),
@@ -129,6 +139,7 @@ export const cruReducer = <T>(
 ) => createReducer<CRUState<T>>(
   initialState,
   onError<T, CRUState<T>>(typePrefix),
+  onErrorReset<T, CRUState<T>>(typePrefix),
   onGet<T, CRUState<T>>(typePrefix),
   onGetSuccess<T, CRUState<T>>(typePrefix),
   onCreate<T, CRUState<T>>(typePrefix),
@@ -146,6 +157,7 @@ export const cruCollectionReducer = <T>(
 ) => createReducer<CRUCollectionState<T>>(
   initialState,
   onError<T, CRUCollectionState<T>>(typePrefix),
+  onErrorReset<T, CRUCollectionState<T>>(typePrefix),
   onGet<T, CRUCollectionState<T>>(typePrefix),
   onGetSuccess<T, CRUCollectionState<T>>(typePrefix),
   onCreate<T, CRUCollectionState<T>>(typePrefix),

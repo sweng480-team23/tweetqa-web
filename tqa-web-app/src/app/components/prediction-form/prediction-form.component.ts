@@ -50,7 +50,9 @@ export class PredictionFormComponent implements OnInit {
     this.predictionErrorAware = ErrorAwareBehavior({
       subscription,
       error$: this.store$.select(predictionSelectors.selectError),
-      dialog: this.dialog
+      dialog: this.dialog,
+      store$: this.store$,
+      typePrefix: predictionActions.typePrefix
     } as ErrorAware);
 
     this.predictionRequestForm = fb.group({
