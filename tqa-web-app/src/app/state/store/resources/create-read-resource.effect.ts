@@ -32,7 +32,7 @@ export abstract class CreateReadResourceEffect<
         })),
         catchError(error => of({
           type: resourceActions.error(this.typePrefix).type,
-          message: error.message
+          error
         }))
       )
     )

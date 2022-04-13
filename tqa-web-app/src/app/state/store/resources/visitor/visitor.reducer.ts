@@ -14,8 +14,7 @@ const onGetToken = on<VisitorState, ActionCreator<string, Creator<any[], object>
   visitorActions.getByToken,
   (state: VisitorState, props: any): VisitorState => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     loading: true
   }));
 
@@ -23,8 +22,7 @@ const onGetTokenSuccess = on<VisitorState, ActionCreator<string, Creator<any[], 
   visitorActions.getByTokenSuccess,
   (state: VisitorState, props: any): VisitorState => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     resource: props.response,
     loading: false,
     loaded: true

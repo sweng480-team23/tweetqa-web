@@ -33,7 +33,7 @@ export class VisitorEffect extends CreateReadResourceEffect<
         })),
         catchError(error => of({
           type: visitorActions.error.type,
-          message: `Test [${error}] ${error.message}`
+          message: error
         }))
       )
     )

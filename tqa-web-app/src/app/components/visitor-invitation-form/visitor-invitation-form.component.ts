@@ -25,7 +25,8 @@ export class VisitorInvitationFormComponent implements OnInit {
   constructor(
     public store$: Store<AppState>,
     fb: FormBuilder,
-    public dialog: MatDialog
+    public successDialog: MatDialog,
+    public errorDialog: MatDialog
   ) {
     let subscription: Subscription = new Subscription();
     this.visitorInviteForm = fb.group({
@@ -35,15 +36,14 @@ export class VisitorInvitationFormComponent implements OnInit {
     this.visitorErrorAware = ErrorAwareBehavior({
       subscription,
       error$: this.store$.select(visitorSelectors.selectError),
-      errorMessage$: this.store$.select(visitorSelectors.selectErrorMessage),
-      dialog: this.dialog
+      dialog: this.errorDialog,
     } as ErrorAware);
 
     this.createAware = CreateAwareBehavior({
       created$: this.store$.select(visitorSelectors.selectCreated),
       subscription,
       onCreateSuccess: () => {
-        this.dialog.open(SuccessDialogComponent, {
+        this.successDialog.open(SuccessDialogComponent, {
           data: {
             message: `Visitor invitations were successfully sent to: ${this.visitorInviteForm.get('emails')?.value}`
           }

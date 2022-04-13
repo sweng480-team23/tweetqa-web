@@ -1,10 +1,10 @@
+import {HttpErrorResponse} from "@angular/common/http";
 
 export interface ReadableState <T> {
   resource: T;
   loading: boolean;
   loaded: boolean;
-  error: boolean;
-  errorMessage: string;
+  error?: HttpErrorResponse;
 }
 
 export interface CRState <T> extends ReadableState<T> {
@@ -25,8 +25,7 @@ export const initialReadableState: ReadableState<any> = {
   resource: null,
   loading: false,
   loaded: false,
-  error: false,
-  errorMessage: ''
+  error: undefined
 };
 
 export const initialCRState: CRState<any> = {

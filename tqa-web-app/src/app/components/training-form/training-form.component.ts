@@ -40,7 +40,6 @@ export class TrainingFormComponent implements OnInit {
     this.trainingErrorAware = ErrorAwareBehavior({
       subscription,
       error$: this.store$.select(trainingSelectors.selectError),
-      errorMessage$: this.store$.select(trainingSelectors.selectErrorMessage),
       dialog: this.dialog
     } as ErrorAware);
 

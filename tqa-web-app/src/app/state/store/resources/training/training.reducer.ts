@@ -26,8 +26,7 @@ const onCreateSuccess = on<TrainingState, ActionCreator<string, Creator<any[], o
   trainingActions.createSuccess,
   (state: TrainingState, props: any): TrainingState => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     creating: false,
     created: true,
     response: props.response

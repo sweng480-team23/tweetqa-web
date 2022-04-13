@@ -6,8 +6,7 @@ export const onError = <T, S extends ReadableState<T>>(typePrefix: string) => on
   resourceActions.error(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: true,
-    errorMessage: props.message
+    error: props.error,
   })
 );
 
@@ -15,8 +14,7 @@ export const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
   resourceActions.getById(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     loading: true,
     loaded: false
   })
@@ -26,8 +24,7 @@ export const onGetSuccess = <T, S extends ReadableState<T>>(typePrefix: string) 
   resourceActions.getByIdSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     resource: props.response,
     loading: false,
     loaded: true
@@ -39,8 +36,7 @@ export const onCreate = <T, S extends CRState<T>>(typePrefix: string) => on(
   resourceActions.create(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     creating: true,
     created: false
   })
@@ -50,8 +46,7 @@ export const onCreateSuccess = <T, S extends CRState<T>>(typePrefix: string) => 
   resourceActions.createSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     resource: props.response,
     creating: false,
     created: true
@@ -62,8 +57,7 @@ export const onCreateReset = <T, S extends CRState<T>>(typePrefix: string) => on
   resourceActions.resetCreated(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     creating: false,
     created: false
   })
@@ -73,8 +67,7 @@ export const onUpdate = <T, S extends CRUState<T>>(typePrefix: string) => on(
   resourceActions.update(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     updating: true,
     updated: false
   })
@@ -84,8 +77,7 @@ export const onUpdateSuccess = <T, S extends CRUState<T>>(typePrefix: string) =>
   resourceActions.updateSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     resource: props.response,
     updating: false,
     updated: true
@@ -96,8 +88,7 @@ export const onGetResourcesSuccess = <T, S extends CRUState<T>>(typePrefix: stri
   resourceActions.getResourcesSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
-    error: false,
-    errorMessage: '',
+    error: undefined,
     loading: false,
     loaded: true,
     resources: props.resources

@@ -50,7 +50,6 @@ export class PredictionFormComponent implements OnInit {
     this.predictionErrorAware = ErrorAwareBehavior({
       subscription,
       error$: this.store$.select(predictionSelectors.selectError),
-      errorMessage$: this.store$.select(predictionSelectors.selectErrorMessage),
       dialog: this.dialog
     } as ErrorAware);
 

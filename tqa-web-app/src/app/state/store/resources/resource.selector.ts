@@ -25,9 +25,3 @@ export const selectError = <DTO, T extends CRState<DTO>>
     selectedState,
     (state: T) => state.error
   );
-
-export const selectErrorMessage = <DTO, T extends CRState<DTO>>
-  (selectedState: (state: AppState) => T) => createSelector(
-    selectedState,
-    (state: T) => state.errorMessage
-  );

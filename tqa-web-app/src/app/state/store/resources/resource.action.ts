@@ -1,8 +1,9 @@
 import { createAction, props } from "@ngrx/store";
+import {HttpErrorResponse} from "@angular/common/http";
 
 export const error = (typePrefix: string) => createAction(
   `${typePrefix} error!`,
-  props<{ message: string }>()
+  props<{ error: HttpErrorResponse }>()
 );
 
 export const getById = (typePrefix: string) => createAction(
