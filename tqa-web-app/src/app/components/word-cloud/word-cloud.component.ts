@@ -4,7 +4,8 @@ import { QaModelService } from "../../services/qa-model.service";
 import { Store } from "@ngrx/store";
 import { AppState } from "../../state/store/app.state";
 import * as formStateSelectors from "../../state/store/prediction-form/prediction-form.selector";
-import {Subscription} from "rxjs";
+import { Subscription } from "rxjs";
+import { SubscribedComponent } from "../abstract/subscribed-component.directive";
 
 declare var require: any
 const Wordcloud = require('highcharts/modules/wordcloud');
@@ -15,10 +16,9 @@ Wordcloud(Highcharts);
   templateUrl: './word-cloud.component.html',
   styleUrls: ['./word-cloud.component.scss']
 })
-export class WordCloudComponent implements OnInit, OnDestroy {
+export class WordCloudComponent extends SubscribedComponent implements OnInit {
   public highcharts = Highcharts;
   private mlType: string = '';
-  private subscription: Subscription = new Subscription();
 
   public options: any = {
     title: {
@@ -32,19 +32,19 @@ export class WordCloudComponent implements OnInit, OnDestroy {
 
   constructor(
     public store$: Store<AppState>,
-    protected modelService: QaModelService) {}
+    protected modelService: QaModelService)
+  {
+    super();
+  }
 
   ngOnInit(): void {
     this.subscription.add(this.onFormChange());
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   onFormChange(): Subscription {
     return this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != undefined
+      if ( formState.prediction.model != undefined
+        && formState.prediction.model.ml_type != undefined
         && formState.prediction.model.ml_type != ''
         && formState.prediction.model.ml_type != this.mlType)
       {

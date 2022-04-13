@@ -11,6 +11,7 @@ import * as formStateSelectors from "../../state/store/prediction-form/predictio
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/store/app.state";
 import {Subscription} from "rxjs";
+import {SubscribedComponent} from "../abstract/subscribed-component.directive";
 
 
 @Component({
@@ -18,10 +19,9 @@ import {Subscription} from "rxjs";
   templateUrl: './scoring-graph.component.html',
   styleUrls: ['./scoring-graph.component.scss']
 })
-export class ScoringGraphComponent implements OnInit, OnDestroy {
+export class ScoringGraphComponent extends SubscribedComponent implements OnInit {
   public highcharts = Highcharts;
   private mlType: string = '';
-  private subscription: Subscription = new Subscription();
 
   public options: Highcharts.Options = {
     title: {
@@ -44,19 +44,19 @@ export class ScoringGraphComponent implements OnInit, OnDestroy {
 
   constructor(
     public store$: Store<AppState>,
-    public modelService: QaModelService) { }
+    public modelService: QaModelService)
+  {
+    super();
+  }
 
   ngOnInit(): void {
     this.subscription.add(this.onFormChange());
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
-  }
-
   onFormChange(): Subscription {
     return this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != undefined
+      if ( formState.prediction.model != undefined
+        && formState.prediction.model.ml_type != undefined
         && formState.prediction.model.ml_type != ''
         && formState.prediction.model.ml_type != this.mlType)
       {

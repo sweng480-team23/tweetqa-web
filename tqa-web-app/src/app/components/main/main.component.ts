@@ -6,6 +6,8 @@ import { AppState } from "../../state/store/app.state";
 import { Constant } from "../../constants/constant";
 import * as visitorActions from "../../state/store/resources/visitor/visitor.action";
 import * as modelActions from "../../state/store/resources/qa-model/qa-model.action";
+import {SubscribedComponent} from "../abstract/subscribed-component.directive";
+import {Subscription} from "rxjs";
 
 
 @Component({
@@ -13,15 +15,23 @@ import * as modelActions from "../../state/store/resources/qa-model/qa-model.act
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit {
+export class MainComponent extends SubscribedComponent implements OnInit {
 
   constructor(
       private localStorageService: LocalStorageService,
       private route: ActivatedRoute,
-      private store: Store<AppState>) {}
+      private store: Store<AppState>)
+  {
+    super();
+  }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe(params => {
+    this.subscription.add(this.onRouteChange());
+    this.store.dispatch(modelActions.getBestModels());
+  }
+
+  onRouteChange(): Subscription {
+    return this.route.queryParamMap.subscribe(params => {
       let token: string | null = params.get(Constant.TOKEN.getValue);
       if (!!token) {
         this.localStorageService.setItem(`${Constant.TOKEN.getValue}`, token);
@@ -33,8 +43,6 @@ export class MainComponent implements OnInit {
         }
       }
     });
-
-    this.store.dispatch(modelActions.getBestModels());
   }
 
 }

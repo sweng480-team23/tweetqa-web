@@ -23,6 +23,7 @@ import {VisitorResponseV2} from "../../dtos/v2/visitor.dto.v2";
 import {QAModelResponseV2} from "../../dtos/v2/qa-model.dto.v2";
 import {ErrorAware, ErrorAwareBehavior} from "../../state/aware/error.aware";
 import {MatDialog} from "@angular/material/dialog";
+import {SubscribedComponent} from "../abstract/subscribed-component.directive";
 
 
 @Component({
@@ -30,7 +31,7 @@ import {MatDialog} from "@angular/material/dialog";
   templateUrl: './prediction-form.component.html',
   styleUrls: ['./prediction-form.component.scss']
 })
-export class PredictionFormComponent implements OnInit, OnDestroy {
+export class PredictionFormComponent extends SubscribedComponent implements OnInit {
 
   predictionRequestForm: FormGroup;
   formState: PredictionRequestFormState;
@@ -38,7 +39,6 @@ export class PredictionFormComponent implements OnInit, OnDestroy {
   randomTweet = "";
   modelAware: ResourceAware<QAModelResponseV2[]>;
   predictionErrorAware: ErrorAware;
-  subscription: Subscription = new Subscription();
 
   constructor(
       public store$: Store<AppState>,
@@ -46,6 +46,7 @@ export class PredictionFormComponent implements OnInit, OnDestroy {
       public dialog: MatDialog,
       fb: FormBuilder)
   {
+    super();
     this.predictionErrorAware = ErrorAwareBehavior({
       subscription: this.subscription,
       error$: this.store$.select(predictionSelectors.selectError),
@@ -84,22 +85,30 @@ export class PredictionFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.predictionRequestForm.valueChanges.subscribe(values => {
-      this.formState = this.formState.nextState(FormAction.VALUE_CHANGED);
-    });
-
-    this.store$.select(predictionSelectors.selectError).subscribe(error => {
-      if (error) {
-        this.formState = this.formState.nextState(FormAction.ERROR);
-      }
-    });
-
+    this.subscription.add(this.onFormValueChange());
+    this.subscription.add(this.onError());
     //Get a new random tweet during initialization, to speed up the tweet retrieval process from user perspective
     this.getTweet();
   }
 
-  ngOnDestroy() {
-    this.subscription.unsubscribe();
+  onFormValueChange(): Subscription {
+    return this.predictionRequestForm.valueChanges.subscribe(values => {
+      this.formState = this.formState.nextState(FormAction.VALUE_CHANGED);
+    });
+  }
+
+  onError(): Subscription {
+    return this.store$.select(predictionSelectors.selectError).subscribe(error => {
+      if (error) {
+        this.formState = this.formState.nextState(FormAction.ERROR);
+      }
+    });
+  }
+
+  onGetRandomTweet(): Subscription {
+    return this.predictionService.getRandomTweet().subscribe((response)=>{
+      this.randomTweet= response['tweet'];
+    });
   }
 
   //Function to submit the tweet
@@ -131,9 +140,7 @@ export class PredictionFormComponent implements OnInit, OnDestroy {
   //Function to get a new random tweet from API
   getTweet():void{
     if (this.formState instanceof InitialFormState) {
-      this.predictionService.getRandomTweet().subscribe((response)=>{
-        this.randomTweet= response['tweet'];
-      });
+      this.subscription.add(this.onGetRandomTweet());
     }
   }
 
