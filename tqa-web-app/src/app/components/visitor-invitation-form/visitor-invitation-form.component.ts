@@ -9,6 +9,7 @@ import {CreateAware, CreateAwareBehavior} from "../../state/aware/create.aware";
 import {Subscription} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {SuccessDialogComponent} from "../success-dialog/success-dialog.component";
+import {ErrorAware, ErrorAwareBehavior} from "../../state/aware/error.aware";
 
 @Component({
   selector: 'app-visitor-invitation-form',
@@ -19,19 +20,28 @@ export class VisitorInvitationFormComponent implements OnInit {
 
   visitorInviteForm: FormGroup;
   public createAware: CreateAware;
+  private visitorErrorAware: ErrorAware;
 
   constructor(
     public store$: Store<AppState>,
     fb: FormBuilder,
     public dialog: MatDialog
   ) {
+    let subscription: Subscription = new Subscription();
     this.visitorInviteForm = fb.group({
       emails: new FormControl('')
     });
 
+    this.visitorErrorAware = ErrorAwareBehavior({
+      subscription,
+      error$: this.store$.select(visitorSelectors.selectError),
+      errorMessage$: this.store$.select(visitorSelectors.selectErrorMessage),
+      dialog: this.dialog
+    } as ErrorAware);
+
     this.createAware = CreateAwareBehavior({
       created$: this.store$.select(visitorSelectors.selectCreated),
-      subscription: new Subscription(),
+      subscription,
       onCreateSuccess: () => {
         this.dialog.open(SuccessDialogComponent, {
           data: {

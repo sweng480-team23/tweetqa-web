@@ -1,8 +1,9 @@
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as resourceActions from "./resource.action";
-import { map, switchMap } from "rxjs/operators";
+import {catchError, map, switchMap} from "rxjs/operators";
 import { CreateReadResourceEffect } from "./create-read-resource.effect";
 import { AbstractCreateReadUpdateService } from "../../../services/abstract/abstract-create-read-update.service";
+import {of} from "rxjs";
 
 export abstract class CreateReadUpdateResourceEffect<
   CREATE_REQUEST,
@@ -28,6 +29,10 @@ export abstract class CreateReadUpdateResourceEffect<
           type: resourceActions.updateSuccess(this.typePrefix).type,
           response: updated
         })),
+        catchError(error => of({
+          type: resourceActions.error(this.typePrefix).type,
+          message: error.message
+        }))
       )
     )
   ));

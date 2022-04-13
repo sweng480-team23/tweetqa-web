@@ -2,10 +2,21 @@ import {ActionCreator, createReducer, on, ReducerTypes} from "@ngrx/store";
 import {CRState, CRUCollectionState, CRUState, initialCRState, ReadableState} from "./resource.state";
 import * as resourceActions from "./resource.action";
 
+export const onError = <T, S extends ReadableState<T>>(typePrefix: string) => on(
+  resourceActions.error(typePrefix),
+  (state: S extends infer S ? S : never, props) => ({
+    ...state,
+    error: true,
+    errorMessage: props.message
+  })
+);
+
 export const onGet = <T, S extends ReadableState<T>>(typePrefix: string) => on(
   resourceActions.getById(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     loading: true,
     loaded: false
   })
@@ -15,6 +26,8 @@ export const onGetSuccess = <T, S extends ReadableState<T>>(typePrefix: string) 
   resourceActions.getByIdSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     resource: props.response,
     loading: false,
     loaded: true
@@ -26,6 +39,8 @@ export const onCreate = <T, S extends CRState<T>>(typePrefix: string) => on(
   resourceActions.create(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     creating: true,
     created: false
   })
@@ -35,6 +50,8 @@ export const onCreateSuccess = <T, S extends CRState<T>>(typePrefix: string) => 
   resourceActions.createSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     resource: props.response,
     creating: false,
     created: true
@@ -45,6 +62,8 @@ export const onCreateReset = <T, S extends CRState<T>>(typePrefix: string) => on
   resourceActions.resetCreated(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     creating: false,
     created: false
   })
@@ -54,6 +73,8 @@ export const onUpdate = <T, S extends CRUState<T>>(typePrefix: string) => on(
   resourceActions.update(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     updating: true,
     updated: false
   })
@@ -63,6 +84,8 @@ export const onUpdateSuccess = <T, S extends CRUState<T>>(typePrefix: string) =>
   resourceActions.updateSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     resource: props.response,
     updating: false,
     updated: true
@@ -73,6 +96,8 @@ export const onGetResourcesSuccess = <T, S extends CRUState<T>>(typePrefix: stri
   resourceActions.getResourcesSuccess(typePrefix),
   (state: S extends infer S ? S : never, props) => ({
     ...state,
+    error: false,
+    errorMessage: '',
     loading: false,
     loaded: true,
     resources: props.resources
@@ -85,6 +110,7 @@ export const readableReducer = <T>(
   ...ons: ReducerTypes<ReadableState<T>, ActionCreator[]>[]
 ) => createReducer<ReadableState<T>>(
   initialState,
+  onError<T, ReadableState<T>>(typePrefix),
   onGet<T, ReadableState<T>>(typePrefix),
   onGetSuccess<T, ReadableState<T>>(typePrefix),
   ...ons
@@ -96,6 +122,7 @@ export const crReducer = <T>(
     ...ons: ReducerTypes<CRState<T>, ActionCreator[]>[]
 ) => createReducer<CRState<T>>(
   initialState,
+  onError<T, CRState<T>>(typePrefix),
   onGet<T, CRState<T>>(typePrefix),
   onGetSuccess<T, CRState<T>>(typePrefix),
   onCreate<T, CRState<T>>(typePrefix),
@@ -110,6 +137,7 @@ export const cruReducer = <T>(
     ...ons: ReducerTypes<CRUState<T>, ActionCreator[]>[]
 ) => createReducer<CRUState<T>>(
   initialState,
+  onError<T, CRUState<T>>(typePrefix),
   onGet<T, CRUState<T>>(typePrefix),
   onGetSuccess<T, CRUState<T>>(typePrefix),
   onCreate<T, CRUState<T>>(typePrefix),
@@ -126,6 +154,7 @@ export const cruCollectionReducer = <T>(
   ...ons: ReducerTypes<CRUCollectionState<T>, ActionCreator[]>[]
 ) => createReducer<CRUCollectionState<T>>(
   initialState,
+  onError<T, CRUCollectionState<T>>(typePrefix),
   onGet<T, CRUCollectionState<T>>(typePrefix),
   onGetSuccess<T, CRUCollectionState<T>>(typePrefix),
   onCreate<T, CRUCollectionState<T>>(typePrefix),

@@ -28,7 +28,7 @@ export class AdminAuthEffects{
                         //Set the user in local storage
                         this.adminauthService.setAdminInLocalStorage(admin);
                         return adminLoginSuccess({admin});
-                    })
+                    }),
                 )
             })
         );

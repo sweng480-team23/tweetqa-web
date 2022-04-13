@@ -1,5 +1,10 @@
 import { createAction, props } from "@ngrx/store";
 
+export const error = (typePrefix: string) => createAction(
+  `${typePrefix} error!`,
+  props<{ message: string }>()
+);
+
 export const getById = (typePrefix: string) => createAction(
   `${typePrefix} GET resource by id`,
   props<{ id: number; }>()

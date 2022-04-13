@@ -3,6 +3,8 @@ export interface ReadableState <T> {
   resource: T;
   loading: boolean;
   loaded: boolean;
+  error: boolean;
+  errorMessage: string;
 }
 
 export interface CRState <T> extends ReadableState<T> {
@@ -22,7 +24,9 @@ export interface CRUCollectionState <T> extends CRUState<T> {
 export const initialReadableState: ReadableState<any> = {
   resource: null,
   loading: false,
-  loaded: false
+  loaded: false,
+  error: false,
+  errorMessage: ''
 };
 
 export const initialCRState: CRState<any> = {

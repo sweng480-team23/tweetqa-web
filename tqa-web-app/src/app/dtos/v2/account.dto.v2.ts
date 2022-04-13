@@ -8,6 +8,8 @@ export interface AccountCreateRequestV2 {
 export interface AccountResponseV2 {
   id: number;
   email: string;
+  token: string;
+  expiresIn: string;
 }
 
 export interface LoginRequestV2 {

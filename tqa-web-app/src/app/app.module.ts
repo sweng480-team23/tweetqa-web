@@ -40,6 +40,7 @@ import { TrainingFormComponent } from './components/training-form/training-form.
 import {LoggedInAdminGuard} from "./util/logged-in-admin-guard";
 import {TrainingEffect} from "./state/store/resources/training/training.effect";
 import {TrainingService} from "./services/training.service";
+import { ErrorDialogComponent } from './components/error-dialog/error-dialog.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import {TrainingService} from "./services/training.service";
     AdminComponent,
     VisitorInvitationFormComponent,
     SuccessDialogComponent,
-    TrainingFormComponent
+    TrainingFormComponent,
+    ErrorDialogComponent
   ],
   imports: [
     AppRoutingModule,
