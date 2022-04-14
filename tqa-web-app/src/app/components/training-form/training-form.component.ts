@@ -30,7 +30,7 @@ export class TrainingFormComponent extends SubscribedComponent implements OnInit
   possibleEpochs: number[] = [1, 2, 4, 8, 16, 32];
   possibleLearningRates: string[] = ["1.05e-7", "2.9e-5"];
   possibleBatchSizes: number[] = [4, 8, 16, 32]
-  possibleBaseModels: string[]= ['bert-large-uncased-whole-word-masking-finetuned-squad]']
+  possibleBaseModels: string[]= ['bert-large-uncased-whole-word-masking-finetuned-squad']
   admin: AdminV2 = new AdminV2(0, '', '', new Date());
 
   constructor(
