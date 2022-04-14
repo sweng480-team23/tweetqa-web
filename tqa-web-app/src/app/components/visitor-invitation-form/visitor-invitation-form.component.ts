@@ -9,31 +9,44 @@ import {CreateAware, CreateAwareBehavior} from "../../state/aware/create.aware";
 import {Subscription} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {SuccessDialogComponent} from "../success-dialog/success-dialog.component";
+import {ErrorAware, ErrorAwareBehavior} from "../../state/aware/error.aware";
+import {SubscribedComponent} from "../abstract/subscribed-component.directive";
 
 @Component({
   selector: 'app-visitor-invitation-form',
   templateUrl: './visitor-invitation-form.component.html',
   styleUrls: ['./visitor-invitation-form.component.scss']
 })
-export class VisitorInvitationFormComponent implements OnInit {
+export class VisitorInvitationFormComponent extends SubscribedComponent implements OnInit {
 
   visitorInviteForm: FormGroup;
   public createAware: CreateAware;
+  private visitorErrorAware: ErrorAware;
 
   constructor(
     public store$: Store<AppState>,
     fb: FormBuilder,
-    public dialog: MatDialog
+    public successDialog: MatDialog,
+    public errorDialog: MatDialog
   ) {
+    super();
     this.visitorInviteForm = fb.group({
       emails: new FormControl('')
     });
 
+    this.visitorErrorAware = ErrorAwareBehavior({
+      subscription: this.subscription,
+      error$: this.store$.select(visitorSelectors.selectError),
+      dialog: this.errorDialog,
+      store$: store$,
+      typePrefix: visitorActions.typePrefix
+    } as ErrorAware);
+
     this.createAware = CreateAwareBehavior({
       created$: this.store$.select(visitorSelectors.selectCreated),
-      subscription: new Subscription(),
+      subscription: this.subscription,
       onCreateSuccess: () => {
-        this.dialog.open(SuccessDialogComponent, {
+        this.successDialog.open(SuccessDialogComponent, {
           data: {
             message: `Visitor invitations were successfully sent to: ${this.visitorInviteForm.get('emails')?.value}`
           }

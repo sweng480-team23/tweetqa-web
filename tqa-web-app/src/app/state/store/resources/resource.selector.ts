@@ -19,3 +19,9 @@ export const selectCreated = <DTO, T extends CRState<DTO>>
     selectedState,
   (state: T) => state.created
   );
+
+export const selectError = <DTO, T extends CRState<DTO>>
+  (selectedState: (state: AppState) => T) => createSelector(
+    selectedState,
+    (state: T) => state.error
+  );

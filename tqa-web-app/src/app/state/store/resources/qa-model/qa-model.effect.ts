@@ -5,7 +5,9 @@ import { QAModelResponseV2 } from "../../../../dtos/v2/qa-model.dto.v2";
 import { QaModelService } from "../../../../services/qa-model.service";
 import { ReadResourceEffect } from "../read-resource.effect";
 import * as qaModelActions from "./qa-model.action";
-import { map, switchMap } from "rxjs/operators";
+import {catchError, map, switchMap} from "rxjs/operators";
+import {of} from "rxjs";
+import * as resourceActions from "../resource.action";
 
 @Injectable()
 export class QAModelEffect extends ReadResourceEffect<
@@ -24,6 +26,10 @@ export class QAModelEffect extends ReadResourceEffect<
         map(response => ({
           type: qaModelActions.getResourcesSuccess.type,
           resources: response
+        })),
+        catchError(error => of({
+          type: resourceActions.error(this.typePrefix).type,
+          message: error.message
         }))
       ))
   ));

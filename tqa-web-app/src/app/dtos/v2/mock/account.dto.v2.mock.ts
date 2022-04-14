@@ -11,7 +11,9 @@ export const mockAccountCreateRequestV2 = cookyCutter.define<AccountCreateReques
 
 export const mockAccountResponseV2 = cookyCutter.define<AccountResponseV2>({
   id: faker.datatype.number(),
-  email: faker.internet.email()
+  email: faker.internet.email(),
+  token: faker.datatype.uuid(),
+  expiresIn: faker.datatype.datetime().toISOString()
 });
 
 export const mockLoginRequestV2 = cookyCutter.define<LoginRequestV2>({

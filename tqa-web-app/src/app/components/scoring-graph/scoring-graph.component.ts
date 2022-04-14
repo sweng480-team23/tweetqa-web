@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ModelSeriesType } from "../../types/model-series.type";
 import { QAModelCollectionResponseV2, QAModelResponseV2 } from "../../dtos/v2/qa-model.dto.v2";
 import { ModelDataType } from "../../types/model-data.type";
@@ -10,6 +10,8 @@ import { QaModelService } from "../../services/qa-model.service";
 import * as formStateSelectors from "../../state/store/prediction-form/prediction-form.selector";
 import {Store} from "@ngrx/store";
 import {AppState} from "../../state/store/app.state";
+import {Subscription} from "rxjs";
+import {SubscribedComponent} from "../abstract/subscribed-component.directive";
 
 
 @Component({
@@ -17,7 +19,7 @@ import {AppState} from "../../state/store/app.state";
   templateUrl: './scoring-graph.component.html',
   styleUrls: ['./scoring-graph.component.scss']
 })
-export class ScoringGraphComponent implements OnInit {
+export class ScoringGraphComponent extends SubscribedComponent implements OnInit {
   public highcharts = Highcharts;
   private mlType: string = '';
 
@@ -42,11 +44,22 @@ export class ScoringGraphComponent implements OnInit {
 
   constructor(
     public store$: Store<AppState>,
-    public modelService: QaModelService) { }
+    public modelService: QaModelService)
+  {
+    super();
+  }
 
   ngOnInit(): void {
-    this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
-      if (formState.prediction.model.ml_type != '' && formState.prediction.model.ml_type != this.mlType) {
+    this.subscription.add(this.onFormChange());
+  }
+
+  onFormChange(): Subscription {
+    return this.store$.select(formStateSelectors.getFormState).subscribe(formState => {
+      if ( formState.prediction.model != undefined
+        && formState.prediction.model.ml_type != undefined
+        && formState.prediction.model.ml_type != ''
+        && formState.prediction.model.ml_type != this.mlType)
+      {
         this.mlType = formState.prediction.model.ml_type;
         this.modelService.readAllModelsByType(formState.prediction.model.ml_type).subscribe(models => {
           this.options.series = this.toSeries({

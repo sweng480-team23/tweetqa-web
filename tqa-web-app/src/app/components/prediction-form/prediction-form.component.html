@@ -14,7 +14,12 @@
       <mat-label>Question</mat-label>
       <textarea matInput formControlName="question" id="question" class="text-input-field"></textarea>
     </mat-form-field>
-    <button class="random-button" mat-flat-button color="accent" (click)="onTweetRequest()">Get Random Tweet</button>
+    <button
+      class="random-button"
+      mat-flat-button
+      color="accent"
+      [disabled]="formState.predictionState.formState.isRandomButtonDisabled"
+      (click)="onTweetRequest()">Get Random Tweet</button>
     <div *ngIf="formState.predictionState.formState.showAnswer" class="answer-container">
       <mat-label class="answer-label">Answer</mat-label>
       <div class="answer">{{formState.predictionState.formState.prediction.prediction}}</div>

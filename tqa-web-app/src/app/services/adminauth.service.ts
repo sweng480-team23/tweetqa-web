@@ -23,7 +23,7 @@ export class AdminAuthService{
 
     formatAdmin(data:AdminAuthResponseV2){
         const expirationDate = new Date(new Date().getTime() + +data.expiresIn *1000);
-        const admin = new AdminV2(data.email, data.token, expirationDate);
+        const admin = new AdminV2(data.id, data.email, data.token, expirationDate);
         return admin;
     }
 
@@ -52,7 +52,7 @@ export class AdminAuthService{
         if(adminDataString){
             const adminData = JSON.parse(adminDataString);
             const expirationDate = new Date(adminData.expirationDate);
-            const admin = new AdminV2(adminData.email, adminData.token, expirationDate);
+            const admin = new AdminV2(adminData.id, adminData.email, adminData.token, expirationDate);
             this.runTimeoutInterval(admin);
             return admin;
         }

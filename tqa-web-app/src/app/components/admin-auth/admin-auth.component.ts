@@ -7,13 +7,15 @@ import { AppState } from 'src/app/state/store/app.state';
 import { adminLoginStart } from 'src/app/state/store/resources/adminauth/adminauth.actions';
 import {isAuthenticated} from "../../state/store/resources/adminauth/adminauth.selector";
 import {Router} from "@angular/router";
+import {SubscribedComponent} from "../abstract/subscribed-component.directive";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-admin-auth',
   templateUrl: './admin-auth.component.html',
   styleUrls: ['./admin-auth.component.scss']
 })
-export class AdminAuthComponent implements OnInit {
+export class AdminAuthComponent extends SubscribedComponent implements OnInit {
 
   adminAuthForm!: FormGroup;
   hide = true;
@@ -21,9 +23,10 @@ export class AdminAuthComponent implements OnInit {
     public store: Store<AppState>,
     fb: FormBuilder,
     public dialog: MatDialog,
-    public router: Router) {
-
-    }
+    public router: Router)
+  {
+    super();
+  }
 
   ngOnInit(): void {
     this.adminAuthForm = new FormGroup({
@@ -31,7 +34,11 @@ export class AdminAuthComponent implements OnInit {
       password: new FormControl('', [Validators.required]),
     });
 
-    this.store.select(isAuthenticated).subscribe(auth => {
+    this.subscription.add(this.onAuthentication());
+  }
+
+  onAuthentication(): Subscription {
+    return this.store.select(isAuthenticated).subscribe(auth => {
       if (auth == true) {
         this.router.navigate(['/'], { queryParamsHandling: "preserve" })
       }

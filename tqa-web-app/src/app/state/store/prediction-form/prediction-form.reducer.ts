@@ -5,6 +5,7 @@ import {PredictionResponseV2} from "../../../dtos/v2/prediction.dto.v2";
 
 export interface PredictionFormState {
   isSubmitButtonDisabled: boolean;
+  isRandomButtonDisabled: boolean;
   showAnswer: boolean;
   showIsCorrect: boolean;
   showAltAnswer: boolean;
@@ -13,6 +14,7 @@ export interface PredictionFormState {
 
 export const initialFormState: PredictionFormState = {
   isSubmitButtonDisabled: true,
+  isRandomButtonDisabled: false,
   showAnswer: false,
   showIsCorrect: false,
   showAltAnswer: false,
@@ -24,6 +26,10 @@ const reducer = createReducer(
   on(predictionFormActions.setIsButtonDisabled, (state, props) => ({
     ...state,
     isSubmitButtonDisabled: props.value
+  })),
+  on(predictionFormActions.setIsRandomButtonDisabled, (state, props) => ({
+    ...state,
+    isRandomButtonDisabled: props.value
   })),
   on(predictionFormActions.setShowAnswer, (state, props) => ({
     ...state,

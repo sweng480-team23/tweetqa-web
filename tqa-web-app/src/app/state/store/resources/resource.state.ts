@@ -1,8 +1,10 @@
+import {HttpErrorResponse} from "@angular/common/http";
 
 export interface ReadableState <T> {
   resource: T;
   loading: boolean;
   loaded: boolean;
+  error?: HttpErrorResponse;
 }
 
 export interface CRState <T> extends ReadableState<T> {
@@ -22,7 +24,8 @@ export interface CRUCollectionState <T> extends CRUState<T> {
 export const initialReadableState: ReadableState<any> = {
   resource: null,
   loading: false,
-  loaded: false
+  loaded: false,
+  error: undefined
 };
 
 export const initialCRState: CRState<any> = {

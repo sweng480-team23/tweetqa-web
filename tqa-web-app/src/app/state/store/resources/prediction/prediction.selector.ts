@@ -6,3 +6,4 @@ import {PredictionState} from "./prediction.reducer";
 export const selectPredictions = (state: AppState) => state.predictions;
 
 export const selectResource = resourceSelectors.selectResource<PredictionResponseV2, PredictionState>(selectPredictions);
+export const selectError = resourceSelectors.selectError<PredictionResponseV2, PredictionState>(selectPredictions);

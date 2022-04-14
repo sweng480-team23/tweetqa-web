@@ -4,9 +4,14 @@ import { PredictionResponseV2 } from "../../../dtos/v2/prediction.dto.v2";
 export const typePrefix: string = '[Prediction Form]';
 
 export const setIsButtonDisabled = createAction(
-  `${typePrefix} set isButtonDisabled`,
+  `${typePrefix} set isSubmitButtonDisabled`,
   props<{value: boolean}>()
 );
+
+export const setIsRandomButtonDisabled = createAction(
+  `${typePrefix} set isRandomButtonDisabled`,
+  props<{value: boolean}>()
+)
 
 export const setShowAnswer = createAction(
   `${typePrefix} set showAnswer`,

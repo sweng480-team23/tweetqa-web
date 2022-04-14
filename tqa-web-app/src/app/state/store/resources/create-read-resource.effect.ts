@@ -1,8 +1,10 @@
 import { AbstractCreateReadService } from "../../../services/abstract/abstract-create-read.service";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
 import * as resourceActions from './resource.action';
-import { map, switchMap } from "rxjs/operators";
+import {catchError, map, switchMap} from "rxjs/operators";
 import { ReadResourceEffect } from "./read-resource.effect";
+import {of} from "rxjs";
+import * as visitorActions from "./visitor/visitor.action";
 
 
 export abstract class CreateReadResourceEffect<
@@ -28,6 +30,10 @@ export abstract class CreateReadResourceEffect<
           type: resourceActions.createSuccess(this.typePrefix).type,
           response: created
         })),
+        catchError(error => of({
+          type: resourceActions.error(this.typePrefix).type,
+          error
+        }))
       )
     )
   ));

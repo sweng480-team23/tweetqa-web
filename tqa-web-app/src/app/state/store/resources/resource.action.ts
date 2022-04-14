@@ -1,4 +1,14 @@
 import { createAction, props } from "@ngrx/store";
+import {HttpErrorResponse} from "@angular/common/http";
+
+export const error = (typePrefix: string) => createAction(
+  `${typePrefix} error!`,
+  props<{ error: HttpErrorResponse }>()
+);
+
+export const resetError = (typePrefix: string) => createAction(
+  `${typePrefix} clear error`
+)
 
 export const getById = (typePrefix: string) => createAction(
   `${typePrefix} GET resource by id`,
@@ -37,4 +47,8 @@ export const update = <DTO>(typePrefix: string) => createAction(
 export const updateSuccess = <DTO>(typePrefix: string) => createAction(
   `${typePrefix} PUT to update resource successful`,
   props<{ response: DTO }>()
+);
+
+export const resetResource = <DTO>(typePrefix: string) => createAction(
+  `${typePrefix} Reset resource value`,
 );
