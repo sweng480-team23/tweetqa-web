@@ -11,7 +11,11 @@ import {MatInputModule} from "@angular/material/input";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOptionModule} from "@angular/material/core";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
-import {mockTrainingCreateRequestV2} from "../../dtos/v2/mock/training.dto.v2.mock";
+import {mockTrainingCreateRequestV2, mockTrainingResponseV2} from "../../dtos/v2/mock/training.dto.v2.mock";
+import {initialAdminState} from "../../state/store/resources/adminauth/adminauth.reducer";
+import {AdminV2} from "../../dtos/v2/admin-auth.dto.v2";
+import faker from "@faker-js/faker";
+
 
 describe('TrainingFormComponent', () => {
   let component: TrainingFormComponent;
@@ -19,9 +23,19 @@ describe('TrainingFormComponent', () => {
   let store: MockStore;
 
   const initialState = {
+    adminAuth: {
+      ...initialAdminState,
+      resource: new AdminV2(
+        faker.datatype.number(),
+        faker.internet.email(),
+        faker.datatype.uuid(),
+        faker.datatype.datetime()
+      )
+    },
     training: {
       ...initialTrainingState,
-      resource: mockTrainingCreateRequestV2()
+      resource: mockTrainingCreateRequestV2(),
+      response: mockTrainingResponseV2()
     }
   }
 

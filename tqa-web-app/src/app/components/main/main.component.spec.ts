@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MainComponent } from './main.component';
 import { LocalStorageService } from "../../services/local-storage.service";
-import { ActivatedRoute } from "@angular/router";
+import {ActivatedRoute, convertToParamMap} from "@angular/router";
 import { MockStore, provideMockStore } from "@ngrx/store/testing";
 import { initialVisitorState } from "../../state/store/resources/visitor/visitor.reducer";
 import { mockVisitorResponseV2 } from "../../dtos/v2/mock/visitor.dto.v2.mock";
@@ -16,10 +16,6 @@ describe('MainComponent', () => {
   let service: LocalStorageService;
   let store: MockStore;
 
-  const fakeActivatedRoute = {
-    queryParamMap: of(faker.datatype.uuid())
-  };
-
   const initialState = {
     visitors: {...initialVisitorState, resource: mockVisitorResponseV2()},
   }
@@ -30,7 +26,16 @@ describe('MainComponent', () => {
       providers: [
         LocalStorageService,
         provideMockStore({ initialState }),
-        { provide: ActivatedRoute, useValue: fakeActivatedRoute }
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            queryParamMap: of(convertToParamMap(
+              {
+                token: faker.datatype.uuid()
+              }
+            ))
+          }
+        }
       ]
     })
     .compileComponents();
