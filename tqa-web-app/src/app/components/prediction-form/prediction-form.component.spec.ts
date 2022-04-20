@@ -28,6 +28,7 @@ import {mockVisitorResponseV2} from "../../dtos/v2/mock/visitor.dto.v2.mock";
 import {initialVisitorState} from "../../state/store/resources/visitor/visitor.reducer";
 import {initialQAModelState} from "../../state/store/resources/qa-model/qa-model.reducer";
 import {mockQAModelResponseV2} from "../../dtos/v2/mock/qa-model.dto.v2.mock";
+import {MatDialogModule} from "@angular/material/dialog";
 
 
 describe('PredictionFormComponent', () => {
@@ -50,6 +51,7 @@ describe('PredictionFormComponent', () => {
         BrowserAnimationsModule,
         HttpClientModule,
         MatButtonModule,
+        MatDialogModule,
         MatFormFieldModule,
         MatInputModule,
         MatOptionModule,
@@ -70,7 +72,7 @@ describe('PredictionFormComponent', () => {
     store = TestBed.inject(MockStore);
     fixture = TestBed.createComponent(PredictionFormComponent);
     component = fixture.componentInstance;
-    button = fixture.debugElement.query(By.css('button')).nativeElement;
+    button = fixture.debugElement.query(By.css('#submit-button')).nativeElement;
     fixture.detectChanges();
   });
 
@@ -79,7 +81,7 @@ describe('PredictionFormComponent', () => {
   });
 
   it('button should initially be disabled', () => {
-    const button: HTMLButtonElement = fixture.debugElement.query(By.css('button')).nativeElement;
+    const button: HTMLButtonElement = fixture.debugElement.query(By.css('#submit-button')).nativeElement;
     expect(button.disabled).toBeTrue();
     expect(component.formState instanceof InitialFormState);
   });
@@ -141,7 +143,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: true,
       showIsCorrect: true,
       showAltAnswer: true,
-      isSubmitButtonDisabled: true
+      isSubmitButtonDisabled: true,
+      isRandomButtonDisabled: true
     });
     component.formState = component.formState.nextState(FormAction.VALUE_CHANGED);
     fixture.detectChanges();
@@ -168,7 +171,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: false,
       showIsCorrect: false,
       showAltAnswer: false,
-      isSubmitButtonDisabled: true
+      isSubmitButtonDisabled: true,
+      isRandomButtonDisabled: false,
     });
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
@@ -181,7 +185,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: false,
       showIsCorrect: false,
       showAltAnswer: false,
-      isSubmitButtonDisabled: false
+      isSubmitButtonDisabled: false,
+      isRandomButtonDisabled: false
     });
     component.formState = component.formState.nextState(FormAction.VALUE_CHANGED);
     fixture.detectChanges();
@@ -194,7 +199,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: true,
       showIsCorrect: true,
       showAltAnswer: false,
-      isSubmitButtonDisabled: true
+      isSubmitButtonDisabled: true,
+      isRandomButtonDisabled: true
     });
     component.formState = component.formState.nextState(FormAction.SUBMIT);
     fixture.detectChanges();
@@ -211,7 +217,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: true,
       showIsCorrect: true,
       showAltAnswer: false,
-      isSubmitButtonDisabled: false
+      isSubmitButtonDisabled: false,
+      isRandomButtonDisabled: true
     });
     component.formState = component.formState.nextState(FormAction.VALUE_CHANGED);
     fixture.detectChanges();
@@ -229,7 +236,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: true,
       showIsCorrect: true,
       showAltAnswer: true,
-      isSubmitButtonDisabled: true
+      isSubmitButtonDisabled: true,
+      isRandomButtonDisabled: true
     });
     component.formState = component.formState.nextState(FormAction.VALUE_CHANGED);
     fixture.detectChanges();
@@ -243,7 +251,8 @@ describe('PredictionFormComponent', () => {
       showAnswer: true,
       showIsCorrect: true,
       showAltAnswer: true,
-      isSubmitButtonDisabled: false
+      isSubmitButtonDisabled: false,
+      isRandomButtonDisabled: true
     });
     component.formState = component.formState.nextState(FormAction.VALUE_CHANGED);
     fixture.detectChanges();
